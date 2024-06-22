@@ -1,0 +1,12 @@
+{
+  "dependencies": {
+    "express": "^4.19.2",
+    "git": "^0.1.5",
+    "nodemon": "^3.1.4"
+  },
+  "name": "master_app_tbp",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Ady Candra",
+  "license": "MIT"
+}
