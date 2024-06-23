@@ -1,26 +1,19 @@
 const express = require('express');
+const companyController = require('../controller/company')
 
 const router = express.Router()
 
 // GET All Companies
-router.get('/', (req, res) => {
-
-})
+router.get('/', companyController.getAllCompanies )
 
 // CREATE New Company
-router.post('/', (req, res) => {
-    const {compName, compSite} = req.body
-    res.json(req.body);
-})
+router.post('/', companyController.createNewCompany)
 
 // EDIT Company
-router.patch('/:compId', (req, res) =>{
-
-})
+router.patch('/:compId', companyController.editCompany)
 
 // DELETE Company
-router.delete('/:compId', (req, res) => {
+router.delete('/:compId', )
 
-})
 
 module.exports = router

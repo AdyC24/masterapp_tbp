@@ -1,37 +1,20 @@
 const express = require('express')
+const departmentController = require('../controller/department')
 
 const router = express.Router()
 
 // GET All Department
-router.get('/', (req, res) => {
-
-})
+router.get('/', departmentController.getAllDepartments)
 
 // CREATE Departmnet
-router.post('/', (req, res) => {
-    const {deptName} = req.body
-    if (!deptName) {
-        return res.status(400).json({errMessage: 'Department cannot be blank'});
-    }
-    res.status(200).json(deptName);
-})
+router.post('/', departmentController.createNewDepartment)
 
 // EDIT Department
-router.patch('/:deptId', (req, res) => {
-    const {deptId} = req.params;
-    const {deptName} = req.body;
-
-    if (!deptName) {
-        return res.status(400).json({errMessage: 'Department cannot be blank'});
-    }
-
-    res.status(200).json({deptId, deptName})
-})
+router.patch('/:deptId', departmentController.editDepartment)
 
 // DELETE Department
-router.delete('/:deptId', (req, res) => {
-    
-})
+router.delete('/:deptId', departmentController.deleteDepartment)
+
 
 module.exports = router
 

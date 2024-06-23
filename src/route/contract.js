@@ -1,25 +1,19 @@
 const express = require('express');
+const contractController = require('../controller/contract')
 
 const router = express.Router()
 
 // GET All Contracts
-router.get('/', (req, res) => {
-
-})
+router.get('/', contractController.getAllContracts)
 
 // CREATE New Contract
-router.post('/', (req, res) => {
-
-})
+router.post('/', contractController.createNewContract)
 
 // EDIT Contract
-router.patch('/:compId', (req, res) =>{
-
-})
+router.patch('/:contId', contractController.editContract)
 
 // DELETE Contract
-router.delete('/:compId', (req, res) => {
-    
-})
+router.delete('/:contId', contractController.deleteContract)
+
 
 module.exports = router
