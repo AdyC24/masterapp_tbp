@@ -1,5 +1,13 @@
 const getAllCompanies = (req, res) => {
-    res.json('get all companies success')
+    const data = {
+        compId : "1",
+        compName : "PT. Trimegah Bangun Persada",
+        compAbv : "TBP",
+        compSite : "Kawasi",
+        compUpdated : 7618438
+    }
+
+    res.json(data)
 }
 
 const createNewCompany = (req, res) => {
