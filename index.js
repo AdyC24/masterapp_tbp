@@ -20,4 +20,6 @@ app.use('/contract', contractRoute);
 app.use('/quota', quotaRoute);
 app.use('/ptk', empRequstRoute);
 
-app.listen(4000)
+app.listen(4000, () => {
+    console.log('Server running di post 4000')
+})

@@ -1,13 +1,26 @@
-const getAllCompanies = (req, res) => {
-    const data = {
-        compId : "1",
-        compName : "PT. Trimegah Bangun Persada",
-        compAbv : "TBP",
-        compSite : "Kawasi",
-        compUpdated : 7618438
-    }
+const CompanyModel = require('../models/company');
 
-    res.json(data)
+const getAllCompanies = async (req, res) => {
+    try {
+        const [data] = await CompanyModel.getAllCompanies();
+        // const data = {
+        //     compId : "1",
+        //     compName : "PT. Trimegah Bangun Persada",
+        //     compAbv : "TBP",
+        //     compSite : "Kawasi",
+        //     compUpdated : 7618438
+        // }
+        res.json({
+            message: "Get all companies success",
+            data: data
+        })        
+    } catch (error) {
+        res.json({
+            message: "Server is error",
+            errMessage: error,
+        })
+        
+    }
 }
 
 const createNewCompany = (req, res) => {
