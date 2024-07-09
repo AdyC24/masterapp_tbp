@@ -19,5 +19,5 @@ app.use('/contract', contractRoute);
 app.use('/request', empRequstRoute);
 
 app.listen(4000, () => {
-    console.log('Server running di post 4000')
+    console.log('Server running di port 4000')
 })

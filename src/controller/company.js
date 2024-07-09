@@ -18,11 +18,16 @@ const getAllCompanies = async (req, res) => {
 
 const createNewCompany = async (req, res) => {
     try {
-        const {compName, compSite} = req.body
-        res.json(req.body);
-        
+        const {body} = req
+        await CompanyModel.createNewCompany(body);
+        res.json({
+            message: "Create new company succeed",
+        })
     } catch (error) {
-        
+        res.status(500).json({
+            message: "Server is error",
+            errMessage: error
+        })
     }
 }
 
