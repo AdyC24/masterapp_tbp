@@ -1,4 +1,25 @@
-const getAllDepartments = (req, res) => {
+const DepartmentModel = require('../models/department');
+
+const getAllDepartments = async (req, res) => {
+    try {
+        /**
+         * deptId:
+         * compId:
+         * deptName:
+         * deptUpdate:
+         */
+        const [data] = await DepartmentModel.getAllDepartments();
+        res.json({
+            message: "Get all departments succeed",
+            data: data
+        })
+    } catch (error) {
+        res.status(500).json({
+            message: "Server is error",
+            errMessage: error,
+        })
+        
+    }
 
 }
 

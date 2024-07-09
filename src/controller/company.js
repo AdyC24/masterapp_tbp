@@ -3,19 +3,12 @@ const CompanyModel = require('../models/company');
 const getAllCompanies = async (req, res) => {
     try {
         const [data] = await CompanyModel.getAllCompanies();
-        // const data = {
-        //     compId : "1",
-        //     compName : "PT. Trimegah Bangun Persada",
-        //     compAbv : "TBP",
-        //     compSite : "Kawasi",
-        //     compUpdated : 7618438
-        // }
         res.json({
-            message: "Get all companies success",
+            message: "Get all companies succeed",
             data: data
         })        
     } catch (error) {
-        res.json({
+        res.status(500).json({
             message: "Server is error",
             errMessage: error,
         })
@@ -23,9 +16,14 @@ const getAllCompanies = async (req, res) => {
     }
 }
 
-const createNewCompany = (req, res) => {
-    const {compName, compSite} = req.body
-    res.json(req.body);
+const createNewCompany = async (req, res) => {
+    try {
+        const {compName, compSite} = req.body
+        res.json(req.body);
+        
+    } catch (error) {
+        
+    }
 }
 
 const editCompany = (req, res) =>{
