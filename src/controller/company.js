@@ -19,6 +19,12 @@ const getAllCompanies = async (req, res) => {
 const createNewCompany = async (req, res) => {
     try {
         const {body} = req
+        if (!body) {
+            return res.status(400).json({
+                errMessage: 'Form cannot be blank'
+            });
+        }
+
         await CompanyModel.createNewCompany(body);
         res.json({
             message: "Create new company succeed",

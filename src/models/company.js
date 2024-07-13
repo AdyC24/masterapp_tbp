@@ -7,8 +7,8 @@ const getAllCompanies = () => {
 }
 
 const createNewCompany =(body) => {
-    const SQLQuery =    `INSERT INTO company (compName, compSite, compUpdate)
-                         VALUES ('${body.compName}', '${body.compSite}', NOW())`
+    const SQLQuery =    `INSERT INTO company (compName, compAbv, compSite, compUpdate)
+                         VALUES ('${body.compName}', '${body.compAbv}', '${body.compSite}', NOW())`
 
     return dbPool.execute(SQLQuery);
 }

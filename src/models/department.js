@@ -6,6 +6,12 @@ const getAllDepartments = () => {
     return dbPool.execute(SQLQuery);
 }
 
+const createNewDepartment = (body) => {
+    const SQLQuery = `INSERT INTO department (compId, deptName, deptUpdate)
+                      VALUE ('${body.compId}', '${body.deptName}', NOW())`
+}
+
 module.exports = {
     getAllDepartments,
+    createNewDepartment,
 }

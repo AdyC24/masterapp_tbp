@@ -2,12 +2,6 @@ const DepartmentModel = require('../models/department');
 
 const getAllDepartments = async (req, res) => {
     try {
-        /**
-         * deptId:
-         * compId:
-         * deptName:
-         * deptUpdate:
-         */
         const [data] = await DepartmentModel.getAllDepartments();
         res.json({
             message: "Get all departments succeed",
@@ -23,12 +17,25 @@ const getAllDepartments = async (req, res) => {
 
 }
 
-const createNewDepartment = (req, res) => {
-    const {deptName} = req.body
-    if (!deptName) {
-        return res.status(400).json({errMessage: 'Department cannot be blank'});
+const createNewDepartment = async (req, res) => {
+    try {
+        const {body} = req
+        if (!body) {
+            return res.status(400).json(
+                {errMessage: 'Form cannot be blank'}
+            );
+        }
+
+        await DepartmentModel.createNewDepartment(body);
+        res.json({
+            message: "Create new department succeed",
+        })
+    } catch (error) {
+        res.status(500).json({
+            message: "Server is error",
+            errMessage: error,
+        })
     }
-    res.status(200).json(deptName);
 }
 
 const editDepartment = (req, res) => {
