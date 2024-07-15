@@ -19,10 +19,20 @@ const getAllCompanies = async (req, res) => {
 const createNewCompany = async (req, res) => {
     try {
         const {body} = req
-        if (!body) {
+        if (!body.compName) {
             return res.status(400).json({
-                errMessage: 'Form cannot be blank'
+                errMessage: 'Company Name cannot be blank'
             });
+        }
+        if (!body.compAbv) {
+            return res.status(400).json({
+                errMessage: 'Abbrevation cannot be blank'
+            })
+        }
+        if (!body.compSite) {
+            return res.status(400).json({
+                errMessage: 'Site cannot be blank'
+            })
         }
 
         await CompanyModel.createNewCompany(body);

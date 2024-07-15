@@ -20,10 +20,15 @@ const getAllDepartments = async (req, res) => {
 const createNewDepartment = async (req, res) => {
     try {
         const {body} = req
-        if (!body) {
+        if (!body.compId) {
             return res.status(400).json(
-                {errMessage: 'Form cannot be blank'}
-            );
+                {errMessage: 'Company cannot be blank'}
+            )
+        }
+        if (!body.deptName) {
+            return res.status(400).json(
+                {errMessage: 'Department cannot be blank'}
+            )
         }
 
         await DepartmentModel.createNewDepartment(body);
