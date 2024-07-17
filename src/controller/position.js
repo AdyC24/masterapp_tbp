@@ -15,19 +15,21 @@ const getAllPositions = async (req, res) => {
     }
 }
 
-const createNewPostion = async (req, res) => {
+const createNewPosition = async (req, res) => {
     try {
         const {body} = req
 
-        if(!body.deptId) {
+        if(!body.deptId || !body.posName || !body.posLevel) {
             res.status(400).json({
-                errMessage: 'Department cannot be blank'
+                errMessage: 'Form should be filled completely'
             })
         }
-        if(!body.posName) {
-            res.status(400).json({
-                errMessage: 'Position Name cannot be blank'
-            })
+
+        if(!body.posSlot) {
+            body.posSlot = 0
+        }
+        if(!body.posNum) {
+            body.posNum = 0
         }
 
         await PositionModel.createNewPosition(body);
@@ -37,7 +39,7 @@ const createNewPostion = async (req, res) => {
     } catch (error){
         res.status(500).json({
             message: "Server is error",
-            errMessage: error,
+            errMessage: error.message,
         })
 }
 }
@@ -53,7 +55,7 @@ const deletePosition = (req, res) => {
 
 module.exports = {
     getAllPositions,
-    createNewPostion,
+    createNewPosition,
     editPosition,
     deletePosition
 }
