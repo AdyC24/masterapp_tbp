@@ -1,5 +1,12 @@
-const getAllEmployees = (req, res) => {
+const EmployeeModel = require('../models/')
 
+const getAllEmployees = async (req, res) => {
+    try {
+        const {data} = await 
+        
+    } catch (error) {
+        
+    }
 }
 
 const createNewEmployee = (req, res) => {

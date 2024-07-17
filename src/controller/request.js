@@ -10,13 +10,32 @@ const getAllRequests = async (req, res) => {
     } catch (error) {
         res.status(500).json({
             message: "Server is error",
-            errMessage: error,
+            errMessage: error.message,
         })
     }
 }
 
-const createNewRequest = (req, res) => {
+const createNewRequest = async (req, res) => {
+    try {
+        const {body} = req
+        if (!body) {
+            return res.status(400).json({
+                errMessage: 'Form should be filled completely'
+            })
+        }
 
+        await RequestModel.createNewRequest(body);
+        res.json({
+            message: "Request new request succeed",
+        })
+
+    } catch (error) {
+        res.status(500).json({
+            message: "Server is error",
+            errMessage: error.message,
+        })
+        
+    }
 }
 
 const editRequest = (req, res) => {

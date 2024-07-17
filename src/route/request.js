@@ -1,16 +1,13 @@
 const express = require('express');
+const requestController = require('../controller/request')
 
 const router = express.Router()
 
 // GET All Employee Request
-router.get('/', (req, res) => {
-
-})
+router.get('/', requestController.getAllRequests)
 
 // CREATE New Employee Request
-router.post('/', (req, res) => {
-
-})
+router.post('/', requestController.createNewRequest)
 
 // EDIT Employee Request
 router.patch('/:reqId', (req, res) =>{
