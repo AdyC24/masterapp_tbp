@@ -10,7 +10,7 @@ const getAllCompanies = async (req, res) => {
     } catch (error) {
         res.status(500).json({
             message: "Server is error",
-            errMessage: error,
+            errMessage: error.message,
         })
         
     }
