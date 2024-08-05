@@ -1,7 +1,9 @@
 const express = require('express');
-const userController = require()
+const userController = require('../controller/user');
 
-const router = express.Router()
+const router = express.Router();
 
-// SENT user & password to login into home
-route.post('/', )
+// SEND user & password to login into home
+router.post('/', userController.login);
+
+module.exports = router;

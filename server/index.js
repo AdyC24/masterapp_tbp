@@ -12,7 +12,7 @@ const app = express();
 
 app.use(express.json());
 
-app.use('/user', userRoute)
+app.use('/user', userRoute);
 app.use('/company', companyRoute);
 app.use('/department', departmentRoute);
 app.use('/position', positionRoute);
