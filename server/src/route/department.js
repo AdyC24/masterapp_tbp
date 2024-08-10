@@ -9,6 +9,9 @@ router.get('/', departmentController.getAllDepartments)
 // CREATE Departmnet
 router.post('/', departmentController.createNewDepartment)
 
+// CREATE Bunch Department
+router.post('/departments', departmentController.createBunchDepartment)
+
 // EDIT Department
 router.patch('/:deptId', departmentController.editDepartment)
 

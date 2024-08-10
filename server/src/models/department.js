@@ -13,7 +13,15 @@ const createNewDepartment = (body) => {
     return dbPool.execute(SQLQuery);
 }
 
+const createBunchDepartment = (body) => {
+    const SQLQuery = `INSERT INTO department (compId, deptName, deptUpdate)
+                      VALUES (?, ?, NOW())`;
+
+    return dbPool(SQLQuery, [body.compId, body.deptName])
+}
+
 module.exports = {
     getAllDepartments,
     createNewDepartment,
+    createBunchDepartment,
 }

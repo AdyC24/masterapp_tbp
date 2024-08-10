@@ -1,4 +1,6 @@
 const express = require('express');
+const session = require('express-session');
+
 
 const companyRoute = require('./src/route/company');
 const departmentRoute = require('./src/route/department');
@@ -7,10 +9,22 @@ const employeeRoute = require('./src/route/employee');
 const contractRoute = require('./src/route/contract');
 const requestRoute = require('./src/route/request');
 const userRoute = require('./src/route/user');  
+const authRoute = require('./src/route/auth')
 
 const app = express();
 
 app.use(express.json());
+app.use(express.urlencoded({ extended: true}));
+
+// Setup Session
+app.use(session({
+    secret: 'SecretKey',
+    resave: false,
+    saveUninitialized: false,
+    cookie: {secure: false} //Change if it should be HTTPS
+}))
+
+app.use('/auth', authRoute)
 
 app.use('/user', userRoute);
 app.use('/company', companyRoute);

@@ -1,5 +1,5 @@
 const UserModel = require('../models/user');
-const bcrypt = require('bcrypt');
+// const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const dotenv = require('dotenv');
 
@@ -20,18 +20,20 @@ const login = async (req, res) => {
         }
 
         // Compare provided password with stored hash
-        const match = await bcrypt.compare(req.body.password, user[0].userPassword);
-        if (!match) {
+        // const match = await bcrypt.compare(req.body.password, user[0].userPassword);
+        if (!user[0].userPassword == req.body.password) {
             return res.status(400).json({ errMessage: 'Password incorrect' });
         }
 
+        res.redirect('/')
+
         // Generate access and refresh tokens
-        const userId = user[0].userId;
-        const accessToken = jwt.sign({ userId }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '30s' });
-        const refreshToken = jwt.sign({ userId }, process.env.REFRESH_TOKEN_SECRET, { expiresIn: '1d' });
+        // const userId = user[0].userId;
+        // const accessToken = jwt.sign({ userId }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '30s' });
+        // const refreshToken = jwt.sign({ userId }, process.env.REFRESH_TOKEN_SECRET, { expiresIn: '1d' });
 
         // Respond with tokens
-        res.json({ accessToken, refreshToken });
+        // res.json({ accessToken, refreshToken });
         
     } catch (error) {
         // Catch and respond with error

@@ -1,4 +1,8 @@
 const DepartmentModel = require('../models/department');
+const XLSX = require('xlsx');
+const path = require('path');
+const fs = require('fs');
+
 
 const getAllDepartments = async (req, res) => {
     try {
@@ -40,6 +44,30 @@ const createNewDepartment = async (req, res) => {
             message: "Server is error",
             errMessage: error,
         })
+    }
+}
+
+const createBunchDepartment = async (req, res) => {
+    try {
+        // Cek file yang diupload
+        if (!req.file){
+            res.status(400).json({message: 'No file uploaded'})
+        }
+
+        // Path file ditaruh
+        const filePath = path.join(__dirname, 'upload', req.file.filename)
+        
+        const {body} = req
+
+        await DepartmentModel.createBunchDepartment(body)
+        res.json({
+            message: "Create new departments succeed"
+        })
+    } catch(error) {
+        res.status(500).json({
+            message: "Server is error",
+            errMessage: error,
+        })  
     }
 }
 
