@@ -1,5 +1,6 @@
 const express = require('express')
 const departmentController = require('../controller/department')
+const upload = require('../config/multer');
 
 const router = express.Router()
 
@@ -10,7 +11,7 @@ router.get('/', departmentController.getAllDepartments)
 router.post('/', departmentController.createNewDepartment)
 
 // CREATE Bunch Department
-router.post('/departments', departmentController.createBunchDepartment)
+router.post('/departments', upload.single('file'), departmentController.createBunchDepartment)
 
 // EDIT Department
 router.patch('/:deptId', departmentController.editDepartment)

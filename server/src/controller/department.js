@@ -56,10 +56,28 @@ const createBunchDepartment = async (req, res) => {
 
         // Path file ditaruh
         const filePath = path.join(__dirname, 'upload', req.file.filename)
-        
-        const {body} = req
 
-        await DepartmentModel.createBunchDepartment(body)
+        // Baca file excelnya
+        const workbook = XLSX.readFile(filePath);
+        const sheetName = workbook.SheetNames[0]; //sheet pertama
+        const sheet = workbook.Sheets[sheetName];
+
+        // Ubah datanya menjadi JSON
+        const data = XLSX.utils.sheet_to_json(sheet, {header: 1});
+
+        // Menaghapus header pada data
+        const headers = data.shift();
+
+        // Format data sesuai ekspektasi
+        const formattedData = data.map(row => ({
+            compId: row[0],
+            deptName: row[1]
+        }));
+
+        // Hapus file yang sudah diproses
+        fs.unlinkSync(filePath)
+
+        await DepartmentModel.createBunchDepartment(formattedData)
         res.json({
             message: "Create new departments succeed"
         })
@@ -89,6 +107,7 @@ const deleteDepartment = (req, res) => {
 module.exports = {
     getAllDepartments,
     createNewDepartment,
+    createBunchDepartment,
     editDepartment,
     deleteDepartment
 }

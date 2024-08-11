@@ -1,5 +1,6 @@
 const express = require('express');
 const session = require('express-session');
+const bodyParser = require('body-parser')
 
 
 const companyRoute = require('./src/route/company');
@@ -14,6 +15,7 @@ const authRoute = require('./src/route/auth')
 const app = express();
 
 app.use(express.json());
+app.use(bodyParser.json())
 app.use(express.urlencoded({ extended: true}));
 
 // Setup Session
