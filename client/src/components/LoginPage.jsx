@@ -19,7 +19,7 @@ function LoginPage() {
     const handleLogin = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('/auth/login', { nik, password });
+            const response = await axios.post('http://localhost:4000/auth/login', { nik, password });
             console.log("Login successful:", response.data)
             //redirect ke halaman home
 
