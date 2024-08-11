@@ -1,11 +1,31 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
+import axios from "axios";
 
 function LoginPage() {
+
+    const [backend, setBackend] = useState([{}]);
+
+    useEffect(() => {
+        fetch("http://localhost:4000/api")
+            .then(response => response.json())
+            .then(data => setBackend(data))
+            .catch(error => console.error('Error:', error));
+    }, []);
+
     const [nik, setNik] = useState("");
     const [password, setPassword] = useState("");
+    const [errorMessage, setErrorMessage] = useState("");
 
-    const handleLogin = (e) => {
+    const handleLogin = async (e) => {
         e.preventDefault();
+        try {
+            const response = await axios.post('/auth/login', { nik, password });
+            console.log("Login successful:", response.data)
+            //redirect ke halaman home
+
+        } catch (error) {
+            setErrorMessage("Login failed. Please check your NIK & password")
+        }
 
         console.log("NIK:", nik)
         console.log("Password:", password)
@@ -44,6 +64,7 @@ function LoginPage() {
                             required
                         />
                     </div>
+                    {errorMessage && <p className="text-red-500 text-sm mb-4">{errorMessage}</p>}
                     <button
                         type="submit"
                         className="w-full bg-blue-500 text-white font-bold py-2 px-4 rounded-md hover:bg-blue-600 transition duration-300"

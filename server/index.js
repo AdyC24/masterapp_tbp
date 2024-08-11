@@ -1,6 +1,7 @@
 const express = require('express');
 const session = require('express-session');
-const bodyParser = require('body-parser')
+const bodyParser = require('body-parser');
+const cors = require('cors');
 
 
 const companyRoute = require('./src/route/company');
@@ -14,6 +15,7 @@ const authRoute = require('./src/route/auth')
 
 const app = express();
 
+app.use(cors({ origin: 'http://localhost:3000'}));
 app.use(express.json());
 app.use(bodyParser.json())
 app.use(express.urlencoded({ extended: true}));
@@ -25,6 +27,10 @@ app.use(session({
     saveUninitialized: false,
     cookie: {secure: false} //Change if it should be HTTPS
 }))
+
+app.get("/api", (req, res) => {
+    res.json({"user": ["One", "Two", "Three"]})
+})
 
 app.use('/auth', authRoute)
 
