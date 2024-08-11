@@ -1,7 +1,12 @@
-export default function App() {
+import React from "react"
+import LoginPage from "./components/LoginPage";
+
+function App() {
   return (
-    <h1 className="text-3xl font-bold underline">
-      Hello world!
-    </h1>
+    <div>
+      <LoginPage />
+    </div>
   )
 }
+
+export default App;
