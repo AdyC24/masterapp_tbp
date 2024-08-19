@@ -27,7 +27,7 @@ app.use(express.urlencoded({ extended: true}));
 
 // Setup Session
 app.use(session({
-    secret: 'SecretKey', //perlu ganti secret key yang lebih kompleks dan aman
+    secret: process.env.SECRET_SESSION, //perlu ganti secret key yang lebih kompleks dan aman
     resave: false,
     saveUninitialized: false,
     cookie: {

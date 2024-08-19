@@ -20,12 +20,13 @@ function LoginPage() {
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gray-100">
-            <div className="bg-white p-8 rounded-lg shadow-lg max-w-sm w-full">
-                <h2 className="text-2xl font-bold mb-6 text-center">Login</h2>
-                <form onSubmit={handleLogin}>
-                    <div className="mb-4">
-                        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
+        <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-500 to bg-purple-600">
+            <div className="bg-white p-8 rounded-2xl shadow-2xl max-w-md w-full space-y-6">
+                <h2 className="text-3xl font-extrabold text-center  text-gray-800">Sign in to your account</h2>
+                <p className="text-center text-gray-500">Please enter you NIK and password</p>
+                <form onSubmit={handleLogin} className="space-y-4">
+                    <div>
+                        <label className="block text-sm font-medium text-gray-700" htmlFor="nik">
                             NIK
                         </label>
                         <input 
@@ -33,13 +34,13 @@ function LoginPage() {
                             type="text"
                             value={nik}
                             onChange={(e) => setNik(e.target.value)}
-                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-200"
+                            className="w-full px-4 py-2 mt-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-50 focus:border-indigo-500"
                             placeholder="Enter your NIK"
                             required
                         />
                     </div>
                     <div className="mb-6">
-                        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
+                        <label className="block text-sm font-medium text-gray-700" htmlFor="password">
                             Password
                         </label>
                         <input 
@@ -47,17 +48,20 @@ function LoginPage() {
                             type="password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
-                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-200"
+                            className="w-full px-4 py-2 mt-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
                             placeholder="Enter you password" 
                             required
                         />
                     </div>
-                    {errorMessage && <p className="text-red-500 text-sm mb-4">{errorMessage}</p>}
+                    {errorMessage && <p className="text-red-500 text-sm">{errorMessage}</p>}
+                    <div className="flex items-center justify-between">
+                        <a href="#" className="text-sm text-indigo-600 hover:text-indigo-500">Forgot your password?</a>
+                    </div>
                     <button
                         type="submit"
-                        className="w-full bg-blue-500 text-white font-bold py-2 px-4 rounded-md hover:bg-blue-600 transition duration-300"
+                        className="w-full bg-indigo-600 text-white font-bold py-2 px-4 rounded-md hover:bg-indigo-700 transition duration-300 ease-in-out transform hover:scale-105"
                     >
-                        Login
+                        Sign In
                     </button>
                 </form>
             </div>
