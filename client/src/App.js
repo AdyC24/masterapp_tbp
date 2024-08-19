@@ -1,18 +1,21 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-router-dom';
+import { AuthProvider } from './AuthContext';
 import LoginPage from './components/LoginPage';
 import HomePage from './components/HomePage';
 
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/home" element={<HomePage />} />
-        <Route path="/" element={<AuthenticatedRoute />}/>
-      </Routes>
-    </Router>  
+    <AuthProvider>
+      <Router>
+        <Routes>
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/home" element={<HomePage />} />
+          <Route path="/" element={<AuthenticatedRoute />}/>
+        </Routes>
+      </Router>  
+    </AuthProvider>
   );
 }
 
@@ -25,6 +28,7 @@ function AuthenticatedRoute() {
           const response = await fetch('auth/check-session', {
             credentials: 'include' //kirim coockie jika diperlukan
           });
+          console.log('response session:', response);
     
           if (!response.ok) {
             throw new Error(`HTTP status ${response.status}`)

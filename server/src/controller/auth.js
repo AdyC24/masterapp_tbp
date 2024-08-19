@@ -18,10 +18,17 @@ const login = async(req, res) => {
             return res.status(400).json({errMessage: 'Password is incorrect'})
         }
 
+        req.session.isAuthenticated = true;
         req.session.userId = user.userId;
         req.session.user = {id: user.userId, name:user.userName }
 
-        res.status(200).json({message: 'Login successful', user: {id: user.userId, name: user.userName} });
+        res.status(200).json({
+            message: 'Login successful', 
+            session: req.session,
+            user: {
+                id: user.userId, 
+                name: user.userName, 
+            }});
     } catch (error) {
         console.error('Login error:', error);
         res.status(500).json({errMessage: 'Server error'})

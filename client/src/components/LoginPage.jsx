@@ -1,9 +1,11 @@
 import React, {useState} from "react";
 import axios from "axios";
 import { useNavigate } from 'react-router-dom'
+import { useAuth } from "../AuthContext";
 
 function LoginPage() {
     const navigate = useNavigate()
+    const { setIsAuthenticated } = useAuth();
     const [nik, setNik] = useState("");
     const [password, setPassword] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
@@ -11,9 +13,11 @@ function LoginPage() {
     const handleLogin = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:4000/auth/login', { nik, password });
+            const response = await axios.post('http://localhost:4000/auth/login', { nik, password }, {withCredentials: true});
             console.log("Login successful:", response.data)
-            navigate('/home')
+            setIsAuthenticated(true)
+            console.log(setIsAuthenticated)
+            navigate('/home', { state: { session: response.data.session } });
         } catch (error) {
             setErrorMessage("Login failed. Please check your NIK & password")
         }
