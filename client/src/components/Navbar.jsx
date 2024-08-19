@@ -1,7 +1,17 @@
 import React from "react";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
-const Navbar = () => {
+const Navbar = ({ isAuthenticated, onLogout }) => {
+    const navigate = useNavigate();
+
+    const logoutHandler = () => {
+        fetch('/auth/logout', {
+            method: 'POST'
+        }).then(() => {
+            onLogout(); //setelah running logout, 
+            navigate('/'); //navigate ke "/"
+        }).catch(err => console.error('Logout failed', err))
+    }
     return(
         <nav className="bg-white shadow-md py-4 px-6">
             <div className="flex justify-between items-center">
@@ -10,7 +20,11 @@ const Navbar = () => {
                 </div>
                 <div className="space-x-4">
                     <Link to="/home" className="text-blue-500 hover:text-blue-600">Home</Link>
-                    <Link to="/login" className="text-blue-500 hover:text-blue-600">Login</Link>
+                    {isAuthenticated ? (
+                        <button onClick={logoutHandler} className="text-blue-500 hover:text-blue-600">Logout</button>
+                    ) : (
+                        <Link to="/login" className="text-blue-500 hover:text-blue-600">Login</Link>
+                    )}
                 </div>
             </div>
         </nav>

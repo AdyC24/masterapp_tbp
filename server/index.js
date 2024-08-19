@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const express = require('express');
 const session = require('express-session');
 const bodyParser = require('body-parser');
@@ -15,22 +17,25 @@ const authRoute = require('./src/route/auth')
 
 const app = express();
 
-app.use(cors({ origin: 'http://localhost:3000'}));
+app.use(cors({ 
+    origin: ['http://localhost:3000'],
+    credentials: true //Cookie sesi dikirim dari front-end
+}));
 app.use(express.json());
 app.use(bodyParser.json())
 app.use(express.urlencoded({ extended: true}));
 
 // Setup Session
 app.use(session({
-    secret: 'SecretKey',
+    secret: 'SecretKey', //perlu ganti secret key yang lebih kompleks dan aman
     resave: false,
     saveUninitialized: false,
-    cookie: {secure: false} //Change if it should be HTTPS
+    cookie: {
+        secure: false, //set true jika di HTTPS
+        httpOnly: true,
+        maxAge: 24 * 60 * 60 * 1000 //24 jam 
+    } 
 }))
-
-app.get("/api", (req, res) => {
-    res.json({"user": ["One", "Two", "Three"]})
-})
 
 app.use('/auth', authRoute)
 

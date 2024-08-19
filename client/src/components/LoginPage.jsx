@@ -17,9 +17,6 @@ function LoginPage() {
         } catch (error) {
             setErrorMessage("Login failed. Please check your NIK & password")
         }
-
-        console.log("NIK:", nik)
-        console.log("Password:", password)
     };
 
     return (
