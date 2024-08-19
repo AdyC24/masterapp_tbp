@@ -1,12 +1,18 @@
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import LoginPage from './components/LoginPage';
+import HomePage from './components/HomePage';
+
+
 function App() {
   return (
-    <div className="text-center">
-      <header className="bg-blue-500 min-h-screen flex items-center justify-center text-white">
-        <h1 className="text-6xl font-bold">
-          Welcome to React with Tailwind CSS!
-        </h1>
-      </header>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/home" element={<HomePage />} />
+        <Route path="/" element={<HomePage />}/>
+      </Routes>
+    </Router>  
   );
 }
 

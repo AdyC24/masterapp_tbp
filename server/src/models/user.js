@@ -24,7 +24,16 @@ const createNewUser = (body, password) => {
                         VALUE ('${body.nik}', '${body.nik}', '', '${body.nik}',)`
 }
 
+// Function to find user by NIK
+const findByNik = async (nik) => {
+    const SQLQuery = 'SELECT * FROM user WHERE userNik = ?';
+    const [rows] = await dbPool.execute(SQLQuery, [nik]);
+    return rows.length > 0 ? rows[0] : null;
+}
+
+
 module.exports = {
     getAllUser,
-    updateUser
+    updateUser,
+    findByNik
 }
