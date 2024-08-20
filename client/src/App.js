@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-router-dom';
 import { AuthProvider } from './AuthContext';
-import LoginPage from './components/LoginPage';
-import HomePage from './components/HomePage';
+import LoginPage from './components/Login/LoginPage';
+import HomePage from './components/Home/HomePage';
 
 
 function App() {

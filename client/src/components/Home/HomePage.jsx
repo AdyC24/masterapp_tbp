@@ -1,10 +1,10 @@
 import React from "react";
-import { useAuth } from "../AuthContext";
+import { useAuth } from "../../AuthContext";
 
-import Navbar from "./Navbar";
-import HeroSection from "./HeroSection";
-import ProgramSection from "./ProgramSection";
-import Footer from "./Footer";
+import Navbar from "../Navbar";
+import HeroSection from "../HeroSection";
+import ProgramSection from "../ProgramSection";
+import Footer from "../Footer";
 
 
 const HomePage = () => {
