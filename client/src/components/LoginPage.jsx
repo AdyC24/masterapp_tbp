@@ -59,7 +59,7 @@ function LoginPage() {
                     </div>
                     {errorMessage && <p className="text-red-500 text-sm">{errorMessage}</p>}
                     <div className="flex items-center justify-between">
-                        <a href="#" className="text-sm text-indigo-600 hover:text-indigo-500">Forgot your password?</a>
+                        <a href="/forgot-password" className="text-sm text-indigo-600 hover:text-indigo-500">Forgot your password?</a>
                     </div>
                     <button
                         type="submit"
