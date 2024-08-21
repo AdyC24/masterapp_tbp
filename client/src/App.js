@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-route
 import { AuthProvider } from './AuthContext';
 import LoginPage from './components/Login/LoginPage';
 import HomePage from './components/Home/HomePage';
+import EmployeePage from './components/Employee/EmployeePage'
 
 
 function App() {
@@ -10,6 +11,7 @@ function App() {
     <AuthProvider>
       <Router>
         <Routes>
+          <Route path="/employee" element={<EmployeePage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/home" element={<HomePage />} />
           <Route path="/" element={<AuthenticatedRoute />}/>

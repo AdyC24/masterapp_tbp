@@ -23,7 +23,7 @@ const Navbar = () => {
 
                 {/* Center Section: Karyawan Link */}
                 <div className="hidden md:flex items-center space-x-8">
-                    <Link to="/karyawan" className="text-gray-700 font-semibold text-lg hover:text-blue-600 transition duration-300">
+                    <Link to="/employee" className="text-gray-700 font-semibold text-lg hover:text-blue-600 transition duration-300">
                         Karyawan
                     </Link>
                 </div>

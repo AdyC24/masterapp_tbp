@@ -26,7 +26,7 @@ const createNewUser = (body, password) => {
 
 // Function to find user by NIK
 const findByNik = async (nik) => {
-    const SQLQuery = 'SELECT * FROM user WHERE userNik = ?';
+    const SQLQuery = 'SELECT * FROM user WHERE empId = ?';
     const [rows] = await dbPool.execute(SQLQuery, [nik]);
     return rows.length > 0 ? rows[0] : null;
 }
