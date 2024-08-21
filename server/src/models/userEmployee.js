@@ -16,9 +16,6 @@ const getUserEmployee = async (nik) => {
 
     const queryParams = [nik];
 
-    console.log("SQLQuery: ", SQLQuery);
-    console.log("QueryParams: ", queryParams);
-
     try {
         const [rows] = await dbPool.query(SQLQuery, queryParams);
         return rows;
