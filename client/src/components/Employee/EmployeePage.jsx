@@ -1,19 +1,34 @@
-import React, { useState, useEffect } from "react";
-import { useAuth } from "../../AuthContext";
+import React, { useState, useEffect,useRef } from "react";
+// import { useAuth } from "../../AuthContext";
 import Navbar from "../Navbar";
 import Footer from "../Footer";
 import axios from "axios";
 
 const EmployeePage = () => {
-    const { isAuthenticated } = useAuth();
+    // const { isAuthenticated } = useAuth();
     const [employees, setEmployees] = useState([]);
     const [newEmployee, setNewEmployee] = useState({ nik: "", name: "", position: "", department: "", company: ""});
     const [isEditing, setIsEditing] = useState(false);
     const [editEmployeeId, setEditEmployeeId] = useState(null);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const modalRef = useRef(false)
 
     useEffect(() => {
         fetchEmployee();
     }, []);
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if(modalRef.current && !modalRef.current.contains(event.target)) {
+                setIsModalOpen(false)
+            }
+        };
+
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside)
+        };
+    }, [modalRef])
 
     const fetchEmployee = async () => {
         try {
@@ -41,7 +56,7 @@ const EmployeePage = () => {
 
     const handleDeleteKaryawan = async (id) => {
         try {
-            await axios.delete('/employee/${id}');
+            await axios.delete(`/employee/${id}`);
             setEmployees(employees.filter((employee) => employee.empId !== id));
         } catch (error) {
             console.error("Error deleting employee:", error);
@@ -77,77 +92,98 @@ const EmployeePage = () => {
             <Navbar/>
             <div className="container mx-auto py-8">
                 <h1 className="text-3xl font-bold mb-6 text-center">Employee Management</h1>
-
-                <form 
-                    onSubmit={isEditing ? handleUpdateEmployee : handleCreateEmployee}
-                    className="bg-white p-6 rounded-lg shadow-md max-w-md mx-auto mb-8"
+                <button 
+                    onClick={() => setIsModalOpen(true)}
+                    className="bg-blue-500 text-white font-bold py-2 px-4 rounded-md hover:bg-blue-600 transition duration-300"
                 >
-                    <h2 className="text-2xl font-semibold mb-4">
-                        {isEditing ? "Edit Karyawan" : "Tambahkan Karyawan"}
-                    </h2>
-                    <div className="mb-4">
-                        <label className="block text-gray-700 text-sm font-bold mb-2">NIK</label>
-                        <input 
-                            type="text" 
-                            name="nik"
-                            value={newEmployee.nik}
-                            onChange={handleInputChange}
-                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-200"
-                            required
-                        />
-                    </div>
-                    <div className="mb-4">
-                        <label className="block text-gray-700 text-sm font-bold mb-2">Nama</label>
-                        <input 
-                            type="text" 
-                            name="name"
-                            value={newEmployee.name}
-                            onChange={handleInputChange}
-                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-200"
-                            required
-                        />
-                    </div>
-                    <div className="mb-4">
-                        <label className="block text-gray-700 text-sm font-bold mb-2">Jabatan</label>
-                        <input 
-                            type="text" 
-                            name="position"
-                            value={newEmployee.position}
-                            onChange={handleInputChange}
-                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-200"
-                            required
-                        />
-                    </div>
-                    <div className="mb-4">
-                        <label className="block text-gray-700 text-sm font-bold mb-2">Department</label>
-                        <input 
-                            type="text" 
-                            name="department"
-                            value={newEmployee.department}
-                            onChange={handleInputChange}
-                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-200"
-                            required
-                        />
-                    </div>
-                    <div className="mb-4">
-                        <label className="block text-gray-700 text-sm font-bold mb-2">Company</label>
-                        <input 
-                            type="text" 
-                            name="company"
-                            value={newEmployee.company}
-                            onChange={handleInputChange}
-                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-200"
-                            required
-                        />
-                    </div>
-                    <button
-                        type="submit"
-                        className="w-full bg-blue-500 text-white font-bold py-2 px-4 rounded-md hover:bg-blue-600 transition duration-300"
-                    >
-                        {isEditing ? "Update" : "Tambah"}
-                    </button>
-                </form>
+                    Tambah Karyawan
+                </button>
 
+                {/* Modal Form */}
+                {isModalOpen && (
+                    <div className="fixed z-10 inset-0 overflow-y-auto">
+                        <div className="flex items-center justify-center min-h-screen px-4">
+                            <div className="fixed inset-0 transition-opacity">
+                                <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
+                            </div>
+                            <div className="bg-white rounded-lg overflow-hidden shadow-xl transform transition-all sm:max-w-lg sm:w-full">
+                                <div className="bg-white p-6">
+                                    <h2 className="text-2xl font-semibold mb-4">
+                                        {isEditing ? "Edit Karyawan" : "Tambahkan Karyawan"}
+                                    </h2>
+                                    <form 
+                                        onSubmit={isEditing ? handleUpdateEmployee : handleCreateEmployee}
+                                        className="bg-white p-6 rounded-lg shadow-md max-w-md mx-auto mb-8"
+                                    > 
+                                        <div className="mb-4">
+                                            <label className="block text-gray-700 text-sm font-bold mb-2">NIK</label>
+                                            <input 
+                                                type="text" 
+                                                name="nik"
+                                                value={newEmployee.nik}
+                                                onChange={handleInputChange}
+                                                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-200"
+                                                required
+                                            />
+                                        </div>
+                                        <div className="mb-4">
+                                            <label className="block text-gray-700 text-sm font-bold mb-2">Nama</label>
+                                            <input 
+                                                type="text" 
+                                                name="name"
+                                                value={newEmployee.name}
+                                                onChange={handleInputChange}
+                                                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-200"
+                                                required
+                                            />
+                                        </div>
+                                        <div className="mb-4">
+                                            <label className="block text-gray-700 text-sm font-bold mb-2">Jabatan</label>
+                                            <input 
+                                                type="text" 
+                                                name="position"
+                                                value={newEmployee.position}
+                                                onChange={handleInputChange}
+                                                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-200"
+                                                required
+                                            />
+                                        </div>
+                                        <div className="mb-4">
+                                            <label className="block text-gray-700 text-sm font-bold mb-2">Department</label>
+                                            <input 
+                                                type="text" 
+                                                name="department"
+                                                value={newEmployee.department}
+                                                onChange={handleInputChange}
+                                                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-200"
+                                                required
+                                            />
+                                        </div>
+                                        <div className="mb-4">
+                                            <label className="block text-gray-700 text-sm font-bold mb-2">Company</label>
+                                            <input 
+                                                type="text" 
+                                                name="company"
+                                                value={newEmployee.company}
+                                                onChange={handleInputChange}
+                                                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-200"
+                                                required
+                                            />
+                                        </div>
+                                        <button
+                                            type="submit"
+                                            className="w-full bg-blue-500 text-white font-bold py-2 px-4 rounded-md hover:bg-blue-600 transition duration-300"
+                                        >
+                                            {isEditing ? "Update" : "Tambah"}
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                )}
+
+                {/* Employee List */}
                 <div className="bg-whitep-6 rounded-lg shadow-md max-w-4xl mx-auto">
                     <h2 className="text-2xl font-semibold md-4">Daftar Karyawan</h2>
                     <table className="min-w-full bg-white">
