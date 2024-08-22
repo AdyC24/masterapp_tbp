@@ -1,7 +1,7 @@
 import React from "react";
 import Navbar from "../Navbar";
-import HeroSection from "../HeroSection";
-import ProgramSection from "../ProgramSection";
+import HeroSection from "./HeroSection";
+import ProgramSection from "./ProgramSection";
 import Footer from "../Footer";
 
 
