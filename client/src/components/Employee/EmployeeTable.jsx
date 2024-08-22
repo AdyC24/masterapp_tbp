@@ -14,7 +14,7 @@ const EmployeeTable = ({ employees, handleEditKaryawan, handleDeleteKaryawan }) 
                             </tr>
                         </thead>
                         <tbody>
-                            {employees.map((employee) => {
+                            {employees.map(employee => (
                                 <tr key={employee.empId}>
                                     <td className="py-2 px-4 border-b">{employee.empNIK}</td>
                                     <td className="py-2 px-4 border-b">{employee.empName}</td>
@@ -36,7 +36,8 @@ const EmployeeTable = ({ employees, handleEditKaryawan, handleDeleteKaryawan }) 
                                         </button>
                                     </td>
                                 </tr>
-                            })}
+                            )
+                            )}
                         </tbody>
                     </table>
     )

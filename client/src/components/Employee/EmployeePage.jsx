@@ -34,7 +34,7 @@ const EmployeePage = () => {
 
     const fetchEmployee = async () => {
         try {
-            const response = await axios.get('/employee');
+            const response = await axios.get(`/employee`);
             setEmployees(response.data);
         } catch (error) {
             console.error("Error fetching employee data:", error);
@@ -74,7 +74,7 @@ const EmployeePage = () => {
     const handleUpdateEmployee = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.put('/employee/${editEmployeeId}', newEmployee)
+            const response = await axios.put(`/employee/${editEmployeeId}`, newEmployee)
             setEmployees(
                 employees.map((employee) => 
                     employee.empId === editEmployeeId ? response.data : employee
