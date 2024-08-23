@@ -59,7 +59,14 @@ const EmployeePage = () => {
     const handleEditKaryawan = (employee) => {
         setIsEditing(true);
         setEditEmployeeId(employee.empId);
-        setNewEmployee({ nik: employee.empNIK, name: employee.empName, position: employee.empPosition, department: employee.empDepartment, company: employee.empCompany});
+        setNewEmployee({ 
+            nik: employee.empNIK, 
+            name: employee.empName, 
+            position: employee.empPosition, 
+            department: employee.empDepartment, 
+            company: employee.empCompany
+        });
+        openModal()
     }
 
     const handleUpdateEmployee = async (e) => {
@@ -80,13 +87,13 @@ const EmployeePage = () => {
     }
 
     const openModal = () => {
-        setIsEditing(false);
-        setNewEmployee({ nik: "", name: "", position: "", department: "", company:"" });
         setIsModalOpen(true)
     }
 
     const closeModal = () => {
         setIsModalOpen(false);
+        setIsEditing(false);
+        setNewEmployee({nik: "", name: "", position: "", department: "", company: ""})
     }
 
     return(
