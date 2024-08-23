@@ -35,10 +35,6 @@ const EmployeePage = () => {
     const fetchEmployee = async () => {
         try {
             const response = await axios.get(`http://localhost:4000/employee`);
-            console.log("Fetched employees data:", response.data);
-            console.log("Type of employees:", typeof response.data.data);
-            console.log("Is array:", Array.isArray(response.data.data));
-            console.log(response.data.data)
             setEmployees(response.data.data)
         } catch (error) {
             console.error("Error fetching employee data:", error);

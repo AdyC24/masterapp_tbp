@@ -4,7 +4,7 @@ const EmployeeTable = ({ employees, handleEditKaryawan, handleDeleteKaryawan }) 
     return (
         <div className="overflow-x-auto">
             <table className="min-w-full bg-white shadow-lg rounded-lg overflow-hidden">
-                <thead className="bg-blue-500 text-white">
+                <thead className="bg-green-600 text-white">
                     <tr>
                         <th className="py-3 px-6 text-left font-semibold text-sm uppercase tracking-wider">NIK</th>
                         <th className="py-3 px-6 text-left font-semibold text-sm uppercase tracking-wider">Nama</th>
@@ -25,7 +25,7 @@ const EmployeeTable = ({ employees, handleEditKaryawan, handleDeleteKaryawan }) 
                             <td className="py-3 px-6 text-sm text-gray-700">
                                 <button
                                     onClick={() => handleEditKaryawan(employee)}
-                                    className="text-blue-500 hover:text-blue-700 mr-4 font-semibold"
+                                    className="text-yellow-500 hover:text-yellow-700 mr-4 font-semibold"
                                 >
                                     Edit
                                 </button>
