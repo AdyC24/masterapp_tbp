@@ -1,6 +1,6 @@
 import React from "react";
 
-const EmployeeTable = ({ employees, handleEditKaryawan, handleDeleteKaryawan }) => {
+const EmployeeTable = ({ employees, handleEditKaryawan }) => {
     return (
         <div className="overflow-x-auto">
             <table className="min-w-full bg-white shadow-lg rounded-lg overflow-hidden">
@@ -28,12 +28,6 @@ const EmployeeTable = ({ employees, handleEditKaryawan, handleDeleteKaryawan }) 
                                     className="text-yellow-500 hover:text-yellow-700 mr-4 font-semibold"
                                 >
                                     Edit
-                                </button>
-                                <button
-                                    onClick={() => handleDeleteKaryawan(employee.empId)}
-                                    className="text-red-500 hover:text-red-700 font-semibold"
-                                >
-                                    Delete
                                 </button>
                             </td>
                         </tr>

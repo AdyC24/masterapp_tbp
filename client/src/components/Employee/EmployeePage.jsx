@@ -56,15 +56,6 @@ const EmployeePage = () => {
         }
     }
 
-    const handleDeleteKaryawan = async (id) => {
-        try {
-            await axios.delete(`/employee/${id}`);
-            setEmployees(employees.filter((employee) => employee.empId !== id));
-        } catch (error) {
-            console.error("Error deleting employee:", error);
-        }
-    }
-
     const handleEditKaryawan = (employee) => {
         setIsEditing(true);
         setEditEmployeeId(employee.empId);
@@ -104,17 +95,10 @@ const EmployeePage = () => {
             <Navbar/>
                 <div className="container mx-auto py-8">
                     <h1 className="text-3xl font-bold mb-6 text-center">Employee Management</h1>
-                    <button 
-                        onClick={openModal}
-                        className="mb-4 bg-blue-500 text-white font-bold py-2 px-4 rounded-md hover:bg-blue-600 transition duration-300"
-                    >
-                        Tambah Karyawan
-                    </button>
 
                     <EmployeeTable
                         employees={employees}
                         handleEditKaryawan={handleEditKaryawan}
-                        handleDeleteKaryawan={handleDeleteKaryawan}
                     />     
                 </div>
                 <Footer />
