@@ -1,11 +1,14 @@
 import React, { useState, useEffect} from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Navbar from "../Navbar";
 import Footer from "../Footer";
 import EmployeeTable from "./EmployeeTable";
 
 const EmployeePage = () => {
+    const navigate = useNavigate()
     const [employees, setEmployees] = useState([]);
+    
 
     useEffect(() => {
         fetchEmployee();
@@ -20,6 +23,10 @@ const EmployeePage = () => {
         }
     }
 
+    const handleRowClick = (empId) => {
+        navigate(`/employee/${empId}`)
+    }
+
     return(
         <div>
             <div className="flex flex-col min-h-screen bg-gray-50">
@@ -29,6 +36,7 @@ const EmployeePage = () => {
 
                     <EmployeeTable
                         employees={employees}
+                        handleRowClick={handleRowClick}
                     />     
                 </div>
                 <Footer />

@@ -1,6 +1,6 @@
 import React from "react";
 
-const EmployeeTable = ({ employees }) => {
+const EmployeeTable = ({ employees, handleRowClick }) => {
     return (
         <div className="overflow-x-auto">
             <table className="min-w-full bg-white shadow-lg rounded-lg overflow-hidden">
@@ -15,7 +15,11 @@ const EmployeeTable = ({ employees }) => {
                 </thead>
                 <tbody>
                     {employees.map(employee => (
-                        <tr key={employee.empId} className="border-b hover:bg-gray-100">
+                        <tr 
+                            key={employee.empId}
+                            className="border-b hover:bg-gray-100 cursor-pointer"
+                            onClick={() => handleRowClick(employee.empId)}
+                        >
                             <td className="py-3 px-6 text-sm text-gray-700">{employee.empNIK}</td>
                             <td className="py-3 px-6 text-sm text-gray-700">{employee.empName}</td>
                             <td className="py-3 px-6 text-sm text-gray-700">{employee.empPosition}</td>
