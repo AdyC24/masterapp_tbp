@@ -18,7 +18,7 @@ const EmployeeTable = ({ employees, handleRowClick }) => {
                         <tr 
                             key={employee.empId}
                             className="border-b hover:bg-gray-100 cursor-pointer"
-                            onClick={() => handleRowClick(employee.empId)}
+                            onClick={() => handleRowClick(employee.empNIK)}
                         >
                             <td className="py-3 px-6 text-sm text-gray-700">{employee.empNIK}</td>
                             <td className="py-3 px-6 text-sm text-gray-700">{employee.empName}</td>

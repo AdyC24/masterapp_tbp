@@ -4,7 +4,7 @@ import { AuthProvider } from './AuthContext';
 import LoginPage from './components/Login/LoginPage';
 import HomePage from './components/Home/HomePage';
 import EmployeePage from './components/Employee/EmployeePage'
-import EmployeeDetails from './components/Employee/EmployeeDetails';
+import EmployeeDetails from './components/EmployeeDetails/EmployeeDetails';
 
 
 function App() {
@@ -12,7 +12,7 @@ function App() {
     <AuthProvider>
       <Router>
         <Routes>
-          <Route path="/employee/:id" element={<EmployeeDetails />} />
+          <Route path="/employee/:nik" element={<EmployeeDetails />} />
           <Route path="/employee" element={<EmployeePage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/home" element={<HomePage />} />
