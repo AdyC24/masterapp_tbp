@@ -1,6 +1,6 @@
 import React from "react";
 
-const EmployeeTable = ({ employees, handleEditKaryawan }) => {
+const EmployeeTable = ({ employees }) => {
     return (
         <div className="overflow-x-auto">
             <table className="min-w-full bg-white shadow-lg rounded-lg overflow-hidden">
@@ -11,7 +11,6 @@ const EmployeeTable = ({ employees, handleEditKaryawan }) => {
                         <th className="py-3 px-6 text-left font-semibold text-sm uppercase tracking-wider">Jabatan</th>
                         <th className="py-3 px-6 text-left font-semibold text-sm uppercase tracking-wider">Department</th>
                         <th className="py-3 px-6 text-left font-semibold text-sm uppercase tracking-wider">Perusahaan</th>
-                        <th className="py-3 px-6 text-left font-semibold text-sm uppercase tracking-wider">Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -22,14 +21,6 @@ const EmployeeTable = ({ employees, handleEditKaryawan }) => {
                             <td className="py-3 px-6 text-sm text-gray-700">{employee.empPosition}</td>
                             <td className="py-3 px-6 text-sm text-gray-700">{employee.empDepartment}</td>
                             <td className="py-3 px-6 text-sm text-gray-700">{employee.empCompany}</td>
-                            <td className="py-3 px-6 text-sm text-gray-700">
-                                <button
-                                    onClick={() => handleEditKaryawan(employee)}
-                                    className="text-yellow-500 hover:text-yellow-700 mr-4 font-semibold"
-                                >
-                                    Edit
-                                </button>
-                            </td>
                         </tr>
                     ))}
                 </tbody>
