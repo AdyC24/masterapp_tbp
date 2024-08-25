@@ -24,7 +24,7 @@ const EmployeePage = () => {
     }
 
     const handleRowClick = (empId) => {
-        navigate(`/employee/${empId}`)
+        navigate(`/employee/${empId}/personal`)
     }
 
     return(

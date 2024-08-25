@@ -5,18 +5,22 @@ import LoginPage from './components/Login/LoginPage';
 import HomePage from './components/Home/HomePage';
 import EmployeePage from './components/Employee/EmployeePage'
 import EmployeeDetails from './components/EmployeeDetails/EmployeeDetails';
-
+import Personal from './components/EmployeeDetails/Details/Personal';
+import Contracts from './components/EmployeeDetails/Details/Contracts';
 
 function App() {
   return (
     <AuthProvider>
       <Router>
         <Routes>
-          <Route path="/employee/:nik" element={<EmployeeDetails />} />
+          <Route path="/employee/:nik" element={<EmployeeDetails />}>
+            <Route path="personal" element={<Personal />} /> {/* Perhatikan penggunaan JSX */}
+            <Route path="contract" element={<Contracts />} /> {/* Perhatikan penggunaan JSX */}
+          </Route>
           <Route path="/employee" element={<EmployeePage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/home" element={<HomePage />} />
-          <Route path="/" element={<AuthenticatedRoute />}/>
+          <Route path="/" element={<AuthenticatedRoute />} />
         </Routes>
       </Router>  
     </AuthProvider>
