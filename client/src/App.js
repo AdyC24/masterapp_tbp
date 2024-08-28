@@ -7,12 +7,14 @@ import EmployeePage from './components/Employee/EmployeePage'
 import EmployeeDetails from './components/EmployeeDetails/EmployeeDetails';
 import Personal from './components/EmployeeDetails/Details/Personal';
 import Contracts from './components/EmployeeDetails/Details/Contracts';
+import OrganizationPage from './components/StructureOrganization/OrganizationPage';
 
 function App() {
   return (
     <AuthProvider>
       <Router>
         <Routes>
+          <Route path="/so" element={<OrganizationPage />}/>
           <Route path="/employee/:nik" element={<EmployeeDetails />}>
             <Route path="personal" element={<Personal />} /> {/* Perhatikan penggunaan JSX */}
             <Route path="contract" element={<Contracts />} /> {/* Perhatikan penggunaan JSX */}

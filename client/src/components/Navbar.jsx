@@ -60,8 +60,11 @@ const Navbar = () => {
                         </button>
                         {openDropdown === 'HRPlanning' && (
                             <div className="absolute left-0 mt-2 w-52 bg-white rounded-md shadow-lg z-50">
-                                <Link to={"/mpp"} className="block px-4 py-2 text-gray-700 hover:bg-gray-100">
-                                    Manpower Planning
+                                <Link to={"/so"} className="block px-4 py-2 text-gray-700 hover:bg-gray-100">
+                                    Struktur Organisasi
+                                </Link>
+                                <Link to={"/ptk"} className="block px-4 py-2 text-gray-700 hover:bg-gray-100">
+                                    Permintaan Tenaga Kerja
                                 </Link>
                             </div>
                         )}

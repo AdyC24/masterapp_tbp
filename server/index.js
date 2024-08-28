@@ -5,7 +5,6 @@ const session = require('express-session');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
-
 const companyRoute = require('./src/route/company');
 const departmentRoute = require('./src/route/department');
 const positionRoute = require('./src/route/position');
@@ -13,7 +12,8 @@ const employeeRoute = require('./src/route/employee');
 const contractRoute = require('./src/route/contract');
 const requestRoute = require('./src/route/request');
 const userRoute = require('./src/route/user');  
-const authRoute = require('./src/route/auth')
+const authRoute = require('./src/route/auth');
+const soRoute = require('./src/route/so');
 
 const app = express();
 
@@ -46,6 +46,7 @@ app.use('/position', positionRoute);
 app.use('/employee', employeeRoute);
 app.use('/contract', contractRoute);
 app.use('/request', requestRoute);
+app.use('/so', soRoute);
 
 app.listen(4000, () => {
     console.log('Server running di port 4000')
