@@ -11,7 +11,7 @@ const EmployeeDetails = () => {
             <Navbar />
             <div className="flex flex-grow">
                 <Sidebar />
-                <div className="flex-grow p-8 bg-white shadow-lg rounded-lg mx-4 mt-6">
+                <div className="flex-grow p-8 bg-white shadow-lg rounded-lg mx-4 my-6">
                     <Outlet />
                 </div>
             </div>

@@ -30,8 +30,8 @@ const EmployeePage = () => {
     return(
         <div>
             <div className="flex flex-col min-h-screen bg-gray-50">
-            <Navbar/>
-                <div className="container mx-auto py-8">
+                <Navbar/>
+                <div className="flex-grow container mx-auto py-8">
                     <h1 className="text-3xl font-bold mb-6 text-center">Employee Management</h1>
 
                     <EmployeeTable
