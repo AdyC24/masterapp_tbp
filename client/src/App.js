@@ -8,6 +8,7 @@ import EmployeeDetails from './components/EmployeeDetails/EmployeeDetails';
 import Personal from './components/EmployeeDetails/Details/Personal';
 import Contracts from './components/EmployeeDetails/Details/Contracts';
 import OrganizationPage from './components/StructureOrganization/OrganizationPage';
+import ContractPage from './components/Contracts/ContractPage';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
             <Route path="contract" element={<Contracts />} /> {/* Perhatikan penggunaan JSX */}
           </Route>
           <Route path="/employee" element={<EmployeePage />} />
+          <Route path="/contracts" element={<ContractPage />}/>
           <Route path="/login" element={<LoginPage />} />
           <Route path="/home" element={<HomePage />} />
           <Route path="/" element={<AuthenticatedRoute />} />

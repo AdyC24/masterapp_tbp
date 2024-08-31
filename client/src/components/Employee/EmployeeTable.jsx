@@ -22,9 +22,9 @@ const EmployeeTable = ({ employees, handleRowClick }) => {
                         >
                             <td className="py-3 px-6 text-sm text-gray-700">{employee.empNIK}</td>
                             <td className="py-3 px-6 text-sm text-gray-700">{employee.empName}</td>
-                            <td className="py-3 px-6 text-sm text-gray-700">{employee.empPosition}</td>
-                            <td className="py-3 px-6 text-sm text-gray-700">{employee.empDepartment}</td>
-                            <td className="py-3 px-6 text-sm text-gray-700">{employee.empCompany}</td>
+                            <td className="py-3 px-6 text-sm text-gray-700">HR Operation Officer</td>
+                            <td className="py-3 px-6 text-sm text-gray-700">HR & GA</td>
+                            <td className="py-3 px-6 text-sm text-gray-700">PT. Gane Permai Sentosa</td>
                         </tr>
                     ))}
                 </tbody>

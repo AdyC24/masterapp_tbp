@@ -81,6 +81,7 @@ const OrganizationPage = () => {
 
     const renderNode = (node) => {
         const isExpanded = expandedNodes[node.name];
+        const borderColor = node.mpDev < 0 ? 'red' : 'black';
         return (
             <TreeNode
                 label={
@@ -88,7 +89,7 @@ const OrganizationPage = () => {
                         data-tooltip-id={`tooltip-${node.name}`}
                         style={{ 
                             padding: '10px', 
-                            border: '1px solid black', 
+                            border: `1px solid ${borderColor}`, 
                             display: 'inline-block', 
                             cursor: 'pointer',
                             borderRadius: '10px'
@@ -131,6 +132,11 @@ const OrganizationPage = () => {
         <div className="flex flex-col min-h-screen bg-gray-50">
             <Navbar />
             <div className="flex-grow p-6 bg-gray-100 text-gray-800 font-sans">
+                <div className="flex justify-end mb-4 mr-6">
+                    <button className="bg-blue-500 text-white text-sm font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-blue-600 transition duration-200">
+                        Export
+                    </button>
+                </div>
                 <h2 className="text-2xl mb-4 text-center text-gray-900">
                     Organization Structure
                 </h2>

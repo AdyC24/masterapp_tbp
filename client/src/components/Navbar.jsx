@@ -79,6 +79,9 @@ const Navbar = () => {
                                 <Link to={"/employee"} className="block px-4 py-2 text-gray-700 hover:bg-gray-100">
                                     Employee Management
                                 </Link>
+                                <Link to={"/contracts"} className="block px-4 py-2 text-gray-700 hover:bg-gray-100">
+                                    Contract Management
+                                </Link>
                             </div>
                         )}
                     </div>
