@@ -14,8 +14,8 @@ const OrganizationPage = () => {
         children: [
             {
                 name: "HR Superintendent",
-                mpActual: 1,
-                mpPlan: 0,
+                mpActual: 0,
+                mpPlan: 1,
                 mpDev: -1,
                 recruitProcess: 0,
                 children: [
@@ -130,7 +130,7 @@ const OrganizationPage = () => {
     return (
         <div className="flex flex-col min-h-screen bg-gray-50">
             <Navbar />
-            <div className="p-6 bg-gray-100 text-gray-800 font-sans">
+            <div className="flex-grow p-6 bg-gray-100 text-gray-800 font-sans">
                 <h2 className="text-2xl mb-4 text-center text-gray-900">
                     Organization Structure
                 </h2>
