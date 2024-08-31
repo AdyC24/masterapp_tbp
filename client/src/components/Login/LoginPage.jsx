@@ -14,12 +14,9 @@ function LoginPage() {
         e.preventDefault();
         try {
             const response = await axios.post('http://localhost:4000/auth/login', { nik, password }, {withCredentials: true});
-            console.log("Login successful:", response.data)
 
             localStorage.setItem('isAuthenticated', 'true')
             setIsAuthenticated(true)
-
-            console.log(setIsAuthenticated)
 
             localStorage.setItem('user', JSON.stringify(response.data.user))
             
