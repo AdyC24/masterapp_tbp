@@ -32,7 +32,7 @@ const Sidebar = () => {
                 {dummyDept.map((dept, index) => (
                     <Link
                         key={index}
-                        to={`/contract/${dept}`}
+                        to={`/contracts/comdev`}
                         className={`px-6 py-2 text-md hover:bg-green-500 hover:text-white transition duration-200`}
                     >
                         {dept}

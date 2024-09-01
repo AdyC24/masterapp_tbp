@@ -9,6 +9,7 @@ import Personal from './components/EmployeeDetails/Details/Personal';
 import Contracts from './components/EmployeeDetails/Details/Contracts';
 import OrganizationPage from './components/StructureOrganization/OrganizationPage';
 import ContractPage from './components/Contracts/ContractPage';
+import ComDev from './components/Contracts/Details/ComDev';
 
 function App() {
   return (
@@ -17,11 +18,13 @@ function App() {
         <Routes>
           <Route path="/so" element={<OrganizationPage />}/>
           <Route path="/employee/:nik" element={<EmployeeDetails />}>
-            <Route path="personal" element={<Personal />} /> {/* Perhatikan penggunaan JSX */}
-            <Route path="contract" element={<Contracts />} /> {/* Perhatikan penggunaan JSX */}
+            <Route path="personal" element={<Personal />} /> 
+            <Route path="contract" element={<Contracts />} /> 
           </Route>
           <Route path="/employee" element={<EmployeePage />} />
-          <Route path="/contracts" element={<ContractPage />}/>
+          <Route path="/contracts" element={<ContractPage />}>
+            <Route path="comdev" element={<ComDev />} /> 
+          </Route> 
           <Route path="/login" element={<LoginPage />} />
           <Route path="/home" element={<HomePage />} />
           <Route path="/" element={<AuthenticatedRoute />} />

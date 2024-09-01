@@ -2,6 +2,7 @@ import React from "react";
 import Sidebar from "./Sidebar";
 import Navbar from "../Navbar";
 import Footer from "../Footer";
+import { Outlet } from "react-router-dom";
 
 
 const ContractPage = () => {
@@ -12,7 +13,7 @@ const ContractPage = () => {
             <div className="flex flex-grow">
                 <Sidebar />
                 <div className="flex-grow p-8 bg-white shadow-lg rounded-lg mx-4 mt-6 mb-2">
-                    Here contracts data
+                    <Outlet />
                 </div>
             </div>
             <Footer />
