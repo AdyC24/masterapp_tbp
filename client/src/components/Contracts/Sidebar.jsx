@@ -4,42 +4,30 @@ import { Link } from "react-router-dom";
 
 const Sidebar = () => {
     const dummyDept = [   
-        'Business Control',
-        'Business Development',
         'Community Development',
-        'Community Relation',
-        'Corporate Communication',
-        'CSR',
         'Environment & Business Improvement',
         'Exploration',
-        'Exploration & Mine Development',
         'External Relation',
-        'Finance & Accounting',
         'Forestry Permitting And Compliance',
         'Grade Control',
         'HR & GA',
-        'IT',
-        'Land Acquisitions',
-        'Land Management',
         'Logistic',
-        'Management',
-        'Mine Geology',
         'Mine Services',
-        'MPE',
+        'MPE - Engineering',
+        'MPE - Survey',
+        'MPE - Site Fluk',
         'OHS & Training',
-        'Outer Project',
         'Plant',
         'Preparation & Laboratorium',
         'Production',
-        'Purchasing',
         'Quality Control',
         'Security',
-        'Shipping',
-        'Sustainable Product Development'
+        'Shipping - TBP & GTS',
+        'Shipping - GSP'
     ]
 
     return (
-        <div className="w-64 bg-green-600 shadow-lg flex flex-col h-full text-white mt-6 rounded-lg">
+        <div className="w-64 bg-green-600 shadow-lg flex flex-col h-full text-white mt-6 mb-2 rounded-lg">
             <nav className="flex flex-col justify-center flex-grow py-4 space-y-4">
                 {dummyDept.map((dept, index) => (
                     <Link

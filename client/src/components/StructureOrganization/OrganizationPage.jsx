@@ -45,9 +45,9 @@ const OrganizationPage = () => {
                         recruitProcess: 0,
                     },
                     { name: "IR Supervisor",
-                        mpActual: 2,
+                        mpActual: 1,
                         mpPlan: 2,
-                        mpDev: 0,
+                        mpDev: -1,
                         recruitProcess: 0,
                     }
                 ]
@@ -81,7 +81,7 @@ const OrganizationPage = () => {
 
     const renderNode = (node) => {
         const isExpanded = expandedNodes[node.name];
-        const borderColor = node.mpDev < 0 ? 'red' : 'black';
+        const borderColor = node.mpDev < 0 || node.mpDev > 0 ? 'red' : 'black';
         return (
             <TreeNode
                 label={
