@@ -1,8 +1,10 @@
 // Sidebar.jsx
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const Sidebar = () => {
+    const location = useLocation();
+
     const dummyDept = [
         {
             picName: 'Community Development',
@@ -87,6 +89,12 @@ const Sidebar = () => {
         
     ]
 
+    const getLinkClass = (path) => {
+        return location.pathname.includes(path)
+            ? "bg-green-500 text-white"
+            : "hover:bg-green-500 hover:text-white transition duration-200"
+    }
+
     return (
         <div className="w-64 bg-green-600 shadow-lg flex flex-col h-full text-white mt-6 mb-2 rounded-lg">
             <nav className="flex flex-col justify-center flex-grow py-4 space-y-4">
@@ -94,7 +102,7 @@ const Sidebar = () => {
                     <Link
                         key={dept.picName}
                         to={`/contracts/${dept.picNick}`}
-                        className={`px-6 py-2 text-md hover:bg-green-500 hover:text-white transition duration-200`}
+                        className={`px-6 py-2 text-md ${getLinkClass(`/contracts/${dept.picNick}`)}`}
                     >
                         {dept.picName}
                     </Link>
