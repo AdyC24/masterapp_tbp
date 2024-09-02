@@ -14,7 +14,7 @@ const Sidebar = () => {
         },
         {
             picName: 'Exploration',
-            picNick: 'Exp'
+            picNick: 'Exploration'
         },
         {
             picName: 'External Relation',
@@ -34,7 +34,7 @@ const Sidebar = () => {
         },      
         {
             picName: 'Logistic',
-            picNick: 'Log'
+            picNick: 'Logistic'
         },      
         {
             picName: 'Mine Services',
@@ -42,15 +42,15 @@ const Sidebar = () => {
         },      
         {
             picName: 'MPE - Engineering',
-            picNick: 'MPE_Eng'
+            picNick: 'MPEEng'
         },      
         {
             picName: 'MPE - Survey',
-            picNick: 'MPE_Survey'
+            picNick: 'MPESurvey'
         },      
         {
             picName: 'MPE - Site Fluk',
-            picNick: 'MPE_Fluk'
+            picNick: 'MPEFluk'
         },      
         {
             picName: 'OHS & Training',
@@ -78,11 +78,11 @@ const Sidebar = () => {
         },      
         {
             picName: 'Shipping - TBP & GTS',
-            picNick: 'Shipping_TBPGTS'
+            picNick: 'ShippingTBPGTS'
         },      
         {
             picName: 'Shipping - GSP',
-            picNick: 'Shipping_GSP'
+            picNick: 'ShippingGSP'
         }
         
     ]

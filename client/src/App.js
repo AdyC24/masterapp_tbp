@@ -9,7 +9,7 @@ import Personal from './components/EmployeeDetails/Details/Personal';
 import Contracts from './components/EmployeeDetails/Details/Contracts';
 import OrganizationPage from './components/StructureOrganization/OrganizationPage';
 import ContractPage from './components/Contracts/ContractPage';
-import ComDev from './components/Contracts/Details/ComDev';
+import { ComDev, EBI, Exploration, ExRel, Forestry, GC, HRGA, Logistic, MPEEng, MPEFluk, MPESurvey, MSC, OHST, Plant, PrepLab, Production, QC, Security, ShippingGSP, ShippingTBPGTS } from './components/Contracts/Details/ContractDetail';
 
 function App() {
   return (
@@ -23,7 +23,26 @@ function App() {
           </Route>
           <Route path="/employee" element={<EmployeePage />} />
           <Route path="/contracts" element={<ContractPage />}>
-            <Route path="comdev" element={<ComDev />} /> 
+            <Route path="ComDev" element={<ComDev />} /> 
+            <Route path="EBI" element={<EBI />} /> 
+            <Route path="Exploration" element={<Exploration />} /> 
+            <Route path="ExRel" element={<ExRel />} />  
+            <Route path="Forestry" element={<Forestry />} />  
+            <Route path="GC" element={<GC />} />
+            <Route path="HRGA" element={<HRGA />} />
+            <Route path="Logistic" element={<Logistic />} />
+            <Route path="MSC" element={<MSC />} />
+            <Route path="MPEEng" element={<MPEEng />} /> 
+            <Route path="MPESurvey" element={<MPESurvey />} /> 
+            <Route path="MPEFluk" element={<MPEFluk />} /> 
+            <Route path="OHST" element={<OHST />} /> 
+            <Route path="Plant" element={<Plant />} /> 
+            <Route path="PrepLab" element={<PrepLab />} /> 
+            <Route path="Prod" element={<Production />} /> 
+            <Route path="QC" element={<QC />} /> 
+            <Route path="Security" element={<Security />} /> 
+            <Route path="ShippingTBPGTS" element={<ShippingTBPGTS />} /> 
+            <Route path="ShippingGSP" element={<ShippingGSP />} />
           </Route> 
           <Route path="/login" element={<LoginPage />} />
           <Route path="/home" element={<HomePage />} />
