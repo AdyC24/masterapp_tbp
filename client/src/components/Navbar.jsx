@@ -9,6 +9,7 @@ const Navbar = () => {
     const hrPlanningRef = useRef(null);
     const hrOperationRef = useRef(null);
     const userProfileRef = useRef(null);
+    const irRef = useRef(null);
 
     const toggleDropdown = (dropdown) => {
         setOpenDropdown(prevDropdown => (prevDropdown === dropdown ? null : dropdown));
@@ -79,7 +80,7 @@ const Navbar = () => {
                                 <Link to={"/employee"} className="block px-4 py-2 text-gray-700 hover:bg-gray-100">
                                     Employee Management
                                 </Link>
-                                <Link to={"/contracts"} className="block px-4 py-2 text-gray-700 hover:bg-gray-100">
+                                <Link to={"/contracts/dashboard"} className="block px-4 py-2 text-gray-700 hover:bg-gray-100">
                                     Contract Management
                                 </Link>
                             </div>
@@ -89,6 +90,19 @@ const Navbar = () => {
                     <Link to="/hirs" className="text-green-600 font-semibold text-lg hover:text-green-800 transition duration-300">
                         HRIS
                     </Link>
+                    <div className="border-l border-gray-300 h-6"></div>
+                    <div className="relative" ref={irRef}>
+                        <button onClick={() => toggleDropdown('IR')} className="text-green-600 font-semibold text-lg hover:text-green-800 transition duration-300">
+                            Internal Relations
+                        </button>
+                        {openDropdown === 'IR' && (
+                            <div className="absolute left-0 mt-2 w-52 bg-white rounded-md shadow-lg z-50">
+                                <Link to={"/sp"} className="block px-4 py-2 text-gray-700 hover:bg-gray-100">
+                                    Surat Peringatan
+                                </Link>
+                            </div>
+                        )}
+                    </div>
                 </div>
 
                 {/* Right Section: Navigation Links */}

@@ -26,6 +26,18 @@ const Sidebar = () => {
                 >
                     Contract
                 </Link>
+                <Link
+                    to={`/employee/${nik}/pa`}
+                    className={`px-6 py-2 text-md ${getLinkClass(`/employee/${nik}/pa`)}`}
+                >
+                    Performance Appraisal
+                </Link>
+                <Link
+                    to={`/employee/${nik}/sp`}
+                    className={`px-6 py-2 text-md ${getLinkClass(`/employee/${nik}/sp`)}`}
+                >
+                    Surat Peringatan
+                </Link>
             </nav>
         </div>
     );
