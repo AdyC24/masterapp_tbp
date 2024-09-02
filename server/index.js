@@ -14,6 +14,7 @@ const requestRoute = require('./src/route/request');
 const userRoute = require('./src/route/user');  
 const authRoute = require('./src/route/auth');
 const soRoute = require('./src/route/so');
+const picRoute = require('./src/route/pic')
 
 const app = express();
 
@@ -38,12 +39,13 @@ app.use(session({
 }))
 
 app.use('/auth', authRoute)
+app.use('/employee', employeeRoute);
+app.use('/pic', picRoute);
 
 app.use('/user', userRoute);
 app.use('/company', companyRoute);
 app.use('/department', departmentRoute);
 app.use('/position', positionRoute);
-app.use('/employee', employeeRoute);
 app.use('/contract', contractRoute);
 app.use('/request', requestRoute);
 app.use('/so', soRoute);
