@@ -1,16 +1,29 @@
-const getAllContracts = (req, res) => {
+const ContractModel = require('../models/contract')
+
+const getAllContracts = async (req, res) => {
+    try {
+        const[data] = await ContractModel.getAllContracts();
+        res.json({
+            message: 'Get all contracts succeed',
+            data: data
+        })
+    } catch (error) {
+        res.status(500).json({
+            message: "Server is error",
+            errMessage: error.message
+        })
+    }
+}
+
+const createNewContract = () => {
 
 }
 
-const createNewContract = (req, res) => {
+const editContract = () => {
 
 }
 
-const editContract = (req, res) => {
-
-}
-
-const deleteContract = (req, res) => {
+const deleteContract = () => {
 
 }
 
