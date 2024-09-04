@@ -18,13 +18,13 @@ const EmployeeTable = ({ employees, handleRowClick }) => {
                         <tr 
                             key={employee.empId}
                             className="border-b hover:bg-gray-100 cursor-pointer"
-                            onClick={() => handleRowClick(employee.empNIK)}
+                            onClick={() => handleRowClick(employee.empNik)}
                         >
-                            <td className="py-3 px-6 text-sm text-gray-700">{employee.empNIK}</td>
+                            <td className="py-3 px-6 text-sm text-gray-700">{employee.empNik}</td>
                             <td className="py-3 px-6 text-sm text-gray-700">{employee.empName}</td>
-                            <td className="py-3 px-6 text-sm text-gray-700">HR Operation Officer</td>
-                            <td className="py-3 px-6 text-sm text-gray-700">HR & GA</td>
-                            <td className="py-3 px-6 text-sm text-gray-700">PT. Gane Permai Sentosa</td>
+                            <td className="py-3 px-6 text-sm text-gray-700">{employee.posName}</td>
+                            <td className="py-3 px-6 text-sm text-gray-700">{employee.secName}</td>
+                            <td className="py-3 px-6 text-sm text-gray-700">{employee.compName}</td>
                         </tr>
                     ))}
                 </tbody>

@@ -5,12 +5,11 @@ const getUserEmployee = async (nik) => {
         SELECT
             user.userId,
             user.userPassword,
-            employee.empId,
             employee.empNIK
         FROM
             user
         JOIN
-            employee ON user.empId = employee.empId
+            employee ON user.empNIK = employee.empNIK
         WHERE employee.empNIK = ?
     `;
 
