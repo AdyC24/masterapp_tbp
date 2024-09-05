@@ -2,15 +2,24 @@ import React, { useState } from "react";
 
 const EmployeeTable = ({ employees, handleRowClick }) => {
     const [currentPage, setCurrentPage] = useState(1);
-    const [itemsPerPage] = useState(15); // Jumlah item per halaman
+    const [itemsPerPage] = useState(10); // Jumlah item per halaman
+    const [searchTerm, setSearchTerm] = useState(""); // Kata kunci pencarian
 
-    // Menghitung total halaman
-    const totalPages = Math.ceil(employees.length / itemsPerPage);
+    // Menghitung total halaman berdasarkan data yang difilter
+    const filteredEmployees = employees.filter(employee =>
+        employee.empNik.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        employee.empName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        employee.posName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        employee.secName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        employee.compName.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
+    const totalPages = Math.ceil(filteredEmployees.length / itemsPerPage);
 
     // Menentukan indeks awal dan akhir untuk data di halaman saat ini
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-    const currentEmployees = employees.slice(indexOfFirstItem, indexOfLastItem);
+    const currentEmployees = filteredEmployees.slice(indexOfFirstItem, indexOfLastItem);
 
     const handleNextPage = () => {
         if (currentPage < totalPages) {
@@ -24,8 +33,25 @@ const EmployeeTable = ({ employees, handleRowClick }) => {
         }
     };
 
+    const handleSearch = (event) => {
+        setSearchTerm(event.target.value);
+        setCurrentPage(1); // Reset halaman ke 1 saat pencarian dilakukan
+    };
+
     return (
         <div className="overflow-x-auto">
+            {/* Search Input */}
+            <div className="flex justify-end items-center mb-4">
+                <input
+                    type="text"
+                    placeholder="Cari karyawan..."
+                    value={searchTerm}
+                    onChange={handleSearch}
+                    className="border border-gray-300 rounded-lg px-4 py-2 w-1/4" // Atur width menjadi lebih kecil
+                />
+            </div>
+
+
             <table className="min-w-full bg-white shadow-lg rounded-lg overflow-hidden">
                 <thead className="bg-green-600 text-white">
                     <tr>
