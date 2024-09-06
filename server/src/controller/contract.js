@@ -15,6 +15,25 @@ const getAllContracts = async (req, res) => {
     }
 }
 
+const getAllContractsByNik = async (req, res) => {
+    const { nik } = req.params;
+
+    console.log('NIK: ', nik);
+
+    try {
+        const[data] = await ContractModel.getAllContractsByNik(nik);
+        res.json({
+            message: 'Get all contract by nik',
+            data: data
+        })
+    } catch (error) {
+        res.status(500).json({
+            message: "Server is error",
+            errMessage: error.message
+        })
+    }
+}
+
 const createNewContract = () => {
 
 }
@@ -29,6 +48,7 @@ const deleteContract = () => {
 
 module.exports = {
     getAllContracts,
+    getAllContractsByNik,
     createNewContract,
     editContract,
     deleteContract

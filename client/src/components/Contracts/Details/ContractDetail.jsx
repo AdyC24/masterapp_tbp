@@ -1,6 +1,22 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 const ComDev = () => {
+    
+    const [contracts, setContracts] = useState([]);
+
+    useEffect(() => {
+        fetchContract();
+    }, []);
+
+    const fetchContract = async () => {
+        try {
+            const response = await axios.get(`http://localhost:4000/contract`);
+            setContracts(response.data.data)
+        } catch (error) {
+            console.error("Error fetching contract data:", error);
+        }
+    }
 
     return(
         <div>

@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { useParams } from "react-router-dom";
 
 const Contracts = () => {
     const [contracts, setContracts] = useState([]);
 
+    const { nik } = useParams()
+
     useEffect(() => {
         fetchContract();
-    }, []);
+    }, [nik]);
 
     const formatDate = (isDate) => {
         const date = new Date(isDate);
@@ -19,7 +22,7 @@ const Contracts = () => {
 
     const fetchContract = async () => {
         try {
-            const response = await axios.get(`http://localhost:4000/contract`);
+            const response = await axios.get(`http://localhost:4000/contract/${nik}`);
             setContracts(response.data.data)
         } catch (error) {
             console.error("Error fetching contract:", error)
