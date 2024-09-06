@@ -19,12 +19,11 @@ const ComDev = () => {
                                 <th className="py-3 px-6 text-left">Name</th>
                                 <th className="py-3 px-6 text-left">Level</th>
                                 <th className="py-3 px-6 text-left">Position</th>
-                                <th className="py-3 px-6 text-left">Length of Service</th>
+                                <th className="py-3 px-6 text-left">Hire Date</th>
                                 <th className="py-3 px-6 text-left">Contract</th>
                                 <th className="py-3 px-6 text-left">Expired Date</th>
                                 <th className="py-3 px-6 text-left">PA</th>
                                 <th className="py-3 px-6 text-left">SP</th>
-                                <th className="py-3 px-6 text-left">Direct</th>
                                 <th className="py-3 px-6 text-left">Sign</th>
                             </tr>
                         </thead>
@@ -46,11 +45,6 @@ const ComDev = () => {
                                     <td className="py-3 px-6 text-left">
                                         <span className= "py-1 px-3 rounded-full text-xs bg-green-200 text-green-600">
                                         {contract.contractSP}
-                                        </span>
-                                    </td>
-                                    <td className="py-3 px-6 text-left">
-                                        <span className= "py-1 px-3 rounded-full text-xs bg-red-200 text-red-600">
-                                            {contract.contractDirect}
                                         </span>
                                     </td>
                                     <td className="py-3 px-6 text-left">
@@ -84,12 +78,11 @@ const EBI = () => {
                                 <th className="py-3 px-6 text-left">Name</th>
                                 <th className="py-3 px-6 text-left">Level</th>
                                 <th className="py-3 px-6 text-left">Position</th>
-                                <th className="py-3 px-6 text-left">Length of Service</th>
+                                <th className="py-3 px-6 text-left">Hire Date</th>
                                 <th className="py-3 px-6 text-left">Contract</th>
                                 <th className="py-3 px-6 text-left">Expired Date</th>
                                 <th className="py-3 px-6 text-left">PA</th>
                                 <th className="py-3 px-6 text-left">SP</th>
-                                <th className="py-3 px-6 text-left">Direct</th>
                                 <th className="py-3 px-6 text-left">Sign</th>
                             </tr>
                         </thead>
@@ -111,11 +104,6 @@ const EBI = () => {
                                     <td className="py-3 px-6 text-left">
                                         <span className= "py-1 px-3 rounded-full text-xs bg-green-200 text-green-600">
                                         {contract.contractSP}
-                                        </span>
-                                    </td>
-                                    <td className="py-3 px-6 text-left">
-                                        <span className= "py-1 px-3 rounded-full text-xs bg-red-200 text-red-600">
-                                            {contract.contractDirect}
                                         </span>
                                     </td>
                                     <td className="py-3 px-6 text-left">
@@ -149,12 +137,11 @@ const Exploration = () => {
                                 <th className="py-3 px-6 text-left">Name</th>
                                 <th className="py-3 px-6 text-left">Level</th>
                                 <th className="py-3 px-6 text-left">Position</th>
-                                <th className="py-3 px-6 text-left">Length of Service</th>
+                                <th className="py-3 px-6 text-left">Hire Date</th>
                                 <th className="py-3 px-6 text-left">Contract</th>
                                 <th className="py-3 px-6 text-left">Expired Date</th>
                                 <th className="py-3 px-6 text-left">PA</th>
                                 <th className="py-3 px-6 text-left">SP</th>
-                                <th className="py-3 px-6 text-left">Direct</th>
                                 <th className="py-3 px-6 text-left">Sign</th>
                             </tr>
                         </thead>
@@ -176,11 +163,6 @@ const Exploration = () => {
                                     <td className="py-3 px-6 text-left">
                                         <span className= "py-1 px-3 rounded-full text-xs bg-green-200 text-green-600">
                                         {contract.contractSP}
-                                        </span>
-                                    </td>
-                                    <td className="py-3 px-6 text-left">
-                                        <span className= "py-1 px-3 rounded-full text-xs bg-red-200 text-red-600">
-                                            {contract.contractDirect}
                                         </span>
                                     </td>
                                     <td className="py-3 px-6 text-left">
@@ -214,12 +196,11 @@ const ExRel = () => {
                                 <th className="py-3 px-6 text-left">Name</th>
                                 <th className="py-3 px-6 text-left">Level</th>
                                 <th className="py-3 px-6 text-left">Position</th>
-                                <th className="py-3 px-6 text-left">Length of Service</th>
+                                <th className="py-3 px-6 text-left">Hire Date</th>
                                 <th className="py-3 px-6 text-left">Contract</th>
                                 <th className="py-3 px-6 text-left">Expired Date</th>
                                 <th className="py-3 px-6 text-left">PA</th>
                                 <th className="py-3 px-6 text-left">SP</th>
-                                <th className="py-3 px-6 text-left">Direct</th>
                                 <th className="py-3 px-6 text-left">Sign</th>
                             </tr>
                         </thead>
@@ -241,11 +222,6 @@ const ExRel = () => {
                                     <td className="py-3 px-6 text-left">
                                         <span className= "py-1 px-3 rounded-full text-xs bg-green-200 text-green-600">
                                         {contract.contractSP}
-                                        </span>
-                                    </td>
-                                    <td className="py-3 px-6 text-left">
-                                        <span className= "py-1 px-3 rounded-full text-xs bg-red-200 text-red-600">
-                                            {contract.contractDirect}
                                         </span>
                                     </td>
                                     <td className="py-3 px-6 text-left">
@@ -279,12 +255,11 @@ const Forestry = () => {
                                 <th className="py-3 px-6 text-left">Name</th>
                                 <th className="py-3 px-6 text-left">Level</th>
                                 <th className="py-3 px-6 text-left">Position</th>
-                                <th className="py-3 px-6 text-left">Length of Service</th>
+                                <th className="py-3 px-6 text-left">Hire Date</th>
                                 <th className="py-3 px-6 text-left">Contract</th>
                                 <th className="py-3 px-6 text-left">Expired Date</th>
                                 <th className="py-3 px-6 text-left">PA</th>
                                 <th className="py-3 px-6 text-left">SP</th>
-                                <th className="py-3 px-6 text-left">Direct</th>
                                 <th className="py-3 px-6 text-left">Sign</th>
                             </tr>
                         </thead>
@@ -306,11 +281,6 @@ const Forestry = () => {
                                     <td className="py-3 px-6 text-left">
                                         <span className= "py-1 px-3 rounded-full text-xs bg-green-200 text-green-600">
                                         {contract.contractSP}
-                                        </span>
-                                    </td>
-                                    <td className="py-3 px-6 text-left">
-                                        <span className= "py-1 px-3 rounded-full text-xs bg-red-200 text-red-600">
-                                            {contract.contractDirect}
                                         </span>
                                     </td>
                                     <td className="py-3 px-6 text-left">
@@ -344,12 +314,11 @@ const GC = () => {
                                 <th className="py-3 px-6 text-left">Name</th>
                                 <th className="py-3 px-6 text-left">Level</th>
                                 <th className="py-3 px-6 text-left">Position</th>
-                                <th className="py-3 px-6 text-left">Length of Service</th>
+                                <th className="py-3 px-6 text-left">Hire Date</th>
                                 <th className="py-3 px-6 text-left">Contract</th>
                                 <th className="py-3 px-6 text-left">Expired Date</th>
                                 <th className="py-3 px-6 text-left">PA</th>
                                 <th className="py-3 px-6 text-left">SP</th>
-                                <th className="py-3 px-6 text-left">Direct</th>
                                 <th className="py-3 px-6 text-left">Sign</th>
                             </tr>
                         </thead>
@@ -371,11 +340,6 @@ const GC = () => {
                                     <td className="py-3 px-6 text-left">
                                         <span className= "py-1 px-3 rounded-full text-xs bg-green-200 text-green-600">
                                         {contract.contractSP}
-                                        </span>
-                                    </td>
-                                    <td className="py-3 px-6 text-left">
-                                        <span className= "py-1 px-3 rounded-full text-xs bg-red-200 text-red-600">
-                                            {contract.contractDirect}
                                         </span>
                                     </td>
                                     <td className="py-3 px-6 text-left">
@@ -409,12 +373,11 @@ const HRGA = () => {
                                 <th className="py-3 px-6 text-left">Name</th>
                                 <th className="py-3 px-6 text-left">Level</th>
                                 <th className="py-3 px-6 text-left">Position</th>
-                                <th className="py-3 px-6 text-left">Length of Service</th>
+                                <th className="py-3 px-6 text-left">Hire Date</th>
                                 <th className="py-3 px-6 text-left">Contract</th>
                                 <th className="py-3 px-6 text-left">Expired Date</th>
                                 <th className="py-3 px-6 text-left">PA</th>
                                 <th className="py-3 px-6 text-left">SP</th>
-                                <th className="py-3 px-6 text-left">Direct</th>
                                 <th className="py-3 px-6 text-left">Sign</th>
                             </tr>
                         </thead>
@@ -436,11 +399,6 @@ const HRGA = () => {
                                     <td className="py-3 px-6 text-left">
                                         <span className= "py-1 px-3 rounded-full text-xs bg-green-200 text-green-600">
                                         {contract.contractSP}
-                                        </span>
-                                    </td>
-                                    <td className="py-3 px-6 text-left">
-                                        <span className= "py-1 px-3 rounded-full text-xs bg-red-200 text-red-600">
-                                            {contract.contractDirect}
                                         </span>
                                     </td>
                                     <td className="py-3 px-6 text-left">
@@ -474,12 +432,11 @@ const Logistic = () => {
                                 <th className="py-3 px-6 text-left">Name</th>
                                 <th className="py-3 px-6 text-left">Level</th>
                                 <th className="py-3 px-6 text-left">Position</th>
-                                <th className="py-3 px-6 text-left">Length of Service</th>
+                                <th className="py-3 px-6 text-left">Hire Date</th>
                                 <th className="py-3 px-6 text-left">Contract</th>
                                 <th className="py-3 px-6 text-left">Expired Date</th>
                                 <th className="py-3 px-6 text-left">PA</th>
                                 <th className="py-3 px-6 text-left">SP</th>
-                                <th className="py-3 px-6 text-left">Direct</th>
                                 <th className="py-3 px-6 text-left">Sign</th>
                             </tr>
                         </thead>
@@ -501,11 +458,6 @@ const Logistic = () => {
                                     <td className="py-3 px-6 text-left">
                                         <span className= "py-1 px-3 rounded-full text-xs bg-green-200 text-green-600">
                                         {contract.contractSP}
-                                        </span>
-                                    </td>
-                                    <td className="py-3 px-6 text-left">
-                                        <span className= "py-1 px-3 rounded-full text-xs bg-red-200 text-red-600">
-                                            {contract.contractDirect}
                                         </span>
                                     </td>
                                     <td className="py-3 px-6 text-left">
@@ -539,12 +491,11 @@ const MPE = () => {
                                 <th className="py-3 px-6 text-left">Name</th>
                                 <th className="py-3 px-6 text-left">Level</th>
                                 <th className="py-3 px-6 text-left">Position</th>
-                                <th className="py-3 px-6 text-left">Length of Service</th>
+                                <th className="py-3 px-6 text-left">Hire Date</th>
                                 <th className="py-3 px-6 text-left">Contract</th>
                                 <th className="py-3 px-6 text-left">Expired Date</th>
                                 <th className="py-3 px-6 text-left">PA</th>
                                 <th className="py-3 px-6 text-left">SP</th>
-                                <th className="py-3 px-6 text-left">Direct</th>
                                 <th className="py-3 px-6 text-left">Sign</th>
                             </tr>
                         </thead>
@@ -566,11 +517,6 @@ const MPE = () => {
                                     <td className="py-3 px-6 text-left">
                                         <span className= "py-1 px-3 rounded-full text-xs bg-green-200 text-green-600">
                                         {contract.contractSP}
-                                        </span>
-                                    </td>
-                                    <td className="py-3 px-6 text-left">
-                                        <span className= "py-1 px-3 rounded-full text-xs bg-red-200 text-red-600">
-                                            {contract.contractDirect}
                                         </span>
                                     </td>
                                     <td className="py-3 px-6 text-left">
@@ -604,12 +550,11 @@ const MSC = () => {
                                 <th className="py-3 px-6 text-left">Name</th>
                                 <th className="py-3 px-6 text-left">Level</th>
                                 <th className="py-3 px-6 text-left">Position</th>
-                                <th className="py-3 px-6 text-left">Length of Service</th>
+                                <th className="py-3 px-6 text-left">Hire Date</th>
                                 <th className="py-3 px-6 text-left">Contract</th>
                                 <th className="py-3 px-6 text-left">Expired Date</th>
                                 <th className="py-3 px-6 text-left">PA</th>
                                 <th className="py-3 px-6 text-left">SP</th>
-                                <th className="py-3 px-6 text-left">Direct</th>
                                 <th className="py-3 px-6 text-left">Sign</th>
                             </tr>
                         </thead>
@@ -631,11 +576,6 @@ const MSC = () => {
                                     <td className="py-3 px-6 text-left">
                                         <span className= "py-1 px-3 rounded-full text-xs bg-green-200 text-green-600">
                                         {contract.contractSP}
-                                        </span>
-                                    </td>
-                                    <td className="py-3 px-6 text-left">
-                                        <span className= "py-1 px-3 rounded-full text-xs bg-red-200 text-red-600">
-                                            {contract.contractDirect}
                                         </span>
                                     </td>
                                     <td className="py-3 px-6 text-left">
@@ -669,12 +609,11 @@ const OHST = () => {
                                 <th className="py-3 px-6 text-left">Name</th>
                                 <th className="py-3 px-6 text-left">Level</th>
                                 <th className="py-3 px-6 text-left">Position</th>
-                                <th className="py-3 px-6 text-left">Length of Service</th>
+                                <th className="py-3 px-6 text-left">Hire Date</th>
                                 <th className="py-3 px-6 text-left">Contract</th>
                                 <th className="py-3 px-6 text-left">Expired Date</th>
                                 <th className="py-3 px-6 text-left">PA</th>
                                 <th className="py-3 px-6 text-left">SP</th>
-                                <th className="py-3 px-6 text-left">Direct</th>
                                 <th className="py-3 px-6 text-left">Sign</th>
                             </tr>
                         </thead>
@@ -696,11 +635,6 @@ const OHST = () => {
                                     <td className="py-3 px-6 text-left">
                                         <span className= "py-1 px-3 rounded-full text-xs bg-green-200 text-green-600">
                                         {contract.contractSP}
-                                        </span>
-                                    </td>
-                                    <td className="py-3 px-6 text-left">
-                                        <span className= "py-1 px-3 rounded-full text-xs bg-red-200 text-red-600">
-                                            {contract.contractDirect}
                                         </span>
                                     </td>
                                     <td className="py-3 px-6 text-left">
@@ -734,12 +668,11 @@ const Plant = () => {
                                 <th className="py-3 px-6 text-left">Name</th>
                                 <th className="py-3 px-6 text-left">Level</th>
                                 <th className="py-3 px-6 text-left">Position</th>
-                                <th className="py-3 px-6 text-left">Length of Service</th>
+                                <th className="py-3 px-6 text-left">Hire Date</th>
                                 <th className="py-3 px-6 text-left">Contract</th>
                                 <th className="py-3 px-6 text-left">Expired Date</th>
                                 <th className="py-3 px-6 text-left">PA</th>
                                 <th className="py-3 px-6 text-left">SP</th>
-                                <th className="py-3 px-6 text-left">Direct</th>
                                 <th className="py-3 px-6 text-left">Sign</th>
                             </tr>
                         </thead>
@@ -761,11 +694,6 @@ const Plant = () => {
                                     <td className="py-3 px-6 text-left">
                                         <span className= "py-1 px-3 rounded-full text-xs bg-green-200 text-green-600">
                                         {contract.contractSP}
-                                        </span>
-                                    </td>
-                                    <td className="py-3 px-6 text-left">
-                                        <span className= "py-1 px-3 rounded-full text-xs bg-red-200 text-red-600">
-                                            {contract.contractDirect}
                                         </span>
                                     </td>
                                     <td className="py-3 px-6 text-left">
@@ -799,12 +727,11 @@ const PrepLab = () => {
                                 <th className="py-3 px-6 text-left">Name</th>
                                 <th className="py-3 px-6 text-left">Level</th>
                                 <th className="py-3 px-6 text-left">Position</th>
-                                <th className="py-3 px-6 text-left">Length of Service</th>
+                                <th className="py-3 px-6 text-left">Hire Date</th>
                                 <th className="py-3 px-6 text-left">Contract</th>
                                 <th className="py-3 px-6 text-left">Expired Date</th>
                                 <th className="py-3 px-6 text-left">PA</th>
                                 <th className="py-3 px-6 text-left">SP</th>
-                                <th className="py-3 px-6 text-left">Direct</th>
                                 <th className="py-3 px-6 text-left">Sign</th>
                             </tr>
                         </thead>
@@ -826,11 +753,6 @@ const PrepLab = () => {
                                     <td className="py-3 px-6 text-left">
                                         <span className= "py-1 px-3 rounded-full text-xs bg-green-200 text-green-600">
                                         {contract.contractSP}
-                                        </span>
-                                    </td>
-                                    <td className="py-3 px-6 text-left">
-                                        <span className= "py-1 px-3 rounded-full text-xs bg-red-200 text-red-600">
-                                            {contract.contractDirect}
                                         </span>
                                     </td>
                                     <td className="py-3 px-6 text-left">
@@ -864,12 +786,11 @@ const Production = () => {
                                 <th className="py-3 px-6 text-left">Name</th>
                                 <th className="py-3 px-6 text-left">Level</th>
                                 <th className="py-3 px-6 text-left">Position</th>
-                                <th className="py-3 px-6 text-left">Length of Service</th>
+                                <th className="py-3 px-6 text-left">Hire Date</th>
                                 <th className="py-3 px-6 text-left">Contract</th>
                                 <th className="py-3 px-6 text-left">Expired Date</th>
                                 <th className="py-3 px-6 text-left">PA</th>
                                 <th className="py-3 px-6 text-left">SP</th>
-                                <th className="py-3 px-6 text-left">Direct</th>
                                 <th className="py-3 px-6 text-left">Sign</th>
                             </tr>
                         </thead>
@@ -891,11 +812,6 @@ const Production = () => {
                                     <td className="py-3 px-6 text-left">
                                         <span className= "py-1 px-3 rounded-full text-xs bg-green-200 text-green-600">
                                         {contract.contractSP}
-                                        </span>
-                                    </td>
-                                    <td className="py-3 px-6 text-left">
-                                        <span className= "py-1 px-3 rounded-full text-xs bg-red-200 text-red-600">
-                                            {contract.contractDirect}
                                         </span>
                                     </td>
                                     <td className="py-3 px-6 text-left">
@@ -929,12 +845,11 @@ const QC = () => {
                                 <th className="py-3 px-6 text-left">Name</th>
                                 <th className="py-3 px-6 text-left">Level</th>
                                 <th className="py-3 px-6 text-left">Position</th>
-                                <th className="py-3 px-6 text-left">Length of Service</th>
+                                <th className="py-3 px-6 text-left">Hire Date</th>
                                 <th className="py-3 px-6 text-left">Contract</th>
                                 <th className="py-3 px-6 text-left">Expired Date</th>
                                 <th className="py-3 px-6 text-left">PA</th>
                                 <th className="py-3 px-6 text-left">SP</th>
-                                <th className="py-3 px-6 text-left">Direct</th>
                                 <th className="py-3 px-6 text-left">Sign</th>
                             </tr>
                         </thead>
@@ -956,11 +871,6 @@ const QC = () => {
                                     <td className="py-3 px-6 text-left">
                                         <span className= "py-1 px-3 rounded-full text-xs bg-green-200 text-green-600">
                                         {contract.contractSP}
-                                        </span>
-                                    </td>
-                                    <td className="py-3 px-6 text-left">
-                                        <span className= "py-1 px-3 rounded-full text-xs bg-red-200 text-red-600">
-                                            {contract.contractDirect}
                                         </span>
                                     </td>
                                     <td className="py-3 px-6 text-left">
@@ -994,12 +904,11 @@ const Security = () => {
                                 <th className="py-3 px-6 text-left">Name</th>
                                 <th className="py-3 px-6 text-left">Level</th>
                                 <th className="py-3 px-6 text-left">Position</th>
-                                <th className="py-3 px-6 text-left">Length of Service</th>
+                                <th className="py-3 px-6 text-left">Hire Date</th>
                                 <th className="py-3 px-6 text-left">Contract</th>
                                 <th className="py-3 px-6 text-left">Expired Date</th>
                                 <th className="py-3 px-6 text-left">PA</th>
                                 <th className="py-3 px-6 text-left">SP</th>
-                                <th className="py-3 px-6 text-left">Direct</th>
                                 <th className="py-3 px-6 text-left">Sign</th>
                             </tr>
                         </thead>
@@ -1021,11 +930,6 @@ const Security = () => {
                                     <td className="py-3 px-6 text-left">
                                         <span className= "py-1 px-3 rounded-full text-xs bg-green-200 text-green-600">
                                         {contract.contractSP}
-                                        </span>
-                                    </td>
-                                    <td className="py-3 px-6 text-left">
-                                        <span className= "py-1 px-3 rounded-full text-xs bg-red-200 text-red-600">
-                                            {contract.contractDirect}
                                         </span>
                                     </td>
                                     <td className="py-3 px-6 text-left">
@@ -1059,12 +963,11 @@ const Shipping = () => {
                                 <th className="py-3 px-6 text-left">Name</th>
                                 <th className="py-3 px-6 text-left">Level</th>
                                 <th className="py-3 px-6 text-left">Position</th>
-                                <th className="py-3 px-6 text-left">Length of Service</th>
+                                <th className="py-3 px-6 text-left">Hire Date</th>
                                 <th className="py-3 px-6 text-left">Contract</th>
                                 <th className="py-3 px-6 text-left">Expired Date</th>
                                 <th className="py-3 px-6 text-left">PA</th>
                                 <th className="py-3 px-6 text-left">SP</th>
-                                <th className="py-3 px-6 text-left">Direct</th>
                                 <th className="py-3 px-6 text-left">Sign</th>
                             </tr>
                         </thead>
@@ -1086,11 +989,6 @@ const Shipping = () => {
                                     <td className="py-3 px-6 text-left">
                                         <span className= "py-1 px-3 rounded-full text-xs bg-green-200 text-green-600">
                                         {contract.contractSP}
-                                        </span>
-                                    </td>
-                                    <td className="py-3 px-6 text-left">
-                                        <span className= "py-1 px-3 rounded-full text-xs bg-red-200 text-red-600">
-                                            {contract.contractDirect}
                                         </span>
                                     </td>
                                     <td className="py-3 px-6 text-left">
