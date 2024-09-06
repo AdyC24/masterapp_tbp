@@ -7,6 +7,9 @@ const router = express.Router()
 // GET All Contract by NIK
 router.get('/:nik', contractController.getAllContractsByNik);
 
+// GET All Contract by Dept
+router.get('/dept/:dept', contractController.getAllContractByDept)
+
 // GET All Contracts
 router.get('/', contractController.getAllContracts)
 

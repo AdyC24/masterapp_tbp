@@ -1,16 +1,29 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+
+
 
 const Contracts = () => {
     const [contracts, setContracts] = useState([]);
 
     const { nik } = useParams()
 
+    const fetchContract = useCallback(
+        async () => {
+            try {
+                const response = await axios.get(`http://localhost:4000/contract/${nik}`);
+                setContracts(response.data.data)
+            } catch (error) {
+                console.error("Error fetching contract:", error)
+            }
+        }, [nik]); 
+
     useEffect(() => {
         fetchContract();
-    }, [nik]);
+    }, [fetchContract]);
 
+    
     const formatDate = (isDate) => {
         const date = new Date(isDate);
         return date.toLocaleDateString('en-GB', {
@@ -18,15 +31,6 @@ const Contracts = () => {
             month: 'short',
             year: 'numeric'
         });
-    }
-
-    const fetchContract = async () => {
-        try {
-            const response = await axios.get(`http://localhost:4000/contract/${nik}`);
-            setContracts(response.data.data)
-        } catch (error) {
-            console.error("Error fetching contract:", error)
-        }
     }
 
     return(

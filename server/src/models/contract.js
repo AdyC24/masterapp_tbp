@@ -23,7 +23,43 @@ const getAllContractsByNik = (nik) => {
     return dbPool.execute(SQLQuery, [nik]);
 }
 
+const getAllContractByDept = (dept) => {
+    const SQLQuery = `
+                    SELECT
+                        contractId,
+                        employee.empNik,
+                        contractType,
+                        compId,
+                        contractNo,
+                        contractEnd,
+                        contractPA,
+                        contractSP,
+                        contractDirect,
+                        contractSign,
+                        contractStatus,
+                        empName,
+                        posName
+                    FROM
+                        contract
+                    JOIN
+                        employee ON contract.empNik = employee.empNik
+                    JOIN
+                        position ON employee.posId = position.posId
+                    JOIN
+                        section ON position.secId = section.secId
+                    JOIN
+                        department ON section.deptId = department.deptId
+                    JOIN
+                        pic ON department.picId = pic.picId
+                    WHERE
+                        picNick = ?
+                    `;
+
+    return dbPool.execute(SQLQuery, [dept])                
+}
+
 module.exports = {
     getAllContracts,
-    getAllContractsByNik
+    getAllContractsByNik,
+    getAllContractByDept
 }

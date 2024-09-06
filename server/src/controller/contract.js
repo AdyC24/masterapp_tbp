@@ -18,12 +18,29 @@ const getAllContracts = async (req, res) => {
 const getAllContractsByNik = async (req, res) => {
     const { nik } = req.params;
 
-    console.log('NIK: ', nik);
-
     try {
         const[data] = await ContractModel.getAllContractsByNik(nik);
         res.json({
             message: 'Get all contract by nik',
+            data: data
+        })
+    } catch (error) {
+        res.status(500).json({
+            message: "Server is error",
+            errMessage: error.message
+        })
+    }
+}
+
+const getAllContractByDept = async (req, res) => {
+    const { dept } = req.params;
+
+    console.log(dept);
+
+    try {
+        const[data] = await ContractModel.getAllContractByDept(dept);
+        res.json({
+            message: 'Get all contract by dept',
             data: data
         })
     } catch (error) {
@@ -49,6 +66,7 @@ const deleteContract = () => {
 module.exports = {
     getAllContracts,
     getAllContractsByNik,
+    getAllContractByDept,
     createNewContract,
     editContract,
     deleteContract
