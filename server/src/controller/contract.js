@@ -35,8 +35,6 @@ const getAllContractsByNik = async (req, res) => {
 const getAllContractByDept = async (req, res) => {
     const { dept } = req.params;
 
-    console.log(dept);
-
     try {
         const[data] = await ContractModel.getAllContractByDept(dept);
         res.json({

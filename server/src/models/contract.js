@@ -34,7 +34,6 @@ const getAllContractByDept = (dept) => {
                         contractEnd,
                         contractPA,
                         contractSP,
-                        contractDirect,
                         contractSign,
                         contractStatus,
                         empName,
