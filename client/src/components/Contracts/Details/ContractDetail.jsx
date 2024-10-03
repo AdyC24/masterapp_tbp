@@ -31,7 +31,7 @@ const ComDev = () => {
                         {contracts.map(contract => (
                                 <tr className="border-b border-gray-200 hover:bg-gray-100">
                                     <td className="py-3 px-6 text-left">{contract.empNik}</td>
-                                    <td className="py-3 px-6 text-left">{contract.empName}</td>
+                                    <td className="py-3 px-6 text-left">{contract.persName}</td>
                                     <td className="py-3 px-6 text-left"></td>
                                     <td className="py-3 px-6 text-left">{contract.posName}</td>
                                     <td className="py-3 px-6 text-left"></td>
@@ -90,7 +90,7 @@ const EBI = () => {
                         {contracts.map(contract => (
                                 <tr className="border-b border-gray-200 hover:bg-gray-100">
                                     <td className="py-3 px-6 text-left">{contract.empNik}</td>
-                                    <td className="py-3 px-6 text-left">{contract.empName}</td>
+                                    <td className="py-3 px-6 text-left">{contract.persName}</td>
                                     <td className="py-3 px-6 text-left"></td>
                                     <td className="py-3 px-6 text-left">{contract.posName}</td>
                                     <td className="py-3 px-6 text-left"></td>
@@ -149,7 +149,7 @@ const Exploration = () => {
                         {contracts.map(contract => (
                                 <tr className="border-b border-gray-200 hover:bg-gray-100">
                                     <td className="py-3 px-6 text-left">{contract.empNik}</td>
-                                    <td className="py-3 px-6 text-left">{contract.empName}</td>
+                                    <td className="py-3 px-6 text-left">{contract.persName}</td>
                                     <td className="py-3 px-6 text-left"></td>
                                     <td className="py-3 px-6 text-left">{contract.posName}</td>
                                     <td className="py-3 px-6 text-left"></td>
@@ -208,7 +208,7 @@ const ExRel = () => {
                         {contracts.map(contract => (
                                 <tr className="border-b border-gray-200 hover:bg-gray-100">
                                     <td className="py-3 px-6 text-left">{contract.empNik}</td>
-                                    <td className="py-3 px-6 text-left">{contract.empName}</td>
+                                    <td className="py-3 px-6 text-left">{contract.persName}</td>
                                     <td className="py-3 px-6 text-left"></td>
                                     <td className="py-3 px-6 text-left">{contract.posName}</td>
                                     <td className="py-3 px-6 text-left"></td>
@@ -267,7 +267,7 @@ const Forestry = () => {
                         {contracts.map(contract => (
                                 <tr className="border-b border-gray-200 hover:bg-gray-100">
                                     <td className="py-3 px-6 text-left">{contract.empNik}</td>
-                                    <td className="py-3 px-6 text-left">{contract.empName}</td>
+                                    <td className="py-3 px-6 text-left">{contract.persName}</td>
                                     <td className="py-3 px-6 text-left"></td>
                                     <td className="py-3 px-6 text-left">{contract.posName}</td>
                                     <td className="py-3 px-6 text-left"></td>
@@ -326,7 +326,7 @@ const GC = () => {
                         {contracts.map(contract => (
                                 <tr className="border-b border-gray-200 hover:bg-gray-100">
                                     <td className="py-3 px-6 text-left">{contract.empNik}</td>
-                                    <td className="py-3 px-6 text-left">{contract.empName}</td>
+                                    <td className="py-3 px-6 text-left">{contract.persName}</td>
                                     <td className="py-3 px-6 text-left"></td>
                                     <td className="py-3 px-6 text-left">{contract.posName}</td>
                                     <td className="py-3 px-6 text-left"></td>
@@ -385,7 +385,7 @@ const HRGA = () => {
                         {contracts.map(contract => (
                                 <tr className="border-b border-gray-200 hover:bg-gray-100">
                                     <td className="py-3 px-6 text-left">{contract.empNik}</td>
-                                    <td className="py-3 px-6 text-left">{contract.empName}</td>
+                                    <td className="py-3 px-6 text-left">{contract.persName}</td>
                                     <td className="py-3 px-6 text-left"></td>
                                     <td className="py-3 px-6 text-left">{contract.posName}</td>
                                     <td className="py-3 px-6 text-left"></td>
@@ -444,7 +444,7 @@ const Logistic = () => {
                         {contracts.map(contract => (
                                 <tr className="border-b border-gray-200 hover:bg-gray-100">
                                     <td className="py-3 px-6 text-left">{contract.empNik}</td>
-                                    <td className="py-3 px-6 text-left">{contract.empName}</td>
+                                    <td className="py-3 px-6 text-left">{contract.persName}</td>
                                     <td className="py-3 px-6 text-left"></td>
                                     <td className="py-3 px-6 text-left">{contract.posName}</td>
                                     <td className="py-3 px-6 text-left"></td>
@@ -503,7 +503,7 @@ const MPE = () => {
                         {contracts.map(contract => (
                                 <tr className="border-b border-gray-200 hover:bg-gray-100">
                                     <td className="py-3 px-6 text-left">{contract.empNik}</td>
-                                    <td className="py-3 px-6 text-left">{contract.empName}</td>
+                                    <td className="py-3 px-6 text-left">{contract.persName}</td>
                                     <td className="py-3 px-6 text-left"></td>
                                     <td className="py-3 px-6 text-left">{contract.posName}</td>
                                     <td className="py-3 px-6 text-left"></td>
@@ -562,7 +562,7 @@ const MSC = () => {
                         {contracts.map(contract => (
                                 <tr className="border-b border-gray-200 hover:bg-gray-100">
                                     <td className="py-3 px-6 text-left">{contract.empNik}</td>
-                                    <td className="py-3 px-6 text-left">{contract.empName}</td>
+                                    <td className="py-3 px-6 text-left">{contract.persName}</td>
                                     <td className="py-3 px-6 text-left"></td>
                                     <td className="py-3 px-6 text-left">{contract.posName}</td>
                                     <td className="py-3 px-6 text-left"></td>
@@ -621,7 +621,7 @@ const OHST = () => {
                         {contracts.map(contract => (
                                 <tr className="border-b border-gray-200 hover:bg-gray-100">
                                     <td className="py-3 px-6 text-left">{contract.empNik}</td>
-                                    <td className="py-3 px-6 text-left">{contract.empName}</td>
+                                    <td className="py-3 px-6 text-left">{contract.persName}</td>
                                     <td className="py-3 px-6 text-left"></td>
                                     <td className="py-3 px-6 text-left">{contract.posName}</td>
                                     <td className="py-3 px-6 text-left"></td>
@@ -680,7 +680,7 @@ const Plant = () => {
                         {contracts.map(contract => (
                                 <tr className="border-b border-gray-200 hover:bg-gray-100">
                                     <td className="py-3 px-6 text-left">{contract.empNik}</td>
-                                    <td className="py-3 px-6 text-left">{contract.empName}</td>
+                                    <td className="py-3 px-6 text-left">{contract.persName}</td>
                                     <td className="py-3 px-6 text-left"></td>
                                     <td className="py-3 px-6 text-left">{contract.posName}</td>
                                     <td className="py-3 px-6 text-left"></td>
@@ -739,7 +739,7 @@ const PrepLab = () => {
                         {contracts.map(contract => (
                                 <tr className="border-b border-gray-200 hover:bg-gray-100">
                                     <td className="py-3 px-6 text-left">{contract.empNik}</td>
-                                    <td className="py-3 px-6 text-left">{contract.empName}</td>
+                                    <td className="py-3 px-6 text-left">{contract.persName}</td>
                                     <td className="py-3 px-6 text-left"></td>
                                     <td className="py-3 px-6 text-left">{contract.posName}</td>
                                     <td className="py-3 px-6 text-left"></td>
@@ -798,7 +798,7 @@ const Production = () => {
                         {contracts.map(contract => (
                                 <tr className="border-b border-gray-200 hover:bg-gray-100">
                                     <td className="py-3 px-6 text-left">{contract.empNik}</td>
-                                    <td className="py-3 px-6 text-left">{contract.empName}</td>
+                                    <td className="py-3 px-6 text-left">{contract.persName}</td>
                                     <td className="py-3 px-6 text-left"></td>
                                     <td className="py-3 px-6 text-left">{contract.posName}</td>
                                     <td className="py-3 px-6 text-left"></td>
@@ -857,7 +857,7 @@ const QC = () => {
                         {contracts.map(contract => (
                                 <tr className="border-b border-gray-200 hover:bg-gray-100">
                                     <td className="py-3 px-6 text-left">{contract.empNik}</td>
-                                    <td className="py-3 px-6 text-left">{contract.empName}</td>
+                                    <td className="py-3 px-6 text-left">{contract.persName}</td>
                                     <td className="py-3 px-6 text-left"></td>
                                     <td className="py-3 px-6 text-left">{contract.posName}</td>
                                     <td className="py-3 px-6 text-left"></td>
@@ -916,7 +916,7 @@ const Security = () => {
                         {contracts.map(contract => (
                                 <tr className="border-b border-gray-200 hover:bg-gray-100">
                                     <td className="py-3 px-6 text-left">{contract.empNik}</td>
-                                    <td className="py-3 px-6 text-left">{contract.empName}</td>
+                                    <td className="py-3 px-6 text-left">{contract.persName}</td>
                                     <td className="py-3 px-6 text-left"></td>
                                     <td className="py-3 px-6 text-left">{contract.posName}</td>
                                     <td className="py-3 px-6 text-left"></td>
@@ -975,7 +975,7 @@ const Shipping = () => {
                         {contracts.map(contract => (
                                 <tr className="border-b border-gray-200 hover:bg-gray-100">
                                     <td className="py-3 px-6 text-left">{contract.empNik}</td>
-                                    <td className="py-3 px-6 text-left">{contract.empName}</td>
+                                    <td className="py-3 px-6 text-left">{contract.persName}</td>
                                     <td className="py-3 px-6 text-left"></td>
                                     <td className="py-3 px-6 text-left">{contract.posName}</td>
                                     <td className="py-3 px-6 text-left"></td>

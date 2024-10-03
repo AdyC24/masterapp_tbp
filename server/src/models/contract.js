@@ -36,12 +36,14 @@ const getAllContractByDept = (dept) => {
                         contractSP,
                         contractSign,
                         contractStatus,
-                        empName,
+                        persName,
                         posName
                     FROM
                         contract
                     JOIN
-                        employee ON contract.empNik = employee.empNik
+                        employee ON contract.empId = employee.empId
+                    JOIN
+                        personal ON employee.persId = personal.persId
                     JOIN
                         position ON employee.posId = position.posId
                     JOIN
@@ -52,6 +54,10 @@ const getAllContractByDept = (dept) => {
                         pic ON department.picId = pic.picId
                     WHERE
                         picNick = ?
+                        AND DATEDIFF(contractEnd, CURRENT_DATE) <= 30
+                        AND contractEnd >= CURRENT_DATE
+                    ORDER BY
+                        contractEnd ASC
                     `;
 
     return dbPool.execute(SQLQuery, [dept])                
