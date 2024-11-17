@@ -1,52 +1,69 @@
 // Personal.jsx
-import React, { useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
+import axios from "axios";
+import { useParams } from "react-router-dom";
+
 
 const Personal = () => {
+    const [personal, setPersonals] = useState([])
+
+    const { nik } = useParams()
+
+    const fetchPersonal = useCallback(
+        async () => {
+            try {
+                const response = await axios.get(`http://localhost:4000/employee/${nik}`)
+                setPersonals(response.data.data)
+            } catch (error) {
+                console.error("Error fetching personalL", error)
+            }
+        }, [nik]);
+
+    useEffect(() => {
+        fetchPersonal();
+    }, [fetchPersonal]);
+
     // Dummy data to simulate fetched employee data
-    const dummyEmployeeData = {
-        nik: "02D24000045",
-        name: "Ady Candra",
-        gender: "Laki-laki",
-        email: "adychandra101@gmail.com",
-        phone: "+6281234567890",
-        address: "Jl. Murjani II, Berau, Kalimantan Timur",
-        birthdate: "24 December 1992",
-        age: "31",
-        ktpNumber: "6403052412920001",
-        kkNumber: "646403052012170009",
-        company: "PT. Gane Permai Sentosa",
-        site: "Loji",
-        department: "HR & GA",
-        position: "HR Operation Officer",
-        level: "II",
-        workStatus: "Contract",
-        poh: "Samarinda",
-        residential: "Camp Residence",
-        hireDate: "24 November 2023",
-        workingDate: "24 November 2023",
-        salaryLocation: "Non Local",
-        savingAccount: "065831938",
-        savingBank: "Bank Negara Indonesia",
-        npwp: "835700949727000",
-        religion: "Islam",
-        education: "S1",
-        major: "Pendidikan Bahasa Inggris",
-        gender: "Laki-laki",
-        birthplace: "Berau",
-        marital: "K-3",
-        spouse: "Devi Eka Maryati",
-        father: "Burhanuddin, S.E",
-        mother: "Ida Norsanti",
-        child1: "Princessa Cherish Fredella Chandra",
-        child2: "Azelea Kevia Chandra",
-        child3: "Givenly Faris Devara Chandra",
-        emergencyContact: "Devi Eka Maryati",
-        emergencyPhone: "+6280987654321"
-    };
-
-    // Setting dummy data to state
-    const [employeeData] = useState(dummyEmployeeData);
-
+    // const dummyEmployeeData = {
+    //     nik: "02D24000045",
+    //     name: "Ady Candra",
+    //     gender: "Laki-laki",
+    //     email: "adychandra101@gmail.com",
+    //     phone: "+6281234567890",
+    //     address: "Jl. Murjani II, Berau, Kalimantan Timur",
+    //     birthdate: "24 December 1992",
+    //     age: "31",
+    //     ktpNumber: "6403052412920001",
+    //     kkNumber: "646403052012170009",
+    //     company: "PT. Gane Permai Sentosa",
+    //     site: "Loji",
+    //     department: "HR & GA",
+    //     position: "HR Operation Officer",
+    //     level: "II",
+    //     workStatus: "Contract",
+    //     poh: "Samarinda",
+    //     residential: "Camp Residence",
+    //     hireDate: "24 November 2023",
+    //     workingDate: "24 November 2023",
+    //     salaryLocation: "Non Local",
+    //     savingAccount: "065831938",
+    //     savingBank: "Bank Negara Indonesia",
+    //     npwp: "835700949727000",
+    //     religion: "Islam",
+    //     education: "S1",
+    //     major: "Pendidikan Bahasa Inggris",
+    //     gender: "Laki-laki",
+    //     birthplace: "Berau",
+    //     marital: "K-3",
+    //     spouse: "Devi Eka Maryati",
+    //     father: "Burhanuddin, S.E",
+    //     mother: "Ida Norsanti",
+    //     child1: "Princessa Cherish Fredella Chandra",
+    //     child2: "Azelea Kevia Chandra",
+    //     child3: "Givenly Faris Devara Chandra",
+    //     emergencyContact: "Devi Eka Maryati",
+    //     emergencyPhone: "+6280987654321"
+    
     return (
         <div>
             {/* Personal Information */}

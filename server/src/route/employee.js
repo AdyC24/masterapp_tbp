@@ -6,6 +6,9 @@ const router = express.Router()
 // GET All Employees
 router.get('/', employeeController.getAllEmployees)
 
+// GET Employee by Id
+router.get('/:nik', employeeController.getEmployeeByNik)
+
 // CREATE New Employee
 router.post('/', employeeController.createNewEmployee)
 

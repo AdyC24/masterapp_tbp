@@ -55,7 +55,7 @@ const ContractPage = () => {
             <Navbar />
             <div className="flex flex-grow">
                 <Sidebar />
-                <div className="flex-grow p-8 bg-white shadow-lg rounded-lg mx-4 mt-6 mb-2">
+                <div id="contractTable" className="flex-grow p-8 bg-white shadow-lg rounded-lg mx-4 mt-6 mb-2">
                     {renderComponent()}
                 </div>
             </div>

@@ -8,7 +8,7 @@ const EmployeeTable = ({ employees, handleRowClick }) => {
     // Menghitung total halaman berdasarkan data yang difilter
     const filteredEmployees = employees.filter(employee =>
         employee.empNik.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        employee.empName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        employee.persName.toLowerCase().includes(searchTerm.toLowerCase()) ||
         employee.posName.toLowerCase().includes(searchTerm.toLowerCase()) ||
         employee.secName.toLowerCase().includes(searchTerm.toLowerCase()) ||
         employee.compName.toLowerCase().includes(searchTerm.toLowerCase())
@@ -70,7 +70,7 @@ const EmployeeTable = ({ employees, handleRowClick }) => {
                             onClick={() => handleRowClick(employee.empNik)}
                         >
                             <td className="py-3 px-6 text-sm text-gray-700">{employee.empNik}</td>
-                            <td className="py-3 px-6 text-sm text-gray-700">{employee.empName}</td>
+                            <td className="py-3 px-6 text-sm text-gray-700">{employee.persName}</td>
                             <td className="py-3 px-6 text-sm text-gray-700">{employee.posName}</td>
                             <td className="py-3 px-6 text-sm text-gray-700">{employee.secName}</td>
                             <td className="py-3 px-6 text-sm text-gray-700">{employee.compName}</td>

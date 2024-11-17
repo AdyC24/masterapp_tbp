@@ -34,7 +34,7 @@ const Contracts = () => {
     }
 
     return(
-        <div>
+        <div id="personalContract">
             <h2 className="text-2xl font-semibold mb-4">Contract Information</h2>
             <div className="overflow-x-auto shadow-lg rounded-lg">
                 <table className="min-w-full bg-white border-collapse">

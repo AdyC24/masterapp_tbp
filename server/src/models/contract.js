@@ -17,8 +17,10 @@ const getAllContractsByNik = (nik) => {
                         *
                     FROM
                         contract
+                    JOIN 
+                        employee ON contract.empId = employee.empId
                     WHERE
-                        empNik = ?
+                        employee.empNik = ?
                     `;
     return dbPool.execute(SQLQuery, [nik]);
 }
@@ -27,9 +29,9 @@ const getAllContractByDept = (dept) => {
     const SQLQuery = `
                     SELECT
                         contractId,
-                        employee.empNik,
+                        empNik,
                         contractType,
-                        compId,
+                        level.compId,
                         contractNo,
                         contractEnd,
                         contractPA,
@@ -37,7 +39,8 @@ const getAllContractByDept = (dept) => {
                         contractSign,
                         contractStatus,
                         persName,
-                        posName
+                        posName,
+                        levelCode
                     FROM
                         contract
                     JOIN
@@ -46,6 +49,10 @@ const getAllContractByDept = (dept) => {
                         personal ON employee.persId = personal.persId
                     JOIN
                         position ON employee.posId = position.posId
+                    JOIN
+                        job ON position.jobId = job.jobId
+                    JOIN
+                        level ON job.levelId = level.levelId
                     JOIN
                         section ON position.secId = section.secId
                     JOIN

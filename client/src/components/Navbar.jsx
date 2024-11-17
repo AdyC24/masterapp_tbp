@@ -93,7 +93,7 @@ const Navbar = () => {
                     <div className="border-l border-gray-300 h-6"></div>
                     <div className="relative" ref={irRef}>
                         <button onClick={() => toggleDropdown('IR')} className="text-green-600 font-semibold text-lg hover:text-green-800 transition duration-300">
-                            Internal Relations
+                            Industrial Relations
                         </button>
                         {openDropdown === 'IR' && (
                             <div className="absolute left-0 mt-2 w-52 bg-white rounded-md shadow-lg z-50">

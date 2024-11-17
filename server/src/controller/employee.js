@@ -18,6 +18,23 @@ const getAllEmployees = async (req, res) => {
     }
 }
 
+const getEmployeeByNik = async (req, res) => {
+    const { nik } = req.params;
+
+    try {
+        const [data] = await EmployeeModel.getEmployeeByNik(nik);
+        res.json({
+            message: 'Get employee by nik',
+            data: data
+        })
+    } catch (error) {
+        res.status(500).json({
+            message: "Server is error",
+            errMessage: error.message
+        })
+    }
+}
+
 const createNewEmployee = async (req, res) => {
     try {
         // Extract data from request body
@@ -56,5 +73,6 @@ module.exports = {
     getAllEmployees,
     createNewEmployee,
     editEmployee,
-    deleteEmployee
+    deleteEmployee, 
+    getEmployeeByNik
 }

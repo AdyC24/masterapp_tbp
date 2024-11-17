@@ -91,7 +91,7 @@ const EBI = () => {
                                 <tr className="border-b border-gray-200 hover:bg-gray-100">
                                     <td className="py-3 px-6 text-left">{contract.empNik}</td>
                                     <td className="py-3 px-6 text-left">{contract.persName}</td>
-                                    <td className="py-3 px-6 text-left"></td>
+                                    <td className="py-3 px-6 text-left">{contract.levelCode}</td>
                                     <td className="py-3 px-6 text-left">{contract.posName}</td>
                                     <td className="py-3 px-6 text-left"></td>
                                     <td className="py-3 px-6 text-left">{contract.contractType}</td>
