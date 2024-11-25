@@ -25,7 +25,7 @@ const getEmployeeByNik = async (req, res) => {
         const [data] = await EmployeeModel.getEmployeeByNik(nik);
         res.json({
             message: 'Get employee by nik',
-            data: data
+            data: data[0]
         })
     } catch (error) {
         res.status(500).json({

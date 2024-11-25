@@ -11,10 +11,11 @@ const Personal = () => {
 
     const fetchPersonal = useCallback(async () => {
         try {
-            const response = await axios.get(`http://localhost:4000/employee/${nik}`);
-            if (JSON.stringify(response.data.data) !== JSON.stringify(personal)) {
-                setPersonals(response.data.data);
+            const personal = await axios.get(`http://localhost:4000/employee/${nik}`);
+            if (JSON.stringify(personal.data.data) !== JSON.stringify(personal)) {
+                setPersonals(personal.data.data);
             }
+            console.log(personal.data.data)
         } catch (error) {
             console.error("Error fetching personal", error);
         }
@@ -25,46 +26,43 @@ const Personal = () => {
         fetchPersonal();
     }, [nik]);
 
-    // Dummy data to simulate fetched employee data
-    // const dummyEmployeeData = {
-    //     nik: "02D24000045",
-    //     name: "Ady Candra",
-    //     gender: "Laki-laki",
-    //     email: "adychandra101@gmail.com",
-    //     phone: "+6281234567890",
-    //     address: "Jl. Murjani II, Berau, Kalimantan Timur",
-    //     birthdate: "24 December 1992",
-    //     age: "31",
-    //     ktpNumber: "6403052412920001",
-    //     kkNumber: "646403052012170009",
-    //     company: "PT. Gane Permai Sentosa",
-    //     site: "Loji",
-    //     department: "HR & GA",
-    //     position: "HR Operation Officer",
-    //     level: "II",
-    //     workStatus: "Contract",
-    //     poh: "Samarinda",
-    //     residential: "Camp Residence",
-    //     hireDate: "24 November 2023",
-    //     workingDate: "24 November 2023",
-    //     salaryLocation: "Non Local",
-    //     savingAccount: "065831938",
-    //     savingBank: "Bank Negara Indonesia",
-    //     npwp: "835700949727000",
-    //     religion: "Islam",
-    //     education: "S1",
-    //     major: "Pendidikan Bahasa Inggris",
-    //     gender: "Laki-laki",
-    //     birthplace: "Berau",
-    //     marital: "K-3",
-    //     spouse: "Devi Eka Maryati",
-    //     father: "Burhanuddin, S.E",
-    //     mother: "Ida Norsanti",
-    //     child1: "Princessa Cherish Fredella Chandra",
-    //     child2: "Azelea Kevia Chandra",
-    //     child3: "Givenly Faris Devara Chandra",
-    //     emergencyContact: "Devi Eka Maryati",
-    //     emergencyPhone: "+6280987654321"
+    // "data": [
+    //     {
+    //         "empNik": "02D23000045",
+    //         "persName": "Ady Candra, S.pd.",
+    //         "persGender": "L",
+    //         "persEmail": "adychandra101@gmail.com",
+    //         "persPhoneNum": "082152006467",
+    //         "persAddress": "Jl. Dr. Murjani II, Rt 012, Kel. Karang Ambun, Kec. Tanjung Rejeb, Kab. Berau, Prov. Kalimantan Timur",
+    //         "persKelurahan": "Karang Ambun",
+    //         "persKecamatan": "Tanjung Rejeb",
+    //         "persKota": "Berau",
+    //         "persProv": "Kalimantan Timur",
+    //         "persBirthDate": "1992-12-23T15:00:00.000Z",
+    //         "perNik": "6403052412920001",
+    //         "famNum": "6403052012170009",
+    //         "compName": "PT. Gane Permai Sentosa",
+    //         "locName": "Loji",
+    //         "deptName": "Human Resource",
+    //         "posName": "HR Operation Officer HO - Loji",
+    //         "levelCode": "2",
+    //         "pohName": "Samarinda",
+    //         "empResidence": null,
+    //         "empJoinDate": "2023-11-21T15:00:00.000Z",
+    //         "empWorkingDate": "2023-11-21T15:00:00.000Z",
+    //         "perReligion": "Islam",
+    //         "persBirthPlace": "Tanjung Redeb",
+    //         "famMaritalStatus": "K/2",
+    //         "famSpouseName": "Devi Eka Maryati",
+    //         "famFatherName": "Burhanudin",
+    //         "famMotherName": "Hj. Ida Norsanti",
+    //         "famFirstKidName": "Princessa Cherish Fredella Chandra",
+    //         "famSecondKidName": "Azzela Kevia Chandra",
+    //         "famThirdKidName": "",
+    //         "persEmergencyNum": "082255940171",
+    //         "persEmergencyContact": "Devi Eka Maryati"
+    //     }
+    // ]
     
     return (
         <div>
@@ -88,55 +86,55 @@ const Personal = () => {
                         <div>
                             <strong>Name:</strong>
                         </div>
-                        <div className="col-span-3">{employeeData.name}</div>
+                        <div className="col-span-3">{personal.persName}</div>
                         <div>
                             <strong>KTP:</strong>
                         </div>
-                        <div className="col-span-3">{employeeData.ktpNumber}</div>
+                        <div className="col-span-3">{personal.perNik}</div>
                         <div>
                             <strong>Gender:</strong>
                         </div>
-                        <div className="col-span-3">{employeeData.gender}</div>
+                        <div className="col-span-3">{personal.persGender}</div>
                         <div>
                             <strong>Email:</strong>
                         </div>
-                        <div className="col-span-3">{employeeData.email}</div>
+                        <div className="col-span-3">{personal.persEmail}</div>
                         <div>
                             <strong>Phone:</strong>
                         </div>
-                        <div className="col-span-3">{employeeData.phone}</div>
+                        <div className="col-span-3">{personal.persPhoneNum}</div>
                         <div>
                             <strong>Birthplace:</strong>
                         </div>
-                        <div className="col-span-3">{employeeData.birthplace}</div>
+                        <div className="col-span-3">{personal.persBirthPlace}</div>
                         <div>
                             <strong>Birthdate:</strong>
                         </div>
-                        <div className="col-span-3">{employeeData.birthdate}</div>
+                        <div className="col-span-3">{personal.persBirthDate}</div>
                         <div>
                             <strong>Age:</strong>
                         </div>
-                        <div className="col-span-3">{employeeData.age}</div>
+                        <div className="col-span-3">age</div>
                         <div>
                             <strong>Gender:</strong>
                         </div>
-                        <div className="col-span-3">{employeeData.gender}</div>
+                        <div className="col-span-3">{personal.persGender}</div>
                         <div>
                             <strong>Religion:</strong>
                         </div>
-                        <div className="col-span-3">{employeeData.religion}</div>
+                        <div className="col-span-3">{personal.perReligion}</div>
                         <div>
                             <strong>Education:</strong>
                         </div>
-                        <div className="col-span-3">{employeeData.education} - {employeeData.major}</div>
+                        <div className="col-span-3">education - major</div>
                         <div>
                             <strong>Emergency Call:</strong>
                         </div>
-                        <div className="col-span-3">{employeeData.emergencyContact} / {employeeData.emergencyPhone}</div>
+                        <div className="col-span-3">{personal.persEmergencyContact} / {personal.persEmergencyNum}</div>
                         <div className="col-span-8">
                             <strong>Address:</strong>
                         </div>
-                        <div className="col-span-8">{employeeData.address}</div>
+                        <div className="col-span-8">{personal.persAddress}</div>
                     </div>
                 </div>
             </div>
@@ -160,47 +158,47 @@ const Personal = () => {
                         <div>
                             <strong>NIK:</strong>
                         </div>
-                        <div className="col-span-3">{employeeData.nik}</div>
+                        <div className="col-span-3">{personal.empNik}</div>
                         <div>
                             <strong>Company:</strong>
                         </div>
-                        <div className="col-span-3">{employeeData.company}</div>
+                        <div className="col-span-3">{personal.compName}</div>
                         <div>
                             <strong>Site:</strong>
                         </div>
-                        <div className="col-span-3">{employeeData.site}</div>
+                        <div className="col-span-3">{personal.locName}</div>
                         <div>
                             <strong>Department:</strong>
                         </div>
-                        <div className="col-span-3">{employeeData.department}</div>
+                        <div className="col-span-3">{personal.deptName}</div>
                         <div>
                             <strong>Position:</strong>
                         </div>
-                        <div className="col-span-3">{employeeData.position}</div>
+                        <div className="col-span-3">{personal.posName}</div>
                         <div>
                             <strong>Level:</strong>
                         </div>
-                        <div className="col-span-3">{employeeData.level}</div>
+                        <div className="col-span-3">{personal.levelCode}</div>
                         <div>
                             <strong>Status:</strong>
                         </div>
-                        <div className="col-span-3">{employeeData.workStatus}</div>
+                        <div className="col-span-3">Kontrak/Tetap</div>
                         <div>
                             <strong>Point of Hire:</strong>
                         </div>
-                        <div className="col-span-3">{employeeData.poh}</div>
+                        <div className="col-span-3">{personal.pohName}</div>
                         <div>
                             <strong>Date of Working:</strong>
                         </div>
-                        <div className="col-span-3">{employeeData.workingDate}</div>
+                        <div className="col-span-3">{personal.empWorkingDate}</div>
                         <div>
                             <strong>Date of Hire:</strong>
                         </div>
-                        <div className="col-span-3">{employeeData.hireDate}</div>
+                        <div className="col-span-3">{personal.empJoinDate}</div>
                         <div>
                             <strong>Residential:</strong>
                         </div>
-                        <div className="col-span-3">{employeeData.residential}</div>
+                        <div className="col-span-3">{personal.empResidence}</div>
                     </div>
                 </div>
             </div>
@@ -224,35 +222,35 @@ const Personal = () => {
                         <div>
                             <strong>Marital Status:</strong>
                         </div>
-                        <div className="col-span-3">{employeeData.marital}</div>
+                        <div className="col-span-3">{personal.famMaritalStatus}</div>
                         <div>
                             <strong>KK:</strong>
                         </div>
-                        <div className="col-span-3">{employeeData.kkNumber}</div>
+                        <div className="col-span-3">{personal.famNum}</div>
                         <div>
                             <strong>Spouse's Name:</strong>
                         </div>
-                        <div className="col-span-3">{employeeData.spouse}</div>
+                        <div className="col-span-3">{personal.famSpouseName}</div>
                         <div>
                             <strong>Child 1:</strong>
                         </div>
-                        <div className="col-span-3">{employeeData.child1}</div>
+                        <div className="col-span-3">{personal.famFirstKidName}</div>
                         <div>
                             <strong>Child 3:</strong>
                         </div>
-                        <div className="col-span-3">{employeeData.child3}</div>
+                        <div className="col-span-3">{personal.famThirdKidName}</div>
                         <div>
                             <strong>Child 2:</strong>
                         </div>
-                        <div className="col-span-3">{employeeData.child2}</div>
+                        <div className="col-span-3">{personal.famSecondKidName}</div>
                         <div>
                             <strong>Father's Name:</strong>
                         </div>
-                        <div className="col-span-3">{employeeData.father}</div>
+                        <div className="col-span-3">{personal.famFatherName}</div>
                         <div>
                             <strong>Mother's Name:</strong>
                         </div>
-                        <div className="col-span-3">{employeeData.mother}</div>
+                        <div className="col-span-3">{personal.famMotherName}</div>
                     </div>
                 </div>
             </div>
@@ -276,19 +274,19 @@ const Personal = () => {
                         <div>
                             <strong>Saving Account:</strong>
                         </div>
-                        <div className="col-span-3">{employeeData.savingAccount}</div>
+                        <div className="col-span-3">Nomor Rekening</div>
                         <div>
                             <strong>Saving Bank:</strong>
                         </div>
-                        <div className="col-span-3">{employeeData.savingBank}</div>
+                        <div className="col-span-3">Bank Rekening</div>
                         <div>
                             <strong>Salary Location:</strong>
                         </div>
-                        <div className="col-span-3">{employeeData.salaryLocation}</div>
+                        <div className="col-span-3">Lokal/Non Lokal</div>
                         <div>
                             <strong>NPWP:</strong>
                         </div>
-                        <div className="col-span-3">{employeeData.npwp}</div>
+                        <div className="col-span-3">npwp</div>
                     </div>
                 </div>
             </div>
