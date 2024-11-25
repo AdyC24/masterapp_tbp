@@ -2,6 +2,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import { formatDate, genderReveal } from "./dateUtils";
 
 
 const Personal = () => {
@@ -15,7 +16,6 @@ const Personal = () => {
             if (JSON.stringify(personal.data.data) !== JSON.stringify(personal)) {
                 setPersonals(personal.data.data);
             }
-            console.log(personal.data.data)
         } catch (error) {
             console.error("Error fetching personal", error);
         }
@@ -25,44 +25,6 @@ const Personal = () => {
     useEffect(() => {
         fetchPersonal();
     }, [nik]);
-
-    // "data": [
-    //     {
-    //         "empNik": "02D23000045",
-    //         "persName": "Ady Candra, S.pd.",
-    //         "persGender": "L",
-    //         "persEmail": "adychandra101@gmail.com",
-    //         "persPhoneNum": "082152006467",
-    //         "persAddress": "Jl. Dr. Murjani II, Rt 012, Kel. Karang Ambun, Kec. Tanjung Rejeb, Kab. Berau, Prov. Kalimantan Timur",
-    //         "persKelurahan": "Karang Ambun",
-    //         "persKecamatan": "Tanjung Rejeb",
-    //         "persKota": "Berau",
-    //         "persProv": "Kalimantan Timur",
-    //         "persBirthDate": "1992-12-23T15:00:00.000Z",
-    //         "perNik": "6403052412920001",
-    //         "famNum": "6403052012170009",
-    //         "compName": "PT. Gane Permai Sentosa",
-    //         "locName": "Loji",
-    //         "deptName": "Human Resource",
-    //         "posName": "HR Operation Officer HO - Loji",
-    //         "levelCode": "2",
-    //         "pohName": "Samarinda",
-    //         "empResidence": null,
-    //         "empJoinDate": "2023-11-21T15:00:00.000Z",
-    //         "empWorkingDate": "2023-11-21T15:00:00.000Z",
-    //         "perReligion": "Islam",
-    //         "persBirthPlace": "Tanjung Redeb",
-    //         "famMaritalStatus": "K/2",
-    //         "famSpouseName": "Devi Eka Maryati",
-    //         "famFatherName": "Burhanudin",
-    //         "famMotherName": "Hj. Ida Norsanti",
-    //         "famFirstKidName": "Princessa Cherish Fredella Chandra",
-    //         "famSecondKidName": "Azzela Kevia Chandra",
-    //         "famThirdKidName": "",
-    //         "persEmergencyNum": "082255940171",
-    //         "persEmergencyContact": "Devi Eka Maryati"
-    //     }
-    // ]
     
     return (
         <div>
@@ -94,7 +56,7 @@ const Personal = () => {
                         <div>
                             <strong>Gender:</strong>
                         </div>
-                        <div className="col-span-3">{personal.persGender}</div>
+                        <div className="col-span-3">{genderReveal(personal.persGender)}</div>
                         <div>
                             <strong>Email:</strong>
                         </div>
@@ -110,7 +72,7 @@ const Personal = () => {
                         <div>
                             <strong>Birthdate:</strong>
                         </div>
-                        <div className="col-span-3">{personal.persBirthDate}</div>
+                        <div className="col-span-3">{formatDate(personal.persBirthDate)}</div>
                         <div>
                             <strong>Age:</strong>
                         </div>
@@ -118,7 +80,7 @@ const Personal = () => {
                         <div>
                             <strong>Gender:</strong>
                         </div>
-                        <div className="col-span-3">{personal.persGender}</div>
+                        <div className="col-span-3">{genderReveal(personal.persGender)}</div>
                         <div>
                             <strong>Religion:</strong>
                         </div>
@@ -190,11 +152,11 @@ const Personal = () => {
                         <div>
                             <strong>Date of Working:</strong>
                         </div>
-                        <div className="col-span-3">{personal.empWorkingDate}</div>
+                        <div className="col-span-3">{formatDate(personal.empWorkingDate)}</div>
                         <div>
                             <strong>Date of Hire:</strong>
                         </div>
-                        <div className="col-span-3">{personal.empJoinDate}</div>
+                        <div className="col-span-3">{formatDate(personal.empJoinDate)}</div>
                         <div>
                             <strong>Residential:</strong>
                         </div>
