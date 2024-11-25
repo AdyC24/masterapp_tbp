@@ -9,19 +9,21 @@ const Personal = () => {
 
     const { nik } = useParams()
 
-    const fetchPersonal = useCallback(
-        async () => {
-            try {
-                const response = await axios.get(`http://localhost:4000/employee/${nik}`)
-                setPersonals(response.data.data)
-            } catch (error) {
-                console.error("Error fetching personalL", error)
+    const fetchPersonal = useCallback(async () => {
+        try {
+            const response = await axios.get(`http://localhost:4000/employee/${nik}`);
+            if (JSON.stringify(response.data.data) !== JSON.stringify(personal)) {
+                setPersonals(response.data.data);
             }
-        }, [nik]);
+        } catch (error) {
+            console.error("Error fetching personal", error);
+        }
+    }, [nik, personal]);
+    
 
     useEffect(() => {
         fetchPersonal();
-    }, [fetchPersonal]);
+    }, [nik]);
 
     // Dummy data to simulate fetched employee data
     // const dummyEmployeeData = {

@@ -40,7 +40,7 @@ const getEmployeeByNik = (nik) => {
                         persAddress,
                         persKelurahan,
                         persKecamatan,
-                        persKota
+                        persKota,
                         persProv,
                         persBirthDate,
                         perNik,
@@ -55,8 +55,6 @@ const getEmployeeByNik = (nik) => {
                         empJoinDate,
                         empWorkingDate,
                         perReligion,
-                        eduLevel,
-                        eduMajor,
                         persGender,
                         persBirthPlace,
                         famMaritalStatus,
@@ -74,10 +72,8 @@ const getEmployeeByNik = (nik) => {
                         poh ON employee.pohId = poh.pohId
                     JOIN 
                         personal ON employee.persId = personal.persId
-                    JOIN 
-                        education ON personal.eduId = education.eduId
                     JOIN
-                        family ON personal.persId = family.persId
+                        family ON personal.famId = family.famId
                     JOIN
                         position ON employee.posId = position.posId
                     JOIN
@@ -91,7 +87,7 @@ const getEmployeeByNik = (nik) => {
                     JOIN 
                         company ON level.compId = company.compId
                     JOIN
-                        location ON company.compId = location.compId
+                        location ON employee.locId = location.locId
                     WHERE
                         employee.empNik = ?
                     `;
