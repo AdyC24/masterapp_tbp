@@ -12,7 +12,7 @@ const getAllEmployees = () => {
                         employee
                     JOIN
                         personal ON employee.persId = personal.persId
-                    JOINa
+                    JOIN
                         position ON employee.posId = position.posId
                     JOIN
                         job ON position.jobId = job.jobId
