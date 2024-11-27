@@ -1,51 +1,26 @@
-import React from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import Sidebar from "./Sidebar";
 import Navbar from "../Navbar";
 import Footer from "../Footer";
+import axios from "axios";
 
 const ContractPage = () => {
+    const [contracts, setContracts] = useState([]);
 
-    // Render the correct component based on the dept parameter
-    // const renderComponent = () => {
-    //     switch (dept) {
-    //         case 'ComDev':
-    //             return <ComDev />;
-    //         case 'EBI':
-    //             return <EBI />;
-    //         case 'Exploration':
-    //             return <Exploration />;
-    //         case 'ExRel':
-    //             return <ExRel />;
-    //         case 'Forestry':
-    //             return <Forestry />;
-    //         case 'GC':
-    //             return <GC />;
-    //         case 'HRGA':
-    //             return <HRGA />;
-    //         case 'Logistic':
-    //             return <Logistic />;
-    //         case 'MSC':
-    //             return <MSC />;
-    //         case 'MPE':
-    //             return <MPE />;
-    //         case 'OHST':
-    //             return <OHST />;
-    //         case 'Plant':
-    //             return <Plant />;
-    //         case 'PrepLab':
-    //             return <PrepLab />;
-    //         case 'Prod':
-    //             return <Production />;
-    //         case 'QC':
-    //             return <QC />;
-    //         case 'Security':
-    //             return <Security />;
-    //         case 'Shipping':
-    //             return <Shipping />;
-    //         default:
-    //             return <div>Department not found</div>;
-    //     }
-    // };
+    const fetchContract = useCallback(
+        async () => {
+            try {
+                const response = await axios.get(`http://localhost:4000/contract`);
+                setContracts(response.data.data)
+            } catch (error) {
+                console.error("Error fetching contract:", error)
+            }
+        }, []);
+    
+    useEffect(() => {
+        fetchContract();
+    }, [fetchContract]);
+        
 
     return (
         <div className="flex flex-col min-h-screen bg-gray-50">
@@ -73,7 +48,7 @@ const ContractPage = () => {
                                         </tr>
                                     </thead>
                                     <tbody className="text-gray-600 text-sm font-light">
-                                    {/* {contracts.map(contract => ( */}
+                                    {contracts.map(contract => (
                                             <tr className="border-b border-gray-200 hover:bg-gray-100">
                                                 <td className="py-3 px-6 text-left">nik</td>
                                                 <td className="py-3 px-6 text-left">nama</td>
@@ -98,7 +73,7 @@ const ContractPage = () => {
                                                     </span>
                                                 </td>
                                             </tr>
-                                        {/* ))} */}
+                                        ))}
                                     </tbody>
                                 </table>
                             </div>

@@ -1,8 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-
-
+import { formatDate } from "./dateUtils";
 
 const Contracts = () => {
     const [contracts, setContracts] = useState([]);
@@ -24,15 +23,6 @@ const Contracts = () => {
     }, [fetchContract]);
 
     
-    const formatDate = (isDate) => {
-        const date = new Date(isDate);
-        return date.toLocaleDateString('en-GB', {
-            day: '2-digit',
-            month: 'short',
-            year: 'numeric'
-        });
-    }
-
     return(
         <div id="personalContract">
             <h2 className="text-2xl font-semibold mb-4">Contract Information</h2>
