@@ -59,10 +59,6 @@ const getAllContractByDept = (dept) => {
                         department ON section.deptId = department.deptId
                     JOIN
                         pic ON department.picId = pic.picId
-                    WHERE
-                        picNick = ?
-                        AND DATEDIFF(contractEnd, CURRENT_DATE) <= 30
-                        AND contractEnd >= CURRENT_DATE
                     ORDER BY
                         contractEnd ASC
                     `;
