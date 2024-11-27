@@ -19,12 +19,12 @@ const Personal = () => {
         } catch (error) {
             console.error("Error fetching personal", error);
         }
-    }, [nik, personal]);
+    }, [nik]);
     
 
     useEffect(() => {
         fetchPersonal();
-    }, [nik]);
+    });
     
     return (
         <div>
