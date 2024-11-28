@@ -7,7 +7,7 @@ import axios from "axios";
 const ContractPage = () => {
     const [contracts, setContracts] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
-    const [itemsPerPage] = useState(10);
+    const [itemsPerPage] = useState(15);
     const [searchTerm, setSearchTerm] = useState("");
     const [selectedContracts, setSelectedContracts] = useState([]);
     const [isAllSelected, setIsAllSelected] = useState(false);
@@ -92,12 +92,19 @@ const ContractPage = () => {
                 <Sidebar />
                 <div id="contractTable" className="flex-grow p-8 bg-white shadow-lg rounded-lg mx-4 mt-6 mb-2">
                     <div>
-                        <h2 className="text-3xl font-semibold mb-8">Contracts</h2>
+                        <h2 className="flex justify-center text-3xl font-semibold mb-8">Contract Monitoring</h2>
                         <div className="mb-8">
                             <div className="overflow-x-auto shadow-lg rounded-lg">
 
-                                {/* Search */}
-                                <div className="flex justify-end items-center mb-4">
+                                <div className="flex justify-between items-center mb-4">
+                                    <div className="bg-green-500 text-white font-bold px-4 py-2 rounded-lg shadow-md hover:bg-green-600 transition duration-200">
+                                        <button className="flex">
+                                            Sent Contract
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+                                                <path strokeLinecap="round" strokeLinejoin="round" d="M6 12 3.269 3.125A59.769 59.769 0 0 1 21.485 12 59.768 59.768 0 0 1 3.27 20.875L5.999 12Zm0 0h7.5" />
+                                            </svg>
+                                        </button>
+                                    </div>
                                     <input 
                                         type="text" 
                                         placeholder="Cari karyawan..."
@@ -120,6 +127,7 @@ const ContractPage = () => {
                                             </th>
                                             <th className="py-3 px-6 text-left">NIK</th>
                                             <th className="py-3 px-6 text-left">Name</th>
+                                            <th className="py-3 px-6 text-left">Department</th>
                                             <th className="py-3 px-6 text-left">Level</th>
                                             <th className="py-3 px-6 text-left">Position</th>
                                             <th className="py-3 px-6 text-left">Hire Date</th>
@@ -141,6 +149,7 @@ const ContractPage = () => {
                                                 </td>
                                                 <td className="py-3 px-6 text-left">{contract.empNik}</td>
                                                 <td className="py-3 px-6 text-left">{contract.persName}</td>
+                                                <td className="py-3 px-6 text-left">department</td>
                                                 <td className="py-3 px-6 text-left">{contract.levelCode}</td>
                                                 <td className="py-3 px-6 text-left">{contract.posName}</td>
                                                 <td className="py-3 px-6 text-left">hire date</td>
