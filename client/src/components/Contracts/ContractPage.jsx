@@ -45,7 +45,7 @@ const ContractPage = () => {
         async () => {
             try {
                 const response = await axios.get(`http://localhost:4000/contract`);
-                setContracts(response.data.data)
+                setContracts(response.data.data) 
             } catch (error) {
                 console.error("Error fetching contract:", error)
             }
@@ -56,7 +56,6 @@ const ContractPage = () => {
     }, [fetchContract]);
     
     
-
     return (
         <div className="flex flex-col min-h-screen bg-gray-50">
             <Navbar />
