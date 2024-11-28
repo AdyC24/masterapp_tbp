@@ -95,7 +95,6 @@ const ContractPage = () => {
                                             <th className="py-3 px-6 text-left">Expired Date</th>
                                             <th className="py-3 px-6 text-left">PA</th>
                                             <th className="py-3 px-6 text-left">SP</th>
-                                            <th className="py-3 px-6 text-left">Sign</th>
                                         </tr>
                                     </thead>
                                     <tbody className="text-gray-600 text-sm font-light">
@@ -116,11 +115,6 @@ const ContractPage = () => {
                                                 <td className="py-3 px-6 text-left">
                                                     <span className= "py-1 px-3 rounded-full text-xs bg-green-200 text-green-600">
                                                     {/* {contract.contractSP} */}
-                                                    </span>
-                                                </td>
-                                                <td className="py-3 px-6 text-left">
-                                                    <span className= "py-1 px-3 rounded-full text-xs bg-red-200 text-red-600">
-                                                        {/* {contract.contractSign} */}
                                                     </span>
                                                 </td>
                                             </tr>
