@@ -115,12 +115,10 @@ const Sidebar = () => {
                         </div>
                     </div>
                 </div>
-                <div className="mt-4">
-                    <button
-                        className="border"
-                    >
-                        Filter
-                    </button>
+                <div className="mt-4 flex justify-center">
+                    <button class="bg-green-500 hover:bg-green-600 text-white font-md py-1 px-4 rounded shadow-lg transition duration-300 items-center">
+                    Filter
+                </button>
                 </div>
             </div>
         </div>
