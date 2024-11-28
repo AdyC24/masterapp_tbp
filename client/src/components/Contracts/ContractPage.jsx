@@ -9,6 +9,8 @@ const ContractPage = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [itemsPerPage] = useState(10);
     const [searchTerm, setSearchTerm] = useState("");
+    const [selectedContracts, setSelectedContracts] = useState([]);
+    const [isAllSelected, setIsAllSelected] = useState(false);
 
     const filterContracts = contracts.filter(contract => 
         contract.empNik.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -38,6 +40,24 @@ const ContractPage = () => {
         setCurrentPage(1);
     }
 
+    const handleSelectedAll = () => {
+        if (isAllSelected) {
+            setSelectedContracts([]);
+        } else {
+            setSelectedContracts(currentContracts.map(contract => contract.contractId));
+        }
+        setIsAllSelected(!isAllSelected)
+    }
+
+    const handleCheckboxChange = (id) => {
+        if (selectedContracts.includes(id)) {
+            setSelectedContracts(selectedContracts.filter(contractId => contractId !== id)); // Hapus jika sudah dipilih
+        } else {
+            setSelectedContracts([...selectedContracts, id]); // Tambahkan ke daftar yang dipilih
+        }
+    };
+    
+
     const fetchContract = useCallback(
         async () => {
             try {
@@ -51,6 +71,10 @@ const ContractPage = () => {
     useEffect(() => {
         fetchContract();
     }, [fetchContract]);
+
+    useEffect(() => {
+        setIsAllSelected(selectedContracts.length === currentContracts.length)
+    }, [selectedContracts, currentContracts])
 
     const formatDate = (isDate) => {
         const date = new Date(isDate);
@@ -86,7 +110,14 @@ const ContractPage = () => {
                                 <table className="min-w-full bg-white border-collapse">
                                     <thead>
                                         <tr className="bg-gray-100 text-gray-600 uppercase text-sm leading-normal">
-                                            <th className="py-3 px-2 text-left"></th>
+                                            <th className="py-3 px-2 text-center">
+                                                <input 
+                                                    type="checkbox" 
+                                                    checked={isAllSelected}
+                                                    onChange={handleSelectedAll}
+                                                    className="w-4 h-4 rounded-md focus:ring-2 focus:ring-offset-2"
+                                                />
+                                            </th>
                                             <th className="py-3 px-6 text-left">NIK</th>
                                             <th className="py-3 px-6 text-left">Name</th>
                                             <th className="py-3 px-6 text-left">Level</th>
@@ -103,7 +134,8 @@ const ContractPage = () => {
                                             <tr className="border-b border-gray-200 hover:bg-gray-100"> 
                                                 <td className="py-3 px-2 text-center">
                                                     <input type="checkbox"
-                                                    value={contract.contractId}
+                                                    checked={selectedContracts.includes(contract.contractId)}
+                                                    onChange={() => handleCheckboxChange(contract.contractId)}
                                                     className="w-3 h-3 rounded-md focus:right-2 focus:ring-offset-2"
                                                 />
                                                 </td>
