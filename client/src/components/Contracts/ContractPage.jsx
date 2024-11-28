@@ -86,6 +86,7 @@ const ContractPage = () => {
                                 <table className="min-w-full bg-white border-collapse">
                                     <thead>
                                         <tr className="bg-gray-100 text-gray-600 uppercase text-sm leading-normal">
+                                            <th className="py-3 px-2 text-left"></th>
                                             <th className="py-3 px-6 text-left">NIK</th>
                                             <th className="py-3 px-6 text-left">Name</th>
                                             <th className="py-3 px-6 text-left">Level</th>
@@ -100,6 +101,12 @@ const ContractPage = () => {
                                     <tbody className="text-gray-600 text-sm font-light">
                                     {currentContracts.map(contract => (
                                             <tr className="border-b border-gray-200 hover:bg-gray-100"> 
+                                                <td className="py-3 px-2 text-center">
+                                                    <input type="checkbox"
+                                                    value={contract.contractId}
+                                                    className="w-3 h-3 rounded-md focus:right-2 focus:ring-offset-2"
+                                                />
+                                                </td>
                                                 <td className="py-3 px-6 text-left">{contract.empNik}</td>
                                                 <td className="py-3 px-6 text-left">{contract.persName}</td>
                                                 <td className="py-3 px-6 text-left">{contract.levelCode}</td>
