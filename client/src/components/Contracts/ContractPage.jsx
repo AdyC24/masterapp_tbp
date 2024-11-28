@@ -11,18 +11,15 @@ const ContractPage = () => {
     const [searchTerm, setSearchTerm] = useState("");
 
     const filterContracts = contracts.filter(contract => 
-        contract.compId.toLowerCase().includes(searchTerm.toLowerCase())
-        // contract.empNik.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        // contract.persName.toLowerCase().includes(searchTerm.toLowerCase())
+        contract.empNik.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        contract.persName.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
-    const totalPages = Math.ceil(filterContracts.lenght / itemsPerPage)
+    const totalPages = Math.ceil(filterContracts.length / itemsPerPage)
 
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
     const currentContracts = filterContracts.slice(indexOfFirstItem, indexOfLastItem)
-
-    console.log(currentContracts)
 
     const handlePreviousPage = () => {
         if (currentPage > 1) {
@@ -37,7 +34,7 @@ const ContractPage = () => {
     }
 
     const handleSearch = (event) => {
-        setSearchTerm(event.terget.value);
+        setSearchTerm(event.target.value);
         setCurrentPage(1);
     }
 
@@ -54,7 +51,15 @@ const ContractPage = () => {
     useEffect(() => {
         fetchContract();
     }, [fetchContract]);
-    
+
+    const formatDate = (isDate) => {
+        const date = new Date(isDate);
+        return date.toLocaleDateString('en-GB', {
+            day: '2-digit',
+            month: 'short',
+            year: 'numeric'
+        });
+    }    
     
     return (
         <div className="flex flex-col min-h-screen bg-gray-50">
@@ -96,13 +101,13 @@ const ContractPage = () => {
                                     <tbody className="text-gray-600 text-sm font-light">
                                     {currentContracts.map(contract => (
                                             <tr className="border-b border-gray-200 hover:bg-gray-100"> 
-                                                <td className="py-3 px-6 text-left">nik</td>
-                                                <td className="py-3 px-6 text-left">nama</td>
-                                                <td className="py-3 px-6 text-left">level</td>
-                                                <td className="py-3 px-6 text-left">posisi</td>
+                                                <td className="py-3 px-6 text-left">{contract.empNik}</td>
+                                                <td className="py-3 px-6 text-left">{contract.persName}</td>
+                                                <td className="py-3 px-6 text-left">{contract.levelCode}</td>
+                                                <td className="py-3 px-6 text-left">{contract.posName}</td>
                                                 <td className="py-3 px-6 text-left">hire date</td>
-                                                <td className="py-3 px-6 text-left">jenis kontrak</td>
-                                                <td className="py-3 px-6 text-left">tanggal expired</td>
+                                                <td className="py-3 px-6 text-left">{contract.contractType}</td>
+                                                <td className="py-3 px-6 text-left">{formatDate(contract.contractEnd)}</td>
                                                 <td className="py-3 px-6 text-left">
                                                     <span className= "py-1 px-3 rounded-full text-xs bg-green-200 text-green-600">
                                                         {/* {contract.contractPA} */}
