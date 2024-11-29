@@ -1,8 +1,38 @@
 // Sidebar.jsx
-import React from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import { Link, useLocation } from "react-router-dom";
+import axios from "axios";
 
 const Sidebar = () => {
+    const [departments, setDepartments] = useState([]);
+    const [contracts, setContract] = useState([]);
+
+    const fetchDepartment = useCallback(
+        async () => {
+            try {
+                const response = await axios.get(`http://localhost:4000/pic`);
+                setDepartments(response.data.data)
+            } catch (error) {
+                console.log("Error fetching department:", error)
+            }
+        }, [])
+
+    const fetchContract = useCallback(
+        async () => {
+            try {
+                const response = await axios.get(`http://localhost:4000/contractType`)
+                setContract(response.data.data) 
+            } catch (error) {
+                console.log("Error fetching contractType:", error)
+            }
+        }, []
+    )
+
+    useEffect(() => {
+        fetchDepartment();
+        fetchContract();
+    }, [fetchDepartment, fetchContract])
+
     const location = useLocation();
 
     const getLinkClass = (path) => {
@@ -51,15 +81,6 @@ const Sidebar = () => {
                             />
                             <span className="text-sm">Level 2</span>
                         </label>
-                        <label className="flex items-center space-x-3 cursor-pointer">
-                            <input
-                                type="checkbox"
-                                value="3"
-                                className="w-5 h-5 accent-green-500 rounded-md focus:ring-2 focus:ring-offset-2 focus:ring-green-400 transition duration-300"
-                                // onChange={(e) => handleCheckboxFilter(e)}
-                            />
-                            <span className="text-sm">Level 3</span>
-                        </label>
                     </div>
                 </div>
                 <div className="mt-4">
@@ -69,9 +90,9 @@ const Sidebar = () => {
                         // onChange={(e) => handleDropdownFilter(e.target.value)} // Function untuk filter dropdown
                     >
                         <option value="">All Department</option>
-                        <option value="1">Dept 1</option>
-                        <option value="2">Dept 2</option>
-                        <option value="3">Dept 3</option>
+                        {departments.map(department => (
+                            <option value={department.picId}>{department.picNick}</option>
+                        ))}
                     </select>
                 </div>
                 <div className="mt-4">
@@ -81,9 +102,9 @@ const Sidebar = () => {
                         // onChange={(e) => handleDropdownFilter(e.target.value)} // Function untuk filter dropdown
                     >
                         <option value="">All Contract</option>
-                        <option value="1">Contract 1</option>
-                        <option value="2">Contract 2</option>
-                        <option value="3">Contract 3</option>
+                        {contracts.map(contract => (
+                            <option value={contract.contractType}>{contract.contractType}</option>
+                        ))}
                     </select>
                 </div>
                 <div className="mt-4">
