@@ -11,11 +11,12 @@ const getAllContracts = () => {
                         contractEnd,
                         contractPA,
                         contractSP,
-                        contractSign,
                         contractStatus,
                         persName,
                         posName,
-                        levelCode
+                        levelCode,
+                        deptName,
+                        empJoinDate
                     FROM
                         contract
                     JOIN
@@ -34,6 +35,8 @@ const getAllContracts = () => {
                         department ON section.deptId = department.deptId
                     JOIN
                         pic ON department.picId = pic.picId
+                    WHERE
+                        contractStatus = 'Open'
                     ORDER BY
                         contractEnd ASC            
                     `;

@@ -99,7 +99,7 @@ const ContractPage = () => {
                                 <div className="flex justify-between items-center mb-4">
                                     <div className="bg-green-500 text-white font-bold px-4 py-2 rounded-lg shadow-md hover:bg-green-600 transition duration-200">
                                         <button className="flex">
-                                            Sent Contract
+                                            Send 
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
                                                 <path strokeLinecap="round" strokeLinejoin="round" d="M6 12 3.269 3.125A59.769 59.769 0 0 1 21.485 12 59.768 59.768 0 0 1 3.27 20.875L5.999 12Zm0 0h7.5" />
                                             </svg>
@@ -149,10 +149,10 @@ const ContractPage = () => {
                                                 </td>
                                                 <td className="py-3 px-6 text-left">{contract.empNik}</td>
                                                 <td className="py-3 px-6 text-left">{contract.persName}</td>
-                                                <td className="py-3 px-6 text-left">department</td>
+                                                <td className="py-3 px-6 text-left">{contract.deptName}</td>
                                                 <td className="py-3 px-6 text-left">{contract.levelCode}</td>
                                                 <td className="py-3 px-6 text-left">{contract.posName}</td>
-                                                <td className="py-3 px-6 text-left">hire date</td>
+                                                <td className="py-3 px-6 text-left">{formatDate(contract.empJoinDate)}</td>
                                                 <td className="py-3 px-6 text-left">{contract.contractType}</td>
                                                 <td className="py-3 px-6 text-left">{formatDate(contract.contractEnd)}</td>
                                                 <td className="py-3 px-6 text-left">
