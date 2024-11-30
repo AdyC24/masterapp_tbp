@@ -23,8 +23,8 @@ const EmployeePage = () => {
         }
     }
 
-    const handleRowClick = (empId) => {
-        navigate(`/employee/${empId}/personal`)
+    const handleRowClick = (empNik) => {
+        navigate(`/employee/${empNik}/contract`)
     }
 
     return(
