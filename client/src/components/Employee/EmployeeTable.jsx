@@ -69,14 +69,14 @@ const EmployeeTable = ({ employees, handleRowClick }) => {
                             {/* Modal Form */}
                             <form>
                                 <div className="mb-4">
-                                    <label className="block text-gray-700 text-sm font-medium mb-2" htmlFor="nik">
-                                        NIK
+                                    <label className="block text-gray-700 text-sm font-medium mb-2" htmlFor="ktpNo">
+                                        KTP Number
                                     </label>
                                     <input 
                                         type="text" 
-                                        id="nik"
+                                        id="ktpNo"
                                         className="w-full border border-gray-300 rounded px-3 py-2 text-gray-800"
-                                        placeholder="Enter NIK"
+                                        placeholder="Enter KTP Number"
                                     />
                                 </div>
                                 <div className="mb-4">
@@ -91,6 +91,116 @@ const EmployeeTable = ({ employees, handleRowClick }) => {
                                     />
                                 </div>
                                 <div className="mb-4">
+                                    <label className="block text-gray-700 text-sm font-medium mb-2" htmlFor="gender">
+                                        Gender
+                                    </label>
+                                    <input 
+                                        type="text" 
+                                        id="name"
+                                        className="w-full border border-gray-300 rounded px-3 py-2 text-gray-800"
+                                        placeholder="Enter Gender"
+                                    />
+                                </div>
+                                <div className="mb-4">
+                                    <label className="block text-gray-700 text-sm font-medium mb-2" htmlFor="birthPlace">
+                                        Birth Place
+                                    </label>
+                                    <input 
+                                        type="text" 
+                                        id="name"
+                                        className="w-full border border-gray-300 rounded px-3 py-2 text-gray-800"
+                                        placeholder="Enter Birth Place"
+                                    />
+                                </div>
+                                <div className="mb-4">
+                                    <label className="block text-gray-700 text-sm font-medium mb-2" htmlFor="birthDate">
+                                        Birth Date
+                                    </label>
+                                    <input 
+                                        type="text" 
+                                        id="name"
+                                        className="w-full border border-gray-300 rounded px-3 py-2 text-gray-800"
+                                        placeholder="Enter Birth Date"
+                                    />
+                                </div>
+                                <div className="mb-4">
+                                    <label className="block text-gray-700 text-sm font-medium mb-2" htmlFor="address">
+                                        Address
+                                    </label>
+                                    <input 
+                                        type="text" 
+                                        id="address"
+                                        className="w-full border border-gray-300 rounded px-3 py-2 text-gray-800"
+                                        placeholder="Enter Address"
+                                    />
+                                </div>
+                                <div className="mb-4">
+                                    <label className="block text-gray-700 text-sm font-medium mb-2" htmlFor="village">
+                                        Village
+                                    </label>
+                                    <input 
+                                        type="text" 
+                                        id="village"
+                                        className="w-full border border-gray-300 rounded px-3 py-2 text-gray-800"
+                                        placeholder="Enter Village"
+                                    />
+                                </div>
+                                <div className="mb-4">
+                                    <label className="block text-gray-700 text-sm font-medium mb-2" htmlFor="region">
+                                        Region
+                                    </label>
+                                    <input 
+                                        type="text" 
+                                        id="region"
+                                        className="w-full border border-gray-300 rounded px-3 py-2 text-gray-800"
+                                        placeholder="Enter Region"
+                                    />
+                                </div>
+                                <div className="mb-4">
+                                    <label className="block text-gray-700 text-sm font-medium mb-2" htmlFor="city">
+                                        City
+                                    </label>
+                                    <input 
+                                        type="text" 
+                                        id="city"
+                                        className="w-full border border-gray-300 rounded px-3 py-2 text-gray-800"
+                                        placeholder="Enter City"
+                                    />
+                                </div>
+                                <div className="mb-4">
+                                    <label className="block text-gray-700 text-sm font-medium mb-2" htmlFor="mariageStatus">
+                                        Mariage Status
+                                    </label>
+                                    <input 
+                                        type="text" 
+                                        id="mariageStatus"
+                                        className="w-full border border-gray-300 rounded px-3 py-2 text-gray-800"
+                                        placeholder="Enter Mariage Status"
+                                    />
+                                </div>
+                                <div className="mb-4">
+                                    <label className="block text-gray-700 text-sm font-medium mb-2" htmlFor="nik">
+                                        NIK
+                                    </label>
+                                    <input 
+                                        type="text" 
+                                        id="nik"
+                                        className="w-full border border-gray-300 rounded px-3 py-2 text-gray-800"
+                                        placeholder="Enter NIK"
+                                    />
+                                </div>
+                                <div className="mb-4">
+                                    <label className="block text-gray-700 text-sm font-medium mb-2" htmlFor="poh">
+                                        Point of Hire
+                                    </label>
+                                    <input 
+                                        type="text" 
+                                        id="poh"
+                                        className="w-full border border-gray-300 rounded px-3 py-2 text-gray-800"
+                                        placeholder="Enter POH"
+                                    />
+                                </div>
+                                <div className="mb-4">
                                     <label className="block text-gray-700 text-sm font-medium mb-2" htmlFor="company">
                                         Company
                                     </label>
@@ -102,6 +212,17 @@ const EmployeeTable = ({ employees, handleRowClick }) => {
                                     />
                                 </div>
                                 <div className="mb-4">
+                                    <label className="block text-gray-700 text-sm font-medium mb-2" htmlFor="department">
+                                        Department
+                                    </label>
+                                    <input 
+                                        type="text" 
+                                        id="department"
+                                        className="w-full border border-gray-300 rounded px-3 py-2 text-gray-800"
+                                        placeholder="Enter Department"
+                                    />
+                                </div>
+                                <div className="mb-4">
                                     <label className="block text-gray-700 text-sm font-medium mb-2" htmlFor="postion">
                                         Position
                                     </label>
@@ -110,6 +231,17 @@ const EmployeeTable = ({ employees, handleRowClick }) => {
                                         id="position"
                                         className="w-full border border-gray-300 rounded px-3 py-2 text-gray-800"
                                         placeholder="Enter Position"
+                                    />
+                                </div>
+                                <div className="mb-4">
+                                    <label className="block text-gray-700 text-sm font-medium mb-2" htmlFor="doh">
+                                        Date of Hire
+                                    </label>
+                                    <input 
+                                        type="text" 
+                                        id="doh"
+                                        className="w-full border border-gray-300 rounded px-3 py-2 text-gray-800"
+                                        placeholder="Enter Date of Hire"
                                     />
                                 </div>
                                 {/* Modal Action */}
