@@ -5,6 +5,7 @@ const EmployeeTable = ({ employees, handleRowClick }) => {
     const [currentPage, setCurrentPage] = useState(1);
     const [itemsPerPage] = useState(10); // Jumlah item per halaman
     const [searchTerm, setSearchTerm] = useState(""); // Kata kunci pencarian
+    const [isModalOpen, setIsModalOpen] = useState(false)
 
     // Menghitung total halaman berdasarkan data yang difilter
     const filteredEmployees = employees.filter(employee =>
@@ -39,6 +40,9 @@ const EmployeeTable = ({ employees, handleRowClick }) => {
         setCurrentPage(1); // Reset halaman ke 1 saat pencarian dilakukan
     };
 
+    const openModal = () => setIsModalOpen(true)
+    const closeModal = () => setIsModalOpen(false)
+
     return (
         <div className="overflow-x-auto">
             <div>
@@ -50,9 +54,84 @@ const EmployeeTable = ({ employees, handleRowClick }) => {
                 </Link>
             </div>
             <div className="pl-6 flex justify-between items-center mb-4 mt-2">
-                <button className="bg-green-700 hover:bg-green-800 text-white font-medium py-2 px-4 rounded shadow-md">
+                {/* Modal Add New Employee */}
+                <button 
+                    onClick={openModal}
+                    className="bg-green-700 hover:bg-green-800 text-white font-medium py-2 px-4 rounded shadow-md">
                     Add New
                 </button>
+                {isModalOpen && (
+                    <div className="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50">
+                        <div className="bg-white rounded-lg shadow-lg w-96 p-6 relative">
+                            {/* Modal Header */}
+                            <h2 className="text-xl font-bold text-gray-800 mb-4">Add New Employee</h2>
+
+                            {/* Modal Form */}
+                            <form>
+                                <div className="mb-4">
+                                    <label className="block text-gray-700 text-sm font-medium mb-2" htmlFor="nik">
+                                        NIK
+                                    </label>
+                                    <input 
+                                        type="text" 
+                                        id="nik"
+                                        className="w-full border border-gray-300 rounded px-3 py-2 text-gray-800"
+                                        placeholder="Enter NIK"
+                                    />
+                                </div>
+                                <div className="mb-4">
+                                    <label className="block text-gray-700 text-sm font-medium mb-2" htmlFor="name">
+                                        Name
+                                    </label>
+                                    <input 
+                                        type="text" 
+                                        id="name"
+                                        className="w-full border border-gray-300 rounded px-3 py-2 text-gray-800"
+                                        placeholder="Enter Name"
+                                    />
+                                </div>
+                                <div className="mb-4">
+                                    <label className="block text-gray-700 text-sm font-medium mb-2" htmlFor="company">
+                                        Company
+                                    </label>
+                                    <input 
+                                        type="text" 
+                                        id="company"
+                                        className="w-full border border-gray-300 rounded px-3 py-2 text-gray-800"
+                                        placeholder="Enter Company"
+                                    />
+                                </div>
+                                <div className="mb-4">
+                                    <label className="block text-gray-700 text-sm font-medium mb-2" htmlFor="postion">
+                                        Position
+                                    </label>
+                                    <input 
+                                        type="text" 
+                                        id="position"
+                                        className="w-full border border-gray-300 rounded px-3 py-2 text-gray-800"
+                                        placeholder="Enter Position"
+                                    />
+                                </div>
+                                {/* Modal Action */}
+                                <div className="flex justify-end space-x-4">
+                                    <button
+                                        type="button"
+                                        onClick={closeModal}
+                                        className="bg-gray-300 hover:bg-gray-400 text-gray-700 font-medium py-2 px-4 rounded"
+                                    >
+                                        Cancel
+                                    </button>
+                                    <button
+                                        type="submit"
+                                        className="bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-4 rounded"
+                                    >
+                                        Save
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                )}
                 {/* Search Input */}
                 <input
                     type="text"
