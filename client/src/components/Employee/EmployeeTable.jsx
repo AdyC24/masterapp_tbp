@@ -35,11 +35,13 @@ const EmployeeTable = ({ employees, handleRowClick }) => {
         }
     };
 
+    // Function Search
     const handleSearch = (event) => {
         setSearchTerm(event.target.value);
         setCurrentPage(1); // Reset halaman ke 1 saat pencarian dilakukan
     };
 
+    // Function Modal
     const openModal = () => setIsModalOpen(true)
     const closeModal = () => setIsModalOpen(false)
 
@@ -63,215 +65,245 @@ const EmployeeTable = ({ employees, handleRowClick }) => {
                 {isModalOpen && (
                     <div className="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50">
                         <div className="bg-white rounded-lg shadow-lg w-96 p-6 relative">
-                            {/* Modal Header */}
-                            <h2 className="text-xl font-bold text-gray-800 mb-4">Add New Employee</h2>
+                            {/* State Management */}
+                            {(() => {
+                                const [step, setStep] = React.useState(1);
 
-                            {/* Modal Form */}
-                            <form>
-                                <div className="mb-4">
-                                    <label className="block text-gray-700 text-sm font-medium mb-2" htmlFor="ktpNo">
-                                        KTP Number
-                                    </label>
-                                    <input 
-                                        type="text" 
-                                        id="ktpNo"
-                                        className="w-full border border-gray-300 rounded px-3 py-2 text-gray-800"
-                                        placeholder="Enter KTP Number"
-                                    />
-                                </div>
-                                <div className="mb-4">
-                                    <label className="block text-gray-700 text-sm font-medium mb-2" htmlFor="name">
-                                        Name
-                                    </label>
-                                    <input 
-                                        type="text" 
-                                        id="name"
-                                        className="w-full border border-gray-300 rounded px-3 py-2 text-gray-800"
-                                        placeholder="Enter Name"
-                                    />
-                                </div>
-                                <div className="mb-4">
-                                    <label className="block text-gray-700 text-sm font-medium mb-2" htmlFor="gender">
-                                        Gender
-                                    </label>
-                                    <input 
-                                        type="text" 
-                                        id="name"
-                                        className="w-full border border-gray-300 rounded px-3 py-2 text-gray-800"
-                                        placeholder="Enter Gender"
-                                    />
-                                </div>
-                                <div className="mb-4">
-                                    <label className="block text-gray-700 text-sm font-medium mb-2" htmlFor="birthPlace">
-                                        Birth Place
-                                    </label>
-                                    <input 
-                                        type="text" 
-                                        id="name"
-                                        className="w-full border border-gray-300 rounded px-3 py-2 text-gray-800"
-                                        placeholder="Enter Birth Place"
-                                    />
-                                </div>
-                                <div className="mb-4">
-                                    <label className="block text-gray-700 text-sm font-medium mb-2" htmlFor="birthDate">
-                                        Birth Date
-                                    </label>
-                                    <input 
-                                        type="text" 
-                                        id="name"
-                                        className="w-full border border-gray-300 rounded px-3 py-2 text-gray-800"
-                                        placeholder="Enter Birth Date"
-                                    />
-                                </div>
-                                <div className="mb-4">
-                                    <label className="block text-gray-700 text-sm font-medium mb-2" htmlFor="address">
-                                        Address
-                                    </label>
-                                    <input 
-                                        type="text" 
-                                        id="address"
-                                        className="w-full border border-gray-300 rounded px-3 py-2 text-gray-800"
-                                        placeholder="Enter Address"
-                                    />
-                                </div>
-                                <div className="mb-4">
-                                    <label className="block text-gray-700 text-sm font-medium mb-2" htmlFor="village">
-                                        Village
-                                    </label>
-                                    <input 
-                                        type="text" 
-                                        id="village"
-                                        className="w-full border border-gray-300 rounded px-3 py-2 text-gray-800"
-                                        placeholder="Enter Village"
-                                    />
-                                </div>
-                                <div className="mb-4">
-                                    <label className="block text-gray-700 text-sm font-medium mb-2" htmlFor="region">
-                                        Region
-                                    </label>
-                                    <input 
-                                        type="text" 
-                                        id="region"
-                                        className="w-full border border-gray-300 rounded px-3 py-2 text-gray-800"
-                                        placeholder="Enter Region"
-                                    />
-                                </div>
-                                <div className="mb-4">
-                                    <label className="block text-gray-700 text-sm font-medium mb-2" htmlFor="city">
-                                        City
-                                    </label>
-                                    <input 
-                                        type="text" 
-                                        id="city"
-                                        className="w-full border border-gray-300 rounded px-3 py-2 text-gray-800"
-                                        placeholder="Enter City"
-                                    />
-                                </div>
-                                <div className="mb-4">
-                                    <label className="block text-gray-700 text-sm font-medium mb-2" htmlFor="mariageStatus">
-                                        Mariage Status
-                                    </label>
-                                    <input 
-                                        type="text" 
-                                        id="mariageStatus"
-                                        className="w-full border border-gray-300 rounded px-3 py-2 text-gray-800"
-                                        placeholder="Enter Mariage Status"
-                                    />
-                                </div>
-                                <div className="mb-4">
-                                    <label className="block text-gray-700 text-sm font-medium mb-2" htmlFor="nik">
-                                        NIK
-                                    </label>
-                                    <input 
-                                        type="text" 
-                                        id="nik"
-                                        className="w-full border border-gray-300 rounded px-3 py-2 text-gray-800"
-                                        placeholder="Enter NIK"
-                                    />
-                                </div>
-                                <div className="mb-4">
-                                    <label className="block text-gray-700 text-sm font-medium mb-2" htmlFor="poh">
-                                        Point of Hire
-                                    </label>
-                                    <input 
-                                        type="text" 
-                                        id="poh"
-                                        className="w-full border border-gray-300 rounded px-3 py-2 text-gray-800"
-                                        placeholder="Enter POH"
-                                    />
-                                </div>
-                                <div className="mb-4">
-                                    <label className="block text-gray-700 text-sm font-medium mb-2" htmlFor="company">
-                                        Company
-                                    </label>
-                                    <input 
-                                        type="text" 
-                                        id="company"
-                                        className="w-full border border-gray-300 rounded px-3 py-2 text-gray-800"
-                                        placeholder="Enter Company"
-                                    />
-                                </div>
-                                <div className="mb-4">
-                                    <label className="block text-gray-700 text-sm font-medium mb-2" htmlFor="department">
-                                        Department
-                                    </label>
-                                    <input 
-                                        type="text" 
-                                        id="department"
-                                        className="w-full border border-gray-300 rounded px-3 py-2 text-gray-800"
-                                        placeholder="Enter Department"
-                                    />
-                                </div>
-                                <div className="mb-4">
-                                    <label className="block text-gray-700 text-sm font-medium mb-2" htmlFor="postion">
-                                        Position
-                                    </label>
-                                    <input 
-                                        type="text" 
-                                        id="position"
-                                        className="w-full border border-gray-300 rounded px-3 py-2 text-gray-800"
-                                        placeholder="Enter Position"
-                                    />
-                                </div>
-                                <div className="mb-4">
-                                    <label className="block text-gray-700 text-sm font-medium mb-2" htmlFor="doh">
-                                        Date of Hire
-                                    </label>
-                                    <input 
-                                        type="text" 
-                                        id="doh"
-                                        className="w-full border border-gray-300 rounded px-3 py-2 text-gray-800"
-                                        placeholder="Enter Date of Hire"
-                                    />
-                                </div>
-                                <div className="mb-4">
-                                    <label className="block text-gray-700 text-sm font-medium mb-2" htmlFor="phoneNumber">
-                                        Phone Number
-                                    </label>
-                                    <input 
-                                        type="text" 
-                                        id="phoneNumber"
-                                        className="w-full border border-gray-300 rounded px-3 py-2 text-gray-800"
-                                        placeholder="Enter Phone Number"
-                                    />
-                                </div>
-                                {/* Modal Action */}
-                                <div className="flex justify-end space-x-4">
-                                    <button
-                                        type="button"
-                                        onClick={closeModal}
-                                        className="bg-gray-300 hover:bg-gray-400 text-gray-700 font-medium py-2 px-4 rounded"
-                                    >
-                                        Cancel
-                                    </button>
-                                    <button
-                                        type="submit"
-                                        className="bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-4 rounded"
-                                    >
-                                        Save
-                                    </button>
-                                </div>
-                            </form>
+                                const handleNext = () => setStep((prevStep) => Math.min(prevStep + 1, 2));
+                                const handleBack = () => setStep((prevStep) => Math.max(prevStep - 1, 1));
+
+                            return (
+                                <>
+                                    <h2 className="text-xl font-bold text-gray-800 mb-4">Add New Employee</h2>
+                                    <form>
+                                        {step === 1 && (
+                                            <div>
+                                                <div className="mb-4">
+                                                    <label className="block text-gray-700 text-sm font-medium mb-2" htmlFor="ktpNo">
+                                                        KTP Number
+                                                    </label>
+                                                    <input 
+                                                        type="text" 
+                                                        id="ktpNo"
+                                                        className="w-full border border-gray-300 rounded px-3 py-2 text-gray-800"
+                                                        placeholder="Enter KTP Number"
+                                                    />
+                                                </div>
+                                                <div className="mb-4">
+                                                    <label className="block text-gray-700 text-sm font-medium mb-2" htmlFor="name">
+                                                        Name
+                                                    </label>
+                                                    <input 
+                                                        type="text" 
+                                                        id="name"
+                                                        className="w-full border border-gray-300 rounded px-3 py-2 text-gray-800"
+                                                        placeholder="Enter Name"
+                                                    />
+                                                </div>
+                                                <div className="mb-4">
+                                                    <label className="block text-gray-700 text-sm font-medium mb-2" htmlFor="gender">
+                                                        Gender
+                                                    </label>
+                                                    <input 
+                                                        type="text" 
+                                                        id="name"
+                                                        className="w-full border border-gray-300 rounded px-3 py-2 text-gray-800"
+                                                        placeholder="Enter Gender"
+                                                    />
+                                                </div>
+                                                <div className="mb-4">
+                                                    <label className="block text-gray-700 text-sm font-medium mb-2" htmlFor="birthPlace">
+                                                        Birth Place
+                                                    </label>
+                                                    <input 
+                                                        type="text" 
+                                                        id="name"
+                                                        className="w-full border border-gray-300 rounded px-3 py-2 text-gray-800"
+                                                        placeholder="Enter Birth Place"
+                                                    />
+                                                </div>
+                                                <div className="mb-4">
+                                                    <label className="block text-gray-700 text-sm font-medium mb-2" htmlFor="birthDate">
+                                                        Birth Date
+                                                    </label>
+                                                    <input 
+                                                        type="text" 
+                                                        id="name"
+                                                        className="w-full border border-gray-300 rounded px-3 py-2 text-gray-800"
+                                                        placeholder="Enter Birth Date"
+                                                    />
+                                                </div>
+                                                <div className="mb-4">
+                                                    <label className="block text-gray-700 text-sm font-medium mb-2" htmlFor="address">
+                                                        Address
+                                                    </label>
+                                                    <input 
+                                                        type="text" 
+                                                        id="address"
+                                                        className="w-full border border-gray-300 rounded px-3 py-2 text-gray-800"
+                                                        placeholder="Enter Address"
+                                                    />
+                                                </div>
+                                                <div className="mb-4">
+                                                    <label className="block text-gray-700 text-sm font-medium mb-2" htmlFor="village">
+                                                        Village
+                                                    </label>
+                                                    <input 
+                                                        type="text" 
+                                                        id="village"
+                                                        className="w-full border border-gray-300 rounded px-3 py-2 text-gray-800"
+                                                        placeholder="Enter Village"
+                                                    />
+                                                </div>
+                                                <div className="mb-4">
+                                                    <label className="block text-gray-700 text-sm font-medium mb-2" htmlFor="region">
+                                                        Region
+                                                    </label>
+                                                    <input 
+                                                        type="text" 
+                                                        id="region"
+                                                        className="w-full border border-gray-300 rounded px-3 py-2 text-gray-800"
+                                                        placeholder="Enter Region"
+                                                    />
+                                                </div>
+                                                <div className="mb-4">
+                                                    <label className="block text-gray-700 text-sm font-medium mb-2" htmlFor="city">
+                                                        City
+                                                    </label>
+                                                    <input 
+                                                        type="text" 
+                                                        id="city"
+                                                        className="w-full border border-gray-300 rounded px-3 py-2 text-gray-800"
+                                                        placeholder="Enter City"
+                                                    />
+                                                </div>
+                                            </div>
+                                        )} 
+                                        {step === 2 && (
+                                            <div>
+                                                <div className="mb-4">
+                                                    <label className="block text-gray-700 text-sm font-medium mb-2" htmlFor="mariageStatus">
+                                                        Mariage Status
+                                                    </label>
+                                                    <input 
+                                                        type="text" 
+                                                        id="mariageStatus"
+                                                        className="w-full border border-gray-300 rounded px-3 py-2 text-gray-800"
+                                                        placeholder="Enter Mariage Status"
+                                                    />
+                                                </div>
+                                                <div className="mb-4">
+                                                    <label className="block text-gray-700 text-sm font-medium mb-2" htmlFor="nik">
+                                                        NIK
+                                                    </label>
+                                                    <input 
+                                                        type="text" 
+                                                        id="nik"
+                                                        className="w-full border border-gray-300 rounded px-3 py-2 text-gray-800"
+                                                        placeholder="Enter NIK"
+                                                    />
+                                                </div>
+                                                <div className="mb-4">
+                                                    <label className="block text-gray-700 text-sm font-medium mb-2" htmlFor="poh">
+                                                        Point of Hire
+                                                    </label>
+                                                    <input 
+                                                        type="text" 
+                                                        id="poh"
+                                                        className="w-full border border-gray-300 rounded px-3 py-2 text-gray-800"
+                                                        placeholder="Enter POH"
+                                                    />
+                                                </div>
+                                                <div className="mb-4">
+                                                    <label className="block text-gray-700 text-sm font-medium mb-2" htmlFor="company">
+                                                        Company
+                                                    </label>
+                                                    <input 
+                                                        type="text" 
+                                                        id="company"
+                                                        className="w-full border border-gray-300 rounded px-3 py-2 text-gray-800"
+                                                        placeholder="Enter Company"
+                                                    />
+                                                </div>
+                                                <div className="mb-4">
+                                                    <label className="block text-gray-700 text-sm font-medium mb-2" htmlFor="department">
+                                                        Department
+                                                    </label>
+                                                    <input 
+                                                        type="text" 
+                                                        id="department"
+                                                        className="w-full border border-gray-300 rounded px-3 py-2 text-gray-800"
+                                                        placeholder="Enter Department"
+                                                    />
+                                                </div>
+                                                <div className="mb-4">
+                                                    <label className="block text-gray-700 text-sm font-medium mb-2" htmlFor="postion">
+                                                        Position
+                                                    </label>
+                                                    <input 
+                                                        type="text" 
+                                                        id="position"
+                                                        className="w-full border border-gray-300 rounded px-3 py-2 text-gray-800"
+                                                        placeholder="Enter Position"
+                                                    />
+                                                </div>
+                                                <div className="mb-4">
+                                                    <label className="block text-gray-700 text-sm font-medium mb-2" htmlFor="doh">
+                                                        Date of Hire
+                                                    </label>
+                                                    <input 
+                                                        type="text" 
+                                                        id="doh"
+                                                        className="w-full border border-gray-300 rounded px-3 py-2 text-gray-800"
+                                                        placeholder="Enter Date of Hire"
+                                                    />
+                                                </div>
+                                                <div className="mb-4">
+                                                    <label className="block text-gray-700 text-sm font-medium mb-2" htmlFor="phoneNumber">
+                                                        Phone Number
+                                                    </label>
+                                                    <input 
+                                                        type="text" 
+                                                        id="phoneNumber"
+                                                        className="w-full border border-gray-300 rounded px-3 py-2 text-gray-800"
+                                                        placeholder="Enter Phone Number"
+                                                    />
+                                                </div>
+                                            </div>
+                                        )}
+                                        {/* Action Buttons */}
+                                        <div className="flex justify-between mt-6">
+                                            <button
+                                                type="button"
+                                                onClick={handleBack}
+                                                className={`${
+                                                    step === 1 ? "hidden" : ""
+                                                } bg-gray-300 hover:bg-gray-400 text-gray-700 font-medium py-2 px-4 rounded`}
+                                            >
+                                                Back
+                                            </button>
+                                            <button
+                                                type="button"
+                                                onClick={handleNext}
+                                                className={`${
+                                                    step === 2 ? "hidden" : ""
+                                                } bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded`}
+                                            >
+                                                Next
+                                            </button>
+                                            {step === 2 && (
+                                                <button
+                                                    type="submit"
+                                                    className="bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-4 rounded"
+                                                >
+                                                    Submit
+                                                </button>
+                                            )}
+                                        </div>
+                                    <form/>
+                                </>
+                            );
+                            })()}
                         </div>
                     </div>
                 )}
@@ -284,7 +316,6 @@ const EmployeeTable = ({ employees, handleRowClick }) => {
                     className="border border-gray-300 rounded-lg px-4 py-2 w-1/4" // Atur width menjadi lebih kecil
                 />
             </div>
-
 
             <table className="min-w-full bg-white shadow-lg rounded-lg overflow-hidden">
                 <thead className="bg-green-600 text-white">
