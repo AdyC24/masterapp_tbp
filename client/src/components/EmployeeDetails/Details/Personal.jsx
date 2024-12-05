@@ -58,10 +58,6 @@ const Personal = () => {
                         </div>
                         <div className="col-span-3">{genderReveal(personal.persGender)}</div>
                         <div>
-                            <strong>Email:</strong>
-                        </div>
-                        <div className="col-span-3">{personal.persEmail}</div>
-                        <div>
                             <strong>Phone:</strong>
                         </div>
                         <div className="col-span-3">{personal.persPhoneNum}</div>
@@ -73,26 +69,6 @@ const Personal = () => {
                             <strong>Birthdate:</strong>
                         </div>
                         <div className="col-span-3">{formatDate(personal.persBirthDate)}</div>
-                        <div>
-                            <strong>Age:</strong>
-                        </div>
-                        <div className="col-span-3">age</div>
-                        <div>
-                            <strong>Gender:</strong>
-                        </div>
-                        <div className="col-span-3">{genderReveal(personal.persGender)}</div>
-                        <div>
-                            <strong>Religion:</strong>
-                        </div>
-                        <div className="col-span-3">{personal.perReligion}</div>
-                        <div>
-                            <strong>Education:</strong>
-                        </div>
-                        <div className="col-span-3">education - major</div>
-                        <div>
-                            <strong>Emergency Call:</strong>
-                        </div>
-                        <div className="col-span-3">{personal.persEmergencyContact} / {personal.persEmergencyNum}</div>
                         <div className="col-span-8">
                             <strong>Address:</strong>
                         </div>
@@ -150,17 +126,9 @@ const Personal = () => {
                         </div>
                         <div className="col-span-3">{personal.pohName}</div>
                         <div>
-                            <strong>Date of Working:</strong>
-                        </div>
-                        <div className="col-span-3">{formatDate(personal.empWorkingDate)}</div>
-                        <div>
                             <strong>Date of Hire:</strong>
                         </div>
                         <div className="col-span-3">{formatDate(personal.empJoinDate)}</div>
-                        <div>
-                            <strong>Residential:</strong>
-                        </div>
-                        <div className="col-span-3">{personal.empResidence}</div>
                     </div>
                 </div>
             </div>
@@ -185,70 +153,6 @@ const Personal = () => {
                             <strong>Marital Status:</strong>
                         </div>
                         <div className="col-span-3">{personal.famMaritalStatus}</div>
-                        <div>
-                            <strong>KK:</strong>
-                        </div>
-                        <div className="col-span-3">{personal.famNum}</div>
-                        <div>
-                            <strong>Spouse's Name:</strong>
-                        </div>
-                        <div className="col-span-3">{personal.famSpouseName}</div>
-                        <div>
-                            <strong>Child 1:</strong>
-                        </div>
-                        <div className="col-span-3">{personal.famFirstKidName}</div>
-                        <div>
-                            <strong>Child 3:</strong>
-                        </div>
-                        <div className="col-span-3">{personal.famThirdKidName}</div>
-                        <div>
-                            <strong>Child 2:</strong>
-                        </div>
-                        <div className="col-span-3">{personal.famSecondKidName}</div>
-                        <div>
-                            <strong>Father's Name:</strong>
-                        </div>
-                        <div className="col-span-3">{personal.famFatherName}</div>
-                        <div>
-                            <strong>Mother's Name:</strong>
-                        </div>
-                        <div className="col-span-3">{personal.famMotherName}</div>
-                    </div>
-                </div>
-            </div>
-            {/* Payroll Information */}
-            <div className="bg-white p-6 rounded-lg shadow-md mb-4">
-                <div className="flex justify-between">
-                    <h2 className="text-2xl font-semibold mb-4">Payroll Information</h2>
-                    <div>
-                        <button className="bg-gray-500 text-white text-xs px-6 py-1 h-8 rounded hover:bg-gray-400 transition-colors duration-300 mx-2"
-                        >
-                            Log
-                        </button>
-                        <button className="bg-green-600 text-white text-xs px-6 py-1 h-8 rounded hover:bg-green-500 transition-colors duration-300 mx-2"
-                        >
-                            Edit
-                        </button>
-                    </div>
-                </div>
-                <div className="border-t border-gray-200 pt-4 mb-4">
-                    <div className="grid grid-cols-8 gap-x-6 gap-y-2 text-gray-700">
-                        <div>
-                            <strong>Saving Account:</strong>
-                        </div>
-                        <div className="col-span-3">Nomor Rekening</div>
-                        <div>
-                            <strong>Saving Bank:</strong>
-                        </div>
-                        <div className="col-span-3">Bank Rekening</div>
-                        <div>
-                            <strong>Salary Location:</strong>
-                        </div>
-                        <div className="col-span-3">Lokal/Non Lokal</div>
-                        <div>
-                            <strong>NPWP:</strong>
-                        </div>
-                        <div className="col-span-3">npwp</div>
                     </div>
                 </div>
             </div>
