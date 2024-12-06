@@ -26,7 +26,7 @@ const Contracts = () => {
     return(
         <div id="personalContract">
             <h2 className="text-2xl font-semibold mb-4">Contract Information</h2>
-            <div className="overflow-x-auto shadow-lg rounded-lg">
+            <div className="overflow-x-auto shadow-lg rounded-lg mb-8">
                 <table className="min-w-full bg-white border-collapse">
                     <thead>
                         <tr className="bg-gray-100 text-gray-600 uppercase text-sm leading-normal">
@@ -55,6 +55,11 @@ const Contracts = () => {
                         ))}
                     </tbody>
                 </table>
+            </div>
+            <div className="flex justify-center mt-8">
+                <button className="bg-gradient-to-r from-green-500 to-green-700 text-white font-semibold py-2 px-6 rounded-full shadow-lg transform transition duration-300 hover:scale-105 hover:shadow-xl">
+                    Generate New Contract
+                </button>
             </div>
         </div>       
     )
