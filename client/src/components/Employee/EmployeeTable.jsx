@@ -314,6 +314,7 @@ const EmployeeTable = ({ employees, handleRowClick }) => {
                         <th className="py-3 px-6 text-left font-semibold text-sm uppercase tracking-wider">Position</th>
                         <th className="py-3 px-6 text-left font-semibold text-sm uppercase tracking-wider">Department</th>
                         <th className="py-3 px-6 text-left font-semibold text-sm uppercase tracking-wider">Company</th>
+                        <th className="py-3 px-6 text-left font-semibold text-sm uppercase tracking-wider">Last Contract</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -328,6 +329,7 @@ const EmployeeTable = ({ employees, handleRowClick }) => {
                             <td className="py-3 px-6 text-sm text-gray-700">{employee.posName}</td>
                             <td className="py-3 px-6 text-sm text-gray-700">{employee.secName}</td>
                             <td className="py-3 px-6 text-sm text-gray-700">{employee.compName}</td>
+                            <td className="py-3 px-6 text-sm text-gray-700"></td>
                         </tr>
                     ))}
                 </tbody>
