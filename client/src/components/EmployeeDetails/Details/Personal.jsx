@@ -69,6 +69,10 @@ const Personal = () => {
                             <strong>Birthdate:</strong>
                         </div>
                         <div className="col-span-3">{formatDate(personal.persBirthDate)}</div>
+                        <div>
+                            <strong>Email:</strong>
+                        </div>
+                        <div className="col-span-3">{personal.persEmail}</div>
                         <div className="col-span-8">
                             <strong>Address:</strong>
                         </div>
