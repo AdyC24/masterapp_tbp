@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const EmployeeTable = ({ employees, handleRowClick }) => {
     const [currentPage, setCurrentPage] = useState(1);
-    const [itemsPerPage] = useState(10); // Jumlah item per halaman
+    const [itemsPerPage] = useState(15); // Jumlah item per halaman
     const [searchTerm, setSearchTerm] = useState(""); // Kata kunci pencarian
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [step, setStep] = useState(1);
