@@ -7,7 +7,8 @@ const getAllEmployees = () => {
                         personal.persName,
                         position.posName,
                         company.compName,
-                        section.secName
+                        section.secName,
+                        contract.contractName
                     FROM 
                         employee
                     JOIN
@@ -24,6 +25,16 @@ const getAllEmployees = () => {
                         section ON position.secId = section.secId
                     JOIN
                         department ON section.deptId = department.deptId
+                    JOIN
+                        (SELECT 
+                            empId, 
+                            MAX(contractId) AS contractId
+                        FROM 
+                            contract
+                        GROUP BY 
+                            empId) AS latest_contract
+                    ON 
+                        employee.empId = latest_contract.empId;
                     `;
 
     return dbPool.execute(SQLQuery);
