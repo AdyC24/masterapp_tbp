@@ -15,7 +15,7 @@ const EmployeePage = () => {
     }, []);
 
     const fetchEmployee = async () => {
-        try {
+        try { 
             const response = await axios.get(`http://localhost:4000/employee`);
             setEmployees(response.data.data)
         } catch (error) {

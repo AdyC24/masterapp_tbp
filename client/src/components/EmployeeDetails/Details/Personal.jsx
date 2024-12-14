@@ -133,6 +133,10 @@ const Personal = () => {
                             <strong>Date of Hire:</strong>
                         </div>
                         <div className="col-span-3">{formatDate(personal.empJoinDate)}</div>
+                        <div>
+                            <strong>Signature:</strong>
+                        </div>
+                        <div className="col-span-3">Not Availabe</div>
                     </div>
                 </div>
             </div>
