@@ -3,6 +3,10 @@ import axios from "axios";
 
 const NewEmployeeModal = ({ isModalOpen, onClose }) => {
     const [step, setStep] = useState(1);
+    const [companies, setCompanies] = useState([])
+    const [departments, setDepartments] = useState([])
+    const [levels, setLevels] = useState([])
+    const [positions, setPositions] = useState([])
     const [formData, setFormData] = useState({
         ktpNo: '',
         name: '',
@@ -26,12 +30,70 @@ const NewEmployeeModal = ({ isModalOpen, onClose }) => {
 
     const modalRef = useRef(null);
 
+    const fetchCompany = async () => {
+        try {
+            const response = await axios.get(`http://localhost:4000/company`);
+            setCompanies(response.data.data)
+        } catch (error) {
+            console.error("Error fetching company data:", error)
+        }
+    }
+
+    const fetchDepartments = async (compId) => {
+        try {
+            const response = await axios.get(`http://localhost:4000/department/${compId}`);
+            setDepartments(response.data.data)
+        } catch (error) {
+            console.error("Error fetching department data:", error)
+        }
+    }
+
+    const fetchLevels = async (compId) => {
+        try {
+            const response = await axios.get(`http://localhost:4000/level/${compId}`);
+            setLevels(response.data.data)
+        } catch (error) {
+            console.error("Error fetching level data:", error)
+        }
+    }
+
+    const fetchPositions = async (deptId, levelId) => {
+        try {
+            const url = "http://localhost:4000/position?deptId=" + deptId + "&levelId=" + levelId;
+            const response = await axios.get(url);
+            setPositions(response.data.data)
+        } catch (error) {
+            console.error("Error fetching position:", error)
+        }
+    }
+
     const handleInputChange = (e) => {
         const { id, value } = e.target;
-        setFormData((prevData) => ({
-            ...prevData,
-            [id]: value
-        }));
+
+        setFormData((prevData) => {
+            const updatedData = {
+                ...prevData,
+                [id]: value,
+                ...(id === "company" && { department: "", level: "", position: "" }),
+            }
+
+            if (id === "company") {
+                if(value) {
+                    fetchDepartments(value);
+                    fetchLevels(value)
+                } else {
+                    setDepartments([])
+                    setLevels([])
+                }
+            }
+
+            
+            if (updatedData.department && updatedData.level) {
+                fetchPositions(updatedData.department, updatedData.level)
+            }
+
+            return updatedData;
+        });
     };
 
     const handleRadioChange = (e) => {
@@ -99,6 +161,10 @@ const NewEmployeeModal = ({ isModalOpen, onClose }) => {
             document.addEventListener("mousedown", handleClickOutside);
         }
     })
+
+    useEffect(() => {
+        fetchCompany();
+    }, [])
     
     if (!isModalOpen) return null
 
@@ -121,7 +187,9 @@ const NewEmployeeModal = ({ isModalOpen, onClose }) => {
                                                 value={formData.ktpNo}
                                                 onChange={handleInputChange}
                                                 className="w-full border border-gray-300 rounded-lg px-3 py-2 text-gray-800"
-                                                placeholder="Enter KTP Number" />
+                                                placeholder="Enter KTP Number" 
+                                                required
+                                                />
                                         </div>
                                         <div className="mb-4">
                                             <label className="block text-gray-700 text-sm font-medium mb-2" htmlFor="name">
@@ -299,7 +367,9 @@ const NewEmployeeModal = ({ isModalOpen, onClose }) => {
                                             </label>
                                             <select name="company" id="company" value={formData.company} onChange={handleInputChange} className="w-full px-3 py-2 text-sm rounded-lg border text-gray-700 focus:outline-none">
                                                 <option value="">Company</option>
-                                                {/* Fetch company id */}
+                                                {companies.map(company => (
+                                                    <option value={company.compId}>{company.compName}</option>
+                                                ))}
                                             </select>
                                         </div>
                                         <div className="mb-4">
@@ -308,7 +378,9 @@ const NewEmployeeModal = ({ isModalOpen, onClose }) => {
                                             </label>
                                             <select name="department" id="department" value={formData.department} onChange={handleInputChange} className="w-full px-3 py-2 text-sm rounded-lg border text-gray-700 focus:outline-none">
                                                 <option value="">Department</option>
-                                                {/* Fetch map department id based on company id dari select company*/}
+                                                {departments.map(department => (
+                                                    <option value={department.deptId}>{department.deptName}</option>
+                                                ))}
                                             </select>
                                         </div>
                                         <div className="mb-4">
@@ -317,7 +389,9 @@ const NewEmployeeModal = ({ isModalOpen, onClose }) => {
                                             </label>
                                             <select name="level" id="level" value={formData.level} onChange={handleInputChange} className="w-full px-3 py-2 text-sm rounded-lg border text-gray-700 focus:outline-none">
                                                 <option value="">Level</option>
-                                                {/* Fetch map level id based on company id dari select department*/}
+                                                {levels.map(level => (
+                                                    <option value={level.levelId}>{level.levelName}</option>
+                                                ))}
                                             </select>
                                         </div>
                                         <div className="mb-4">
@@ -326,7 +400,9 @@ const NewEmployeeModal = ({ isModalOpen, onClose }) => {
                                             </label>
                                             <select name="position" id="position" value={formData.position} onChange={handleInputChange} className="w-full px-3 py-2 text-sm rounded-lg border text-gray-700 focus:outline-none">
                                                 <option value="">Position</option>
-                                                {/* Fetch map position id based on company id dari select level*/}
+                                                {positions.map(position => (
+                                                    <option value={position.posId}>{position.posName}</option>
+                                                ))}
                                             </select>
                                         </div>
                                         <div className="mb-4">

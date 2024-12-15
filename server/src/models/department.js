@@ -6,6 +6,26 @@ const getAllDepartments = () => {
     return dbPool.execute(SQLQuery);
 }
 
+const getAllDepartmentByCompId = (compId) => {
+    const SQLQuery = `
+                    SELECT  
+                        deptId,
+                        deptName
+                    FROM company as c
+                    join directory as d
+                        on c.compId = d.compId
+                    join division as dv
+                        on d.dirId = dv.dirId
+                    join department as dept
+                        on dv.divId = dept.divId
+                    where
+                        c.compId = ?
+                    order by
+                        deptName ASC
+                    `;
+    return dbPool.execute(SQLQuery, [compId]);
+}
+
 const createNewDepartment = (body) => {
     const SQLQuery = `INSERT INTO department (compId, deptName, deptUpdate)
                       VALUE ('${body.compId}', '${body.deptName}', NOW())`
@@ -24,4 +44,5 @@ module.exports = {
     getAllDepartments,
     createNewDepartment,
     createBunchDepartment,
+    getAllDepartmentByCompId
 }

@@ -15,10 +15,25 @@ const getAllDepartments = async (req, res) => {
         res.status(500).json({
             message: "Server is error",
             errMessage: error,
-        })
-        
+        })   
     }
+}
 
+const getAllDepartmentByCompId = async (req, res) => {
+    const { compId } = req.params;
+
+    try {
+        const [data] = await DepartmentModel.getAllDepartmentByCompId(compId);
+        res.json({
+            message: 'Get department by compId',
+            data: data
+        })
+    } catch (error) {
+        res.status(500).json({
+            message: "Server is error",
+            errMessage: error.message
+        })
+    }
 }
 
 const createNewDepartment = async (req, res) => {
@@ -109,5 +124,6 @@ module.exports = {
     createNewDepartment,
     createBunchDepartment,
     editDepartment,
-    deleteDepartment
+    deleteDepartment,
+    getAllDepartmentByCompId
 }

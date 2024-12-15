@@ -11,7 +11,7 @@ import Contracts from './components/EmployeeDetails/Details/Contracts';
 import OrganizationPage from './components/StructureOrganization/OrganizationPage';
 import ContractPage from './components/Contracts/ContractPage';
 import ContractDashboard from './components/Contracts/Details/ContractDashboard';
-import ExportsPage from './components/Exports/ExportsPage';
+import ImportsPage from './components/Imports/ImportsPage';
 
 function App() {
   return (
@@ -23,7 +23,7 @@ function App() {
             <Route path="personal" element={<Personal />} /> 
             <Route path="contract" element={<Contracts />} /> 
           </Route>
-          <Route path="/exports" element={<ExportsPage />}/>
+          <Route path="/imports" element={<ImportsPage />}/>
           <Route path="/employee" element={<EmployeePage />} />
           <Route path="/contracts" element={<ContractPage />}>
             <Route path="dashboard" element={<ContractDashboard />} />

@@ -85,8 +85,8 @@ const Navbar = () => {
                                 <Link to={"/contracts/dashboard"} className="block px-4 py-2 text-gray-700 hover:bg-gray-100">
                                     Contract Management
                                 </Link>
-                                <Link to={"/exports"} className="block px-4 py-2 text-gray-700 hover:bg-gray-100">
-                                    Exports
+                                <Link to={"/imports"} className="block px-4 py-2 text-gray-700 hover:bg-gray-100">
+                                    Imports
                                 </Link>
                             </div>
                         )}

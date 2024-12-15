@@ -37,6 +37,8 @@ const getAllEmployees = () => {
                         employee.empId = latest_contract.empId
                     JOIN
                         contract ON latest_contract.contractId = contract.contractId
+                    ORDER BY
+                        empJoinDate DESC
                     `;
 
     return dbPool.execute(SQLQuery);

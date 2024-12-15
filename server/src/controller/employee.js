@@ -39,6 +39,8 @@ const createNewEmployee = async (req, res) => {
     try {
         // Extract data from request body
         const { body } = req;
+        console.log(body)
+        
         if (!body)
             return res.status(400).json({
                 errMessage: 'Form should be filled completely'

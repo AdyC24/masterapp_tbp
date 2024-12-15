@@ -1,11 +1,22 @@
 const PositionModel = require('../models/position');
 
 const getAllPositions = async (req, res) => {
+    const { deptId, levelId } = req.query;
+
     try {
         const [data] = await PositionModel.getAllPositions();
+
+        let filterdata = data
+
+        if (deptId && levelId) {
+            filterdata = data.filter(
+                (position) => position.deptId === deptId && position.levelId === levelId
+            )
+        }
+
         res.json({
             message: "Get all position succeed",
-            data: data,
+            data: filterdata,
         })
     } catch (error) {
         res.status(500).json({
