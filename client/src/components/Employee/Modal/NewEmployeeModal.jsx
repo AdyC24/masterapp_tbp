@@ -23,6 +23,8 @@ const NewEmployeeModal = ({ isModalOpen, onClose }) => {
         nik: '',
         company: '',
         department: '',
+        subDepartment: '',
+        unit: '',
         level: '',
         position: '',
         doh: ''
@@ -74,22 +76,45 @@ const NewEmployeeModal = ({ isModalOpen, onClose }) => {
             const updatedData = {
                 ...prevData,
                 [id]: value,
-                ...(id === "company" && { department: "", level: "", position: "" }),
+                ...(id === "company" && { department: "", subDepartment: "", unit: "", level: "", position: "" }),
             }
 
             if (id === "company") {
                 if(value) {
-                    fetchDepartments(value);
-                    fetchLevels(value)
+                    fetchDepartments(value); //fetch division
+                    // fetchLevels(value)
                 } else {
                     setDepartments([])
-                    setLevels([])
+                    // setLevels([])
+                }
+
+            if (id === "department") {
+                if(value) {
+                    fetchSubDepartments(value); //fetch department
+                } else {
+                    setSubDepartments([])
                 }
             }
 
+            if (id === "subDepartment") { 
+                if(value) {
+                    fetchUnits(value); //fetch section
+                } else {
+                    setUnits([])
+                }
+            }
+
+            if (id === "unit"){
+                if(value) {
+                    fetchLevels(value); //fetch level
+                } else {
+                    setLevels([])
+                }
+            }
+            }
             
-            if (updatedData.department && updatedData.level) {
-                fetchPositions(updatedData.department, updatedData.level)
+            if (updatedData.subDepartment && updatedData.level) {
+                fetchPositions(updatedData.subDepartment, updatedData.level)
             }
 
             return updatedData;
@@ -128,6 +153,7 @@ const NewEmployeeModal = ({ isModalOpen, onClose }) => {
                     village: '',
                     district: '',
                     city: '',
+                    province: '',
                     mariageStatus: '',
                     phoneNumber: '',
                     email: '',
@@ -259,28 +285,28 @@ const NewEmployeeModal = ({ isModalOpen, onClose }) => {
                                                 placeholder="Enter Birth Date" />
                                         </div>
                                         <div className="mb-4">
-                                            <label className="block text-gray-700 text-sm font-medium mb-2" htmlFor="address">
-                                                Address
+                                            <label className="block text-gray-700 text-sm font-medium mb-2" htmlFor="province">
+                                                Province
                                             </label>
                                             <input
                                                 type="text"
-                                                id="address"
-                                                value={formData.address}
+                                                id="province"
+                                                value={formData.province}
                                                 onChange={handleInputChange}
                                                 className="w-full border border-gray-300 rounded-lg px-3 py-2 text-gray-800"
-                                                placeholder="Enter Address" />
+                                                placeholder="Enter Province" />
                                         </div>
                                         <div className="mb-4">
-                                            <label className="block text-gray-700 text-sm font-medium mb-2" htmlFor="village">
-                                                Village
+                                            <label className="block text-gray-700 text-sm font-medium mb-2" htmlFor="city">
+                                                City
                                             </label>
                                             <input
                                                 type="text"
-                                                id="village"
-                                                value={formData.village}
+                                                id="city"
+                                                value={formData.city}
                                                 onChange={handleInputChange}
                                                 className="w-full border border-gray-300 rounded-lg px-3 py-2 text-gray-800"
-                                                placeholder="Enter Village" />
+                                                placeholder="Enter City" />
                                         </div>
                                         <div className="mb-4">
                                             <label className="block text-gray-700 text-sm font-medium mb-2" htmlFor="district">
@@ -295,16 +321,28 @@ const NewEmployeeModal = ({ isModalOpen, onClose }) => {
                                                 placeholder="Enter Region" />
                                         </div>
                                         <div className="mb-4">
-                                            <label className="block text-gray-700 text-sm font-medium mb-2" htmlFor="city">
-                                                City
+                                            <label className="block text-gray-700 text-sm font-medium mb-2" htmlFor="village">
+                                                Village
                                             </label>
                                             <input
                                                 type="text"
-                                                id="city"
-                                                value={formData.city}
+                                                id="village"
+                                                value={formData.village}
                                                 onChange={handleInputChange}
                                                 className="w-full border border-gray-300 rounded-lg px-3 py-2 text-gray-800"
-                                                placeholder="Enter City" />
+                                                placeholder="Enter Village" />
+                                        </div>
+                                        <div className="mb-4">
+                                            <label className="block text-gray-700 text-sm font-medium mb-2" htmlFor="address">
+                                                Address
+                                            </label>
+                                            <input
+                                                type="text"
+                                                id="address"
+                                                value={formData.address}
+                                                onChange={handleInputChange}
+                                                className="w-full border border-gray-300 rounded-lg px-3 py-2 text-gray-800"
+                                                placeholder="Enter Address" />
                                         </div>
                                         <div className="mb-4">
                                             <label className="block text-gray-700 text-sm font-medium mb-2" htmlFor="mariageStatus">
@@ -378,8 +416,30 @@ const NewEmployeeModal = ({ isModalOpen, onClose }) => {
                                             </label>
                                             <select name="department" id="department" value={formData.department} onChange={handleInputChange} className="w-full px-3 py-2 text-sm rounded-lg border text-gray-700 focus:outline-none">
                                                 <option value="">Department</option>
+                                                {divisions.map(division => (
+                                                    <option value={division.divId}>{division.divName}</option>
+                                                ))}
+                                            </select>
+                                        </div>
+                                        <div className="mb-4">
+                                            <label className="block text-gray-700 text-sm font-medium mb-2" htmlFor="subDepartment">
+                                                Sub Department
+                                            </label>
+                                            <select name="subDepartment" id="subDepartment" value={formData.subDepartment} onChange={handleInputChange} className="w-full px-3 py-2 text-sm rounded-lg border text-gray-700 focus:outline-none">
+                                                <option value="">Sub Department</option>
                                                 {departments.map(department => (
                                                     <option value={department.deptId}>{department.deptName}</option>
+                                                ))}
+                                            </select>
+                                        </div>
+                                        <div className="mb-4">
+                                            <label className="block text-gray-700 text-sm font-medium mb-2" htmlFor="unit">
+                                                Unit
+                                            </label>
+                                            <select name="unit" id="unit" value={formData.unit} onChange={handleInputChange} className="w-full px-3 py-2 text-sm rounded-lg border text-gray-700 focus:outline-none">
+                                                <option value="">Unit</option>
+                                                {sections.map(section => (
+                                                    <option value={section.secId}>{section.secName}</option>
                                                 ))}
                                             </select>
                                         </div>
