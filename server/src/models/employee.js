@@ -25,7 +25,7 @@ const getAllEmployees = () => {
                         section ON position.secId = section.secId
                     JOIN
                         department ON section.deptId = department.deptId
-                    JOIN
+                    LEFT JOIN
                         (SELECT 
                             empId, 
                             MAX(contractId) AS contractId
@@ -35,7 +35,7 @@ const getAllEmployees = () => {
                             empId) AS latest_contract
                     ON 
                         employee.empId = latest_contract.empId
-                    JOIN
+                    LEFT JOIN
                         contract ON latest_contract.contractId = contract.contractId
                     ORDER BY
                         empJoinDate DESC

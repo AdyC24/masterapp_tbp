@@ -19,13 +19,13 @@ const getAllDepartments = async (req, res) => {
     }
 }
 
-const getAllDepartmentByCompId = async (req, res) => {
-    const { compId } = req.params;
+const getAllDepartmentByDivId = async (req, res) => {
+    const { divId } = req.params;
 
     try {
-        const [data] = await DepartmentModel.getAllDepartmentByCompId(compId);
+        const [data] = await DepartmentModel.getAllDepartmentByDivId(divId);
         res.json({
-            message: 'Get department by compId',
+            message: 'Get department by divId',
             data: data
         })
     } catch (error) {
@@ -125,5 +125,5 @@ module.exports = {
     createBunchDepartment,
     editDepartment,
     deleteDepartment,
-    getAllDepartmentByCompId
+    getAllDepartmentByDivId
 }

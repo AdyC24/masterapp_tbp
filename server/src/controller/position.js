@@ -1,16 +1,16 @@
 const PositionModel = require('../models/position');
 
 const getAllPositions = async (req, res) => {
-    const { deptId, levelId } = req.query;
+    const { secId, levelId } = req.query;
 
     try {
         const [data] = await PositionModel.getAllPositions();
 
         let filterdata = data
 
-        if (deptId && levelId) {
+        if (secId && levelId) {
             filterdata = data.filter(
-                (position) => position.deptId === deptId && position.levelId === levelId
+                (position) => position.secId === secId && position.levelId === levelId
             )
         }
 

@@ -4,10 +4,8 @@ const getAllPositions = () => {
     const SQLQuery = `SELECT 
                     posId,
                     posName,
-                    d.deptId,
-                    deptName,
-                    l.levelId,
-                    levelName                    
+                    s.secId,
+                    l.levelId                    
                     FROM position as p
                     JOIN job as j 
                         ON p.jobId = j.jobId

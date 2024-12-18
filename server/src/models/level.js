@@ -5,8 +5,8 @@ const getAllLevelByCompId = (compId) => {
                     SELECT
                         levelId,
                         levelName
-                    FROM level as l
-                    JOIN company as c
+                    FROM level AS l
+                    JOIN company AS c
                         ON l.compId = c.compId
                     WHERE
                         l.compId = ?

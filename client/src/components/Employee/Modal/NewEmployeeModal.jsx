@@ -4,7 +4,9 @@ import axios from "axios";
 const NewEmployeeModal = ({ isModalOpen, onClose }) => {
     const [step, setStep] = useState(1);
     const [companies, setCompanies] = useState([])
+    const [divisions, setDivisions] = useState([])
     const [departments, setDepartments] = useState([])
+    const [sections, setSections] = useState([])
     const [levels, setLevels] = useState([])
     const [positions, setPositions] = useState([])
     const [formData, setFormData] = useState({
@@ -43,10 +45,28 @@ const NewEmployeeModal = ({ isModalOpen, onClose }) => {
 
     const fetchDepartments = async (compId) => {
         try {
-            const response = await axios.get(`http://localhost:4000/department/${compId}`);
-            setDepartments(response.data.data)
+            const response = await axios.get(`http://localhost:4000/division/${compId}`);
+            setDivisions(response.data.data)
         } catch (error) {
             console.error("Error fetching department data:", error)
+        }
+    }
+
+    const fetchSubDepartments = async (divId) => {
+        try {
+            const response = await axios.get(`http://localhost:4000/department/${divId}`);
+            setDepartments(response.data.data)
+        } catch (error) {
+            console.error("Error fetching sub-department data:", error);
+        }
+    }
+
+    const fetchUnits = async (deptId) => {
+        try {
+            const response = await axios.get(`http://localhost:4000/section/${deptId}`)
+            setSections(response.data.data);
+        } catch (error) {
+            console.error("Error fetching units data:", error)            
         }
     }
 
@@ -59,9 +79,9 @@ const NewEmployeeModal = ({ isModalOpen, onClose }) => {
         }
     }
 
-    const fetchPositions = async (deptId, levelId) => {
+    const fetchPositions = async (secId, levelId) => {
         try {
-            const url = "http://localhost:4000/position?deptId=" + deptId + "&levelId=" + levelId;
+            const url = "http://localhost:4000/position?secId=" + secId + "&levelId=" + levelId;
             const response = await axios.get(url);
             setPositions(response.data.data)
         } catch (error) {
@@ -77,49 +97,51 @@ const NewEmployeeModal = ({ isModalOpen, onClose }) => {
                 ...prevData,
                 [id]: value,
                 ...(id === "company" && { department: "", subDepartment: "", unit: "", level: "", position: "" }),
+                ...(id === "department" && { subDepartment: "", unit: "", level: "", position: ""  }),
+                ...(id === "subDepartment" && { unit: "", level: "", position: ""  }),
+                ...(id === "unit" && { level: "", position: ""  }),
+                ...(id === "level" && { position: ""  }),
             }
 
             if (id === "company") {
                 if(value) {
-                    fetchDepartments(value); //fetch division
-                    // fetchLevels(value)
+                    fetchDepartments(value); //fetch division in DB
                 } else {
-                    setDepartments([])
-                    // setLevels([])
+                    setDivisions([])
                 }
-
+            }
+    
             if (id === "department") {
                 if(value) {
-                    fetchSubDepartments(value); //fetch department
+                    fetchSubDepartments(value); //fetch department in DB
                 } else {
-                    setSubDepartments([])
+                    setDepartments([])
                 }
             }
 
             if (id === "subDepartment") { 
                 if(value) {
-                    fetchUnits(value); //fetch section
+                    fetchUnits(value); //fetch section in DB
                 } else {
-                    setUnits([])
+                    setSections([])
                 }
             }
-
-            if (id === "unit"){
+    
+            if (id === "company"){
                 if(value) {
-                    fetchLevels(value); //fetch level
+                    fetchLevels(value); //fetch level in DB
                 } else {
                     setLevels([])
                 }
             }
-            }
-            
-            if (updatedData.subDepartment && updatedData.level) {
-                fetchPositions(updatedData.subDepartment, updatedData.level)
+
+            if (updatedData.unit && updatedData.level) {
+                fetchPositions(updatedData.unit, updatedData.level)
             }
 
             return updatedData;
-        });
-    };
+        });        
+    }
 
     const handleRadioChange = (e) => {
         const { name, value } = e.target;

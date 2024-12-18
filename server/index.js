@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 
 const companyRoute = require('./src/route/company');
+const divisionRoute = require('./src/route/division');
 const departmentRoute = require('./src/route/department');
 const positionRoute = require('./src/route/position');
 const employeeRoute = require('./src/route/employee');
@@ -17,6 +18,7 @@ const soRoute = require('./src/route/so');
 const picRoute = require('./src/route/pic');
 const contractTypeRoute = require('./src/route/contracyType');
 const levelRoute = require('./src/route/level')
+const sectionRoute = require('./src/route/section');
 
 const app = express();
 
@@ -43,7 +45,9 @@ app.use(session({
 app.use('/auth', authRoute)
 app.use('/employee', employeeRoute);
 app.use('/contract', contractRoute);
+app.use('/division', divisionRoute);
 app.use('/department', departmentRoute);
+app.use('/section', sectionRoute);
 app.use('/level', levelRoute)
 app.use('/position', positionRoute);
 app.use('/pic', picRoute);

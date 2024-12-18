@@ -7,8 +7,8 @@ const router = express.Router()
 // GET All Department
 router.get('/', departmentController.getAllDepartments)
 
-// GET All Department By CompId
-router.get('/:compId', departmentController.getAllDepartmentByCompId)
+// GET All Department By divId
+router.get('/:divId', departmentController.getAllDepartmentByDivId)
 
 // CREATE Departmnet
 router.post('/', departmentController.createNewDepartment)
