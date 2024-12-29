@@ -51,10 +51,6 @@ const createNewEmployee = async (req, res) => {
             message: 'Create new employee succeed',
         })
 
-        // Create new user
-        const password = securityMiddleware.generateRandomString()
-        userController.createNewUser(body.nik, password)
-
     } catch (error) {
         // Handle errors
         console.error(error.message);
