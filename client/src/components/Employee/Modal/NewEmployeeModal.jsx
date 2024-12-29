@@ -9,6 +9,7 @@ const NewEmployeeModal = ({ isModalOpen, onClose }) => {
     const [sections, setSections] = useState([])
     const [levels, setLevels] = useState([])
     const [positions, setPositions] = useState([])
+    const [pohs, setPohs] = useState([])
     const [formData, setFormData] = useState({
         ktpNo: '',
         name: '',
@@ -19,6 +20,7 @@ const NewEmployeeModal = ({ isModalOpen, onClose }) => {
         village: '',
         district: '',
         city: '',
+        poh: '',
         mariageStatus: '',
         phoneNumber: '',
         email: '',
@@ -86,6 +88,15 @@ const NewEmployeeModal = ({ isModalOpen, onClose }) => {
             setPositions(response.data.data)
         } catch (error) {
             console.error("Error fetching position:", error)
+        }
+    }
+
+    const fetchPoh = async () => {
+        try {
+            const response = await axios.get(`http://localhost:4000/poh`)
+            setPohs(response.data.data)
+        } catch (error) {
+            console.error("Error fetching poh:", error)
         }
     }
 
@@ -212,6 +223,7 @@ const NewEmployeeModal = ({ isModalOpen, onClose }) => {
 
     useEffect(() => {
         fetchCompany();
+        fetchPoh();
     }, [])
     
     if (!isModalOpen) return null
@@ -332,7 +344,7 @@ const NewEmployeeModal = ({ isModalOpen, onClose }) => {
                                         </div>
                                         <div className="mb-4">
                                             <label className="block text-gray-700 text-sm font-medium mb-2" htmlFor="district">
-                                                District
+                                                Region
                                             </label>
                                             <input
                                                 type="text"
@@ -371,6 +383,7 @@ const NewEmployeeModal = ({ isModalOpen, onClose }) => {
                                                 Mariage Status
                                             </label>
                                             <select name="mariageStatus" id="mariageStatus" value={formData.mariageStatus} onChange={handleInputChange} className="w-full px-3 py-2 text-sm rounded-lg border text-gray-700 focus:outline-none">
+                                                <option value="">Mariage Status</option>
                                                 <option value="TK/0">TK/0</option>
                                                 <option value="TK/1">TK/1</option>
                                                 <option value="TK/2">TK/2</option>
@@ -484,6 +497,17 @@ const NewEmployeeModal = ({ isModalOpen, onClose }) => {
                                                 <option value="">Position</option>
                                                 {positions.map(position => (
                                                     <option value={position.posId}>{position.posName}</option>
+                                                ))}
+                                            </select>{}
+                                        </div>
+                                        <div className="mb-4">
+                                            <label className="block text-gray-700 text-sm font-medium mb-2" htmlFor="poh">
+                                                Point of Hire
+                                            </label>
+                                            <select name="poh" id="poh" value={formData.poh} onChange={handleInputChange} className="w-full px-3 py-2 text-sm rounded-lg border text-gray-700 focus:outline-none">
+                                                <option value="">Point of Hire</option>
+                                                {pohs.map(poh => (
+                                                    <option value={poh.pohId}>{poh.pohName}</option>
                                                 ))}
                                             </select>
                                         </div>

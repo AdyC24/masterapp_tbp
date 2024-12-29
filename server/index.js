@@ -17,8 +17,9 @@ const authRoute = require('./src/route/auth');
 const soRoute = require('./src/route/so');
 const picRoute = require('./src/route/pic');
 const contractTypeRoute = require('./src/route/contracyType');
-const levelRoute = require('./src/route/level')
+const levelRoute = require('./src/route/level');
 const sectionRoute = require('./src/route/section');
+const pohRoute = require('./src/route/poh');
 
 const app = express();
 
@@ -51,7 +52,8 @@ app.use('/section', sectionRoute);
 app.use('/level', levelRoute)
 app.use('/position', positionRoute);
 app.use('/pic', picRoute);
-app.use('/contractType', contractTypeRoute)
+app.use('/contractType', contractTypeRoute);
+app.use('/poh', pohRoute)
 
 
 app.use('/user', userRoute);

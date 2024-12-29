@@ -11,7 +11,7 @@ router.get('/:nik', employeeController.getEmployeeByNik)
 
 // CREATE New Employee
 router.post('/', employeeController.createNewEmployee)
-
+ 
 // EDIT Employee
 router.patch('/:empId', employeeController.editEmployee)
 

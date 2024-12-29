@@ -1,4 +1,5 @@
 const EmployeeModel = require('../models/employee')
+const LocationModel = require('../models/location')
 const userController = require('../controller/user')
 const securityMiddleware = require('../middleware/security')
 const generateRandomString = require('../middleware/security')
@@ -36,16 +37,14 @@ const getEmployeeByNik = async (req, res) => {
 }
 
 const createNewEmployee = async (req, res) => {
-    try {
-        // Extract data from request body
-        const { body } = req;
-        console.log(body)
-        
-        if (!body)
-            return res.status(400).json({
-                errMessage: 'Form should be filled completely'
-            })
+    const { body } = req; 
 
+    const [rows] = await LocationModel.getLocationByCompId(body.company)
+    const locId = rows[0].locId;
+
+    body.locId = locId
+
+    try {
         // Save to database
         await EmployeeModel.createNewEmployee(body);
         res.json({

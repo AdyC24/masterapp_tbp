@@ -109,12 +109,59 @@ const getEmployeeByNik = (nik) => {
     return dbPool.execute(SQLQuery, [nik]);
 }
 
-const createNewEmployee = (body) => {
-    const SQLQuery = `INSERT INTO employee (empNIK, posId, pohId, empName, empJoinDate, empReligion, empGender, empBirthPlace, empBirthDate, empAddress, empMaritalStatus, empStatus)
-                        VALUE ('${body.nik}','${body.posId}','${body.pohId}','${body.name}','${body.joinDate}','${body.religion}','${body.gender}','${body.birthPlace}','${body.birthDate}','${body.address}','${body.maritalStatus}','Active',)`;
+const createNewEmployee = async (body) => {
 
-    return dbPool.execute(SQLQuery);
+    const { ktpNo, name, gender, birthPlace, birthDate, address, village, district, city, mariageStatus, phoneNumber, email, nik, position, doh, province, locId } = body
+
+    const insertFamilyQuery = `
+        INSERT INTO family
+            (famNum, famSpouseName, famSpouseGender, famSpouseBirthPlace, famSpouseBirthDate, famFirstKidName, famFirstKidGender, famFirstKidBirthPlace, famFirstKidBirthDate, famSecondKidName, famSecondKidGender, famSecondKidBirthPlace, famSecondKidBirthDate, famThirdKidName, famThirdKidGender, famThirdKidBirthPlace, famThirdKidBirthDate, famFatherName, famMotherName, famMaritalStatus)
+        VALUE
+            (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    `;
+
+    const insertPersonalQuery = `
+        INSERT INTO personal 
+            (famId, payId, perNik, persName, persBirthPlace, persBirthDate, persGender, perReligion, persAddress, persKelurahan, persKecamatan, persKota, presProv, persPosNum, persPhoneNum, persEmail, presEdu, persEmergencyNum, persEmergencyContract, persEmergencyRelative)
+        VALUE
+            (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)             
+    `;
+
+    const insertEmployeeQuery = `
+        INSERT INTO employee 
+            (persId, posId, locId, payId, empNik, empResidence, empJoinDate, empWorkingDate, empTerminationDate, empTerminationReason, empStatus, empWorkingStatus) 
+        VALUES 
+            (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)   
+    `;
+
+    const connection = await dbPool.getConnection();
+
+    try {
+        await connection.beginTransaction();
+
+        // Insert family
+        const [familyResult] = await connection.execute(insertFamilyQuery, [NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, mariageStatus])
+
+        const famId = familyResult.famId;
+
+        // Insert personal 
+        const [personalResult] = await connection.execute(insertPersonalQuery, [famId, NULL, ktpNo, name, birthPlace, birthDate, gender, NULL, address, village, district, city, province, NULL, phoneNumber, email, NULL, NULL, NULL, NULL]);
+        
+        const persId = personalResult.persId;
+
+        // Insert employee
+        await connection.execute(persId, position, locId, NULL, nik, NULL, doh, doh, NULL, NULL, 'Active', NULL);
+
+        await connection.commit();
+        return {success: true, message: 'Employee created successfully'};
+    } catch (error) {
+        await connection.rollback();
+        return {success: false, message: 'Failed to create employee', error};
+    } finally {
+        connection.release()
+    }
 }
+
     
 module.exports = {
     getAllEmployees, 
