@@ -44,7 +44,6 @@ const EmployeeTable = ({ employees, handleRowClick }) => {
 
     // Function Modal
     const openModal = () => setIsModalOpen(true)
-    // const closeModal = () => setIsModalOpen(false)
 
     return (
         <div className="overflow-x-auto">

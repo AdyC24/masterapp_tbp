@@ -147,11 +147,9 @@ const createNewEmployee = async (body) => {
 
         // Insert personal 
         const [personalResult] = await connection.execute(insertPersonalQuery, [famId, 0, ktpNo, name, birthPlace, birthDate, gender, null, address, village, district, city, province, null, phoneNumber, email, 0, null, null, null]);
-        const persId = personalResult.insertId;
-        console.log(persId)        
+        const persId = personalResult.insertId;   
 
         // Insert employee
-        console.log([persId, position, locId, null, nik, null, doh, doh, null, null, 'Active', null])
         await connection.execute(insertEmployeeQuery, [persId, position, locId, null, nik, null, doh, doh, null, null, 'Active', null]);
 
         await connection.commit();
