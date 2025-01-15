@@ -83,7 +83,7 @@ const getEmployeeByNik = (nik) => {
                         persEmergencyContact
                     FROM   
                         employee
-                    JOIN
+                    LEFT JOIN
                         poh ON employee.pohId = poh.pohId
                     JOIN 
                         personal ON employee.persId = personal.persId
