@@ -69,7 +69,7 @@ const Navbar = () => {
                                 <Link to={"/ptk"} className="block px-4 py-2 text-gray-700 hover:bg-gray-100">
                                     Permintaan Tenaga Kerja
                                 </Link>
-                            </div>
+                            </div> 
                         )}
                     </div> */}
                     {/* <div className="border-l border-gray-300 h-6"></div> */}

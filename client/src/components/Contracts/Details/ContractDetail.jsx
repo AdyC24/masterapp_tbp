@@ -7,24 +7,6 @@ const ComDev = () => {
     const { dept } = useParams();
     const contracts = useFetchContract(dept)
 
-    // "data": [
-    //     {
-    //         "contractId": 9966,
-    //         "empNik": "M0403240125",
-    //         "contractType": "PKWT 1 - Addendum 2",
-    //         "compId": "TBP",
-    //         "contractNo": "186/HRD/ADD II-PKWT I/TBP/VIII/2024",
-    //         "contractEnd": "2024-11-29T15:00:00.000Z",
-    //         "contractPA": null,
-    //         "contractSP": null,
-    //         "contractSign": null,
-    //         "contractStatus": "Open",
-    //         "persName": "Muhammad Amry Rambe",
-    //         "posName": "Excavator Operator EBI",
-    //         "levelCode": "1"
-    //     },
-    // ]
-
     return(
         <div>
             <h2 className="text-3xl font-semibold mb-8">Community Development</h2>
