@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import Navbar from "../Navbar";
 import Footer from "../Footer";
 import ExcelJS from 'exceljs';
+import ImportSection from './ImportSection';
+import ExportSection from './ExportSection';
 
 const ImportsPage = () => {
     const [selectedFile, setSelectedFile] = useState(null);
@@ -40,58 +42,74 @@ const ImportsPage = () => {
         }
     };
 
+    const handleExport = (dataType) => {
+        const workbook = new ExcelJS.Workbook();
+        const worksheet = workbook.addWorksheet(dataType);
+
+        // Add some sample data
+        worksheet.addRow(['ID', 'Name', 'Position']);
+        worksheet.addRow([1, 'John Doe', 'Manager']);
+        worksheet.addRow([2, 'Jane Smith', 'Developer']);
+
+        workbook.xlsx.writeBuffer().then((buffer) => {
+            const blob = new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `${dataType}.xlsx`;
+            a.click();
+            window.URL.revokeObjectURL(url);
+        });
+    };
+
+    const downloadTemplate = async () => {
+        const response = await fetch('/assets/Employee_Template.xlsx');
+        const arrayBuffer = await response.arrayBuffer();
+        const workbook = new ExcelJS.Workbook();
+        await workbook.xlsx.load(arrayBuffer);
+
+        // Optionally, you can modify the workbook here if needed
+
+        workbook.xlsx.writeBuffer().then((buffer) => {
+            const blob = new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'Employee_Import_Template.xlsx';
+            a.click();
+            window.URL.revokeObjectURL(url);
+        });
+    };
+
     return (
-        <div>
-            <div className="flex flex-col min-h-screen bg-gray-50">
-                <Navbar />
-                <div className="flex-grow container mx-auto py-8">
-                    <h1 className="text-3xl font-bold mb-6 text-center">Imports</h1>
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
-                        <div className="bg-white p-6 rounded-lg shadow-md">
-                            <h2 className="text-xl font-semibold mb-4">Import Employee Data</h2>
-                            <div className="relative mb-4">
-                                <input
-                                    type="file"
-                                    accept=".xlsx, .xls"
-                                    onChange={(event) => handleFileChange(event, 'Employee Data')}
-                                    className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
-                                />
-                                <div className="border border-gray-300 rounded-lg px-4 py-2 w-full text-gray-700 bg-white cursor-pointer">
-                                    {employeeFileName}
-                                </div>
-                            </div>
-                            <button
-                                onClick={handleImport}
-                                className="bg-green-700 hover:bg-green-800 text-white font-medium py-2 px-4 rounded shadow-md"
-                            >
-                                Import Employee Data
-                            </button>
-                        </div>
-                        <div className="bg-white p-6 rounded-lg shadow-md">
-                            <h2 className="text-xl font-semibold mb-4">Import Contract Data</h2>
-                            <div className="relative mb-4">
-                                <input
-                                    type="file"
-                                    accept=".xlsx, .xls"
-                                    onChange={(event) => handleFileChange(event, 'Contract Data')}
-                                    className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
-                                />
-                                <div className="border border-gray-300 rounded-lg px-4 py-2 w-full text-gray-700 bg-white cursor-pointer">
-                                    {contractFileName}
-                                </div>
-                            </div>
-                            <button
-                                onClick={handleImport}
-                                className="bg-green-700 hover:bg-green-800 text-white font-medium py-2 px-4 rounded shadow-md"
-                            >
-                                Import Contract Data
-                            </button>
-                        </div>
-                        {/* Add more sections as needed */}
-                    </div>
+        <div className="flex flex-col min-h-screen bg-gray-100">
+            <Navbar />
+            <div className="flex-grow container mx-auto py-12">
+                <h1 className="text-4xl font-bold mb-8 text-center text-gray-800">Data Management</h1>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
+                    <ImportSection
+                        dataType="Employee Data"
+                        fileName={employeeFileName}
+                        handleFileChange={handleFileChange}
+                        handleImport={handleImport}
+                        downloadTemplate={downloadTemplate}
+                    />
+                    <ImportSection
+                        dataType="Contract Data"
+                        fileName={contractFileName}
+                        handleFileChange={handleFileChange}
+                        handleImport={handleImport}
+                        downloadTemplate={downloadTemplate}
+                    />
                 </div>
-                <Footer />
+                <h1 className="text-4xl font-bold mb-8 text-center text-gray-800 mt-16">Exports</h1>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <ExportSection dataType="Position Data" handleExport={handleExport} />
+                    <ExportSection dataType="Employee Data" handleExport={handleExport} />
+                    <ExportSection dataType="Contract Data" handleExport={handleExport} />
+                </div>
             </div>
+            <Footer />
         </div>
     );
 };
