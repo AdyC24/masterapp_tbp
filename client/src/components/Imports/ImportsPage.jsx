@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Navbar from "../Navbar";
 import Footer from "../Footer";
 import ExcelJS from 'exceljs';
+import axios from 'axios';
 import ImportSection from './ImportSection';
 import ExportSection from './ExportSection';
 
@@ -42,16 +43,55 @@ const ImportsPage = () => {
         }
     };
 
-    const handleExport = (dataType) => {
-        const workbook = new ExcelJS.Workbook();
-        const worksheet = workbook.addWorksheet(dataType);
+    const handleExport = async (dataType) => {
+        if (dataType === 'Position Data') {
+            try {
+                const response = await axios.get(`http://localhost:4000/position`); // Adjust the URL to your backend endpoint
+                const positions = response.data.data; // Access the data property
 
-        // Add some sample data
-        worksheet.addRow(['ID', 'Name', 'Position']);
-        worksheet.addRow([1, 'John Doe', 'Manager']);
-        worksheet.addRow([2, 'Jane Smith', 'Developer']);
+                if (!Array.isArray(positions)) {
+                    throw new Error('Expected an array of positions');
+                }
 
-        workbook.xlsx.writeBuffer().then((buffer) => {
+                const workbook = new ExcelJS.Workbook();
+                const worksheet = workbook.addWorksheet(dataType);
+
+                // Add headers
+                const headerRow = worksheet.addRow(['ID', 'Position', 'Level', 'Department', 'Section', 'Division', 'Company']);
+                headerRow.eachCell((cell) => {
+                    cell.font = { bold: true };
+                });
+
+                // Add data
+                positions.forEach(position => {
+                    worksheet.addRow([position.posId, position.posName, position.levelName, position.deptName, position.secName, position.divName, position.compName]);
+                });
+
+                // Export to Excel
+                const buffer = await workbook.xlsx.writeBuffer();
+                const blob = new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `${dataType}.xlsx`;
+                a.click();
+                window.URL.revokeObjectURL(url);
+            } catch (error) {
+                console.error('Error fetching position data:', error);
+            }
+        } else {
+            const workbook = new ExcelJS.Workbook();
+            const worksheet = workbook.addWorksheet(dataType);
+
+            // Add some sample data
+            const headerRow = worksheet.addRow(['ID', 'Name', 'Position']);
+            headerRow.eachCell((cell) => {
+                cell.font = { bold: true };
+            });
+            worksheet.addRow([1, 'John Doe', 'Manager']);
+            worksheet.addRow([2, 'Jane Smith', 'Developer']);
+
+            const buffer = await workbook.xlsx.writeBuffer();
             const blob = new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
             const url = window.URL.createObjectURL(blob);
             const a = document.createElement('a');
@@ -59,7 +99,7 @@ const ImportsPage = () => {
             a.download = `${dataType}.xlsx`;
             a.click();
             window.URL.revokeObjectURL(url);
-        });
+        }
     };
 
     const downloadTemplate = async () => {
