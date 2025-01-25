@@ -56,8 +56,8 @@ const Navbar = () => {
                 </div>
 
                 {/* Center Section: HR Links */}
-                <div className="hidden md:flex items-center space-x-8">
-                    {/* <div className="relative" ref={hrPlanningRef}>
+                <div className="md:flex items-center space-x-8">
+                    <div className="relative" ref={hrPlanningRef}>
                         <button onClick={() => toggleDropdown('HRPlanning')} className="text-green-600 font-semibold text-lg hover:text-green-800 transition duration-300">
                             HR Planning
                         </button>
@@ -71,8 +71,8 @@ const Navbar = () => {
                                 </Link>
                             </div> 
                         )}
-                    </div> */}
-                    {/* <div className="border-l border-gray-300 h-6"></div> */}
+                    </div> 
+                    <div className="border-l border-gray-300 h-6"></div>
                     <div className="relative" ref={hrOperationRef}>
                         <button onClick={() => toggleDropdown('HROperation')} className="text-green-600 font-semibold text-lg hover:text-green-800 transition duration-300">
                             HR Operation
