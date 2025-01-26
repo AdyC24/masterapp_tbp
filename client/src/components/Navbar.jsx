@@ -66,6 +66,9 @@ const Navbar = () => {
                                 <Link to={"/so"} className="block px-4 py-2 text-gray-700 hover:bg-gray-100">
                                     Struktur Organisasi
                                 </Link>
+                                <Link to={"/mpp"} className="block px-4 py-2 text-gray-700 hover:bg-gray-100">
+                                    Manpower Planning
+                                </Link>
                                 <Link to={"/ptk"} className="block px-4 py-2 text-gray-700 hover:bg-gray-100">
                                     Permintaan Tenaga Kerja
                                 </Link>

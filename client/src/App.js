@@ -12,6 +12,7 @@ import OrganizationPage from './components/StructureOrganization/OrganizationPag
 import ContractPage from './components/Contracts/ContractPage';
 import ContractDashboard from './components/Contracts/Details/ContractDashboard';
 import ImportsPage from './components/Imports/ImportsPage';
+import MPPPage from './components/MPP/MPPPage';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
       <Router>
         <Routes>
           <Route path="/so" element={<OrganizationPage />}/>
+          <Route path='/mpp' element={<MPPPage/>}/>
           <Route path="/employee/:nik" element={<EmployeeDetails />}>
             <Route path="personal" element={<Personal />} /> 
             <Route path="contract" element={<Contracts />} /> 
