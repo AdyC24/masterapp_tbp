@@ -88,7 +88,7 @@ const MPPTable = () => {
         const worksheet = workbook.addWorksheet("MPP Data");
 
         // Add headers
-        const headerRow = worksheet.addRow(["ID", "Position", "Job", "Division", "Department", "Section", "Company", "Slot", "Exist", "Dev"]);
+        const headerRow = worksheet.addRow(["ID", "Position", "Job", "Department", "Sub-Department", "Unit", "Company", "Slot", "Exist", "Dev"]);
         headerRow.eachCell((cell) => {
             cell.font = { bold: true };
         });
@@ -168,7 +168,7 @@ const MPPTable = () => {
                     <input
                         type="text"
                         name="deptName"
-                        placeholder="Filter Department"
+                        placeholder="Filter Sub-Department"
                         value={filters.deptName}
                         onChange={handleFilterChange}
                         className="border border-gray-300 rounded-lg px-2 py-1 w-full mb-2"
@@ -176,7 +176,7 @@ const MPPTable = () => {
                     <input
                         type="text"
                         name="secName"
-                        placeholder="Filter Section"
+                        placeholder="Filter Unit"
                         value={filters.secName}
                         onChange={handleFilterChange}
                         className="border border-gray-300 rounded-lg px-2 py-1 w-full mb-2"
@@ -184,7 +184,7 @@ const MPPTable = () => {
                     <input
                         type="text"
                         name="divName"
-                        placeholder="Filter Division"
+                        placeholder="Filter Department"
                         value={filters.divName}
                         onChange={handleFilterChange}
                         className="border border-gray-300 rounded-lg px-2 py-1 w-full mb-2"
@@ -230,9 +230,9 @@ const MPPTable = () => {
                                 <th className="py-3 px-4 border-b text-left text-gray-700 font-semibold">ID</th>
                                 <th className="py-3 px-4 border-b text-left text-gray-700 font-semibold">Position</th>
                                 <th className="py-3 px-4 border-b text-left text-gray-700 font-semibold">Job</th>
-                                <th className="py-3 px-4 border-b text-left text-gray-700 font-semibold">Division</th>
                                 <th className="py-3 px-4 border-b text-left text-gray-700 font-semibold">Department</th>
-                                <th className="py-3 px-4 border-b text-left text-gray-700 font-semibold">Section</th>
+                                <th className="py-3 px-4 border-b text-left text-gray-700 font-semibold">Sub-Department</th>
+                                <th className="py-3 px-4 border-b text-left text-gray-700 font-semibold">Unit</th>
                                 <th className="py-3 px-4 border-b text-left text-gray-700 font-semibold">Company</th>
                                 <th className="py-3 px-4 border-b text-left text-gray-700 font-semibold">Slot</th>
                                 <th className="py-3 px-4 border-b text-left text-gray-700 font-semibold">Exist</th>
@@ -323,7 +323,7 @@ const MPPTable = () => {
                             />
                         </div>
                         <div className="mb-4">
-                            <label className="block text-gray-700">Division</label>
+                            <label className="block text-gray-700">Department</label>
                             <input
                                 type="text"
                                 name="divName"
@@ -333,7 +333,7 @@ const MPPTable = () => {
                             />
                         </div>
                         <div className="mb-4">
-                            <label className="block text-gray-700">Department</label>
+                            <label className="block text-gray-700">Sub-Department</label>
                             <input
                                 type="text"
                                 name="deptName"
@@ -343,7 +343,7 @@ const MPPTable = () => {
                             />
                         </div>
                         <div className="mb-4">
-                            <label className="block text-gray-700">Section</label>
+                            <label className="block text-gray-700">Unit</label>
                             <input
                                 type="text"
                                 name="secName"
