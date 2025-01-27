@@ -2,8 +2,8 @@ const dbPool = require('../config/database');
 
 const getAllPositions = () => {
     const SQLQuery = `SELECT 
-                    posId,
-                    posName,
+                    p.posId,
+                    p.posName,
                     l.levelId,  
                     l.levelName,                  
                     s.secId,
@@ -13,22 +13,22 @@ const getAllPositions = () => {
                     dv.divName,
                     c.compName
                     FROM position as p
-                    JOIN job as j 
+                    LEFT JOIN job as j 
                         ON p.jobId = j.jobId
-                    JOIN level as l
+                    LEFT JOIN level as l
                         ON j.levelId = l.levelId
-                    JOIN section as s
+                    LEFT JOIN section as s
                         ON p.secId = s.secId
-                    JOIN department as d
+                    LEFT JOIN department as d
                         ON s.deptId = d.deptId
-                    JOIN division as dv
+                    LEFT JOIN division as dv
                         ON d.divId = dv.divId
-                    JOIN directory as dr
+                    LEFT JOIN directory as dr
                         ON dv.dirId = dr.dirId
-                    JOIN company as c
+                    LEFT JOIN company as c
                         ON dr.compId = c.compId
                     ORDER BY
-                        posName ASC
+                        p.posName ASC
                     `;
 
     return dbPool.execute(SQLQuery);

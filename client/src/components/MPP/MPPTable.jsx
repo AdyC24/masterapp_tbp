@@ -270,11 +270,14 @@ const MPPTable = () => {
                         Next
                     </button>
                 </div>
+                <div className="mt-4 text-center">
+                    <p className="text-gray-700">Total Records: {filteredData.length}</p>
+                </div>
             </div>
 
             {isModalOpen && (
                 <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-                    <div className="bg-white p-6 rounded-lg shadow-lg w-1/5">
+                    <div className="bg-white p-6 rounded-lg shadow-lg w-1/3">
                         <h2 className="text-2xl font-bold mb-4">Edit MPP</h2>
                         <div className="mb-4">
                             <label className="block text-gray-700">ID</label>
@@ -333,16 +336,6 @@ const MPPTable = () => {
                                 type="text"
                                 name="compName"
                                 value={editData.compName}
-                                onChange={handleEditChange}
-                                className="border border-gray-300 rounded-lg px-2 py-1 w-full"
-                            />
-                        </div>
-                        <div className="mb-4">
-                            <label className="block text-gray-700">Slot</label>
-                            <input
-                                type="text"
-                                name="compName"
-                                value=""
                                 onChange={handleEditChange}
                                 className="border border-gray-300 rounded-lg px-2 py-1 w-full"
                             />
