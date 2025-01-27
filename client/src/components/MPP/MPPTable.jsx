@@ -7,10 +7,11 @@ const MPPTable = () => {
     const [filters, setFilters] = useState({
         posId: "",
         posName: "",
+        jobName: "",
+        divName: "",
         deptName: "",
         secName: "",
-        divName: "",
-        compName: ""
+        compName: "",
     });
     const [currentPage, setCurrentPage] = useState(1);
     const rowsPerPage = 15;
@@ -19,9 +20,10 @@ const MPPTable = () => {
     const [editData, setEditData] = useState({
         posId: "",
         posName: "",
+        jobName: "",
+        divName: "",
         deptName: "",
         secName: "",
-        divName: "",
         compName: "",
         slot: "",
     });
@@ -86,14 +88,14 @@ const MPPTable = () => {
         const worksheet = workbook.addWorksheet("MPP Data");
 
         // Add headers
-        const headerRow = worksheet.addRow(["ID", "Position", "Department", "Section", "Division", "Company", "Slot", "Exist", "Dev"]);
+        const headerRow = worksheet.addRow(["ID", "Position", "Job", "Division", "Department", "Section", "Company", "Slot", "Exist", "Dev"]);
         headerRow.eachCell((cell) => {
             cell.font = { bold: true };
         });
 
         // Add data
         filteredData.forEach((mpp) => {
-            worksheet.addRow([mpp.posId, mpp.posName, mpp.deptName, mpp.secName, mpp.divName, mpp.compName]);
+            worksheet.addRow([mpp.posId, mpp.posName, mpp.jobName, mpp.divName, mpp.deptName, mpp.secName, mpp.compName]);
         });
 
         // Generate Excel file and trigger download
@@ -152,6 +154,14 @@ const MPPTable = () => {
                         name="posName"
                         placeholder="Filter Position"
                         value={filters.posName}
+                        onChange={handleFilterChange}
+                        className="border border-gray-300 rounded-lg px-2 py-1 w-full mb-2"
+                    />
+                    <input
+                        type="text"
+                        name="jobName"
+                        placeholder="Filter Job"
+                        value={filters.jobName}
                         onChange={handleFilterChange}
                         className="border border-gray-300 rounded-lg px-2 py-1 w-full mb-2"
                     />
@@ -219,9 +229,10 @@ const MPPTable = () => {
                             <tr>
                                 <th className="py-3 px-4 border-b text-left text-gray-700 font-semibold">ID</th>
                                 <th className="py-3 px-4 border-b text-left text-gray-700 font-semibold">Position</th>
+                                <th className="py-3 px-4 border-b text-left text-gray-700 font-semibold">Job</th>
+                                <th className="py-3 px-4 border-b text-left text-gray-700 font-semibold">Division</th>
                                 <th className="py-3 px-4 border-b text-left text-gray-700 font-semibold">Department</th>
                                 <th className="py-3 px-4 border-b text-left text-gray-700 font-semibold">Section</th>
-                                <th className="py-3 px-4 border-b text-left text-gray-700 font-semibold">Division</th>
                                 <th className="py-3 px-4 border-b text-left text-gray-700 font-semibold">Company</th>
                                 <th className="py-3 px-4 border-b text-left text-gray-700 font-semibold">Slot</th>
                                 <th className="py-3 px-4 border-b text-left text-gray-700 font-semibold">Exist</th>
@@ -234,9 +245,10 @@ const MPPTable = () => {
                                 <tr key={mpp.posId} className="hover:bg-gray-100 transition duration-200">
                                     <td className="py-3 px-4 border-b">{mpp.posId}</td>
                                     <td className="py-3 px-4 border-b">{mpp.posName}</td>
-                                    <td className="py-3 px-4 border-b">{mpp.deptName}</td>
-                                    <td className="py-3 px-4 border-b">{mpp.secName}</td>
+                                    <td className="py-3 px-4 border-b">{mpp.jobName}</td>
                                     <td className="py-3 px-4 border-b">{mpp.divName}</td>
+                                    <td className="py-3 px-4 border-b">{mpp.deptName}</td> 
+                                    <td className="py-3 px-4 border-b">{mpp.secName}</td>
                                     <td className="py-3 px-4 border-b">{mpp.compName}</td>
                                     <td className="py-3 px-4 border-b">{mpp.slot}</td>
                                     <td className="py-3 px-4 border-b">{mpp.exist}</td>
@@ -301,6 +313,26 @@ const MPPTable = () => {
                             />
                         </div>
                         <div className="mb-4">
+                            <label className="block text-gray-700">Job</label>
+                            <input
+                                type="text"
+                                name="posName"
+                                value={editData.jobName}
+                                onChange={handleEditChange}
+                                className="border border-gray-300 rounded-lg px-2 py-1 w-full"
+                            />
+                        </div>
+                        <div className="mb-4">
+                            <label className="block text-gray-700">Division</label>
+                            <input
+                                type="text"
+                                name="divName"
+                                value={editData.divName}
+                                onChange={handleEditChange}
+                                className="border border-gray-300 rounded-lg px-2 py-1 w-full"
+                            />
+                        </div>
+                        <div className="mb-4">
                             <label className="block text-gray-700">Department</label>
                             <input
                                 type="text"
@@ -316,16 +348,6 @@ const MPPTable = () => {
                                 type="text"
                                 name="secName"
                                 value={editData.secName}
-                                onChange={handleEditChange}
-                                className="border border-gray-300 rounded-lg px-2 py-1 w-full"
-                            />
-                        </div>
-                        <div className="mb-4">
-                            <label className="block text-gray-700">Division</label>
-                            <input
-                                type="text"
-                                name="divName"
-                                value={editData.divName}
                                 onChange={handleEditChange}
                                 className="border border-gray-300 rounded-lg px-2 py-1 w-full"
                             />

@@ -11,21 +11,22 @@ const getAllPositions = () => {
                     d.deptId,
                     d.deptName,
                     dv.divName,
-                    c.compName
-                    FROM position as p
-                    LEFT JOIN job as j 
+                    c.compName,
+                    j.jobName
+                    FROM position AS p
+                    LEFT JOIN job AS j 
                         ON p.jobId = j.jobId
-                    LEFT JOIN level as l
+                    LEFT JOIN level AS l
                         ON j.levelId = l.levelId
-                    LEFT JOIN section as s
+                    LEFT JOIN section AS s
                         ON p.secId = s.secId
-                    LEFT JOIN department as d
+                    LEFT JOIN department AS d
                         ON s.deptId = d.deptId
-                    LEFT JOIN division as dv
+                    LEFT JOIN division AS dv
                         ON d.divId = dv.divId
-                    LEFT JOIN directory as dr
+                    LEFT JOIN directory AS dr
                         ON dv.dirId = dr.dirId
-                    LEFT JOIN company as c
+                    LEFT JOIN company AS c
                         ON dr.compId = c.compId
                     ORDER BY
                         p.posName ASC
