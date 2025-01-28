@@ -8,7 +8,7 @@ const MPPPage = () => {
         <div>
             <div className="flex flex-col min-h-screen bg-gray-50">
                 <Navbar/>
-                <div className="flex-grow container mx-auto py-8">
+                <div className="flex-grow mx-auto py-8">
                     <MPPTable/>
                 </div>
                 <Footer />

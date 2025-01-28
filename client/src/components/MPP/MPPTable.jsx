@@ -88,14 +88,14 @@ const MPPTable = () => {
         const worksheet = workbook.addWorksheet("MPP Data");
 
         // Add headers
-        const headerRow = worksheet.addRow(["ID", "Position", "Job", "Department", "Sub-Department", "Unit", "Company", "Slot", "Exist", "Dev"]);
+        const headerRow = worksheet.addRow(["ID", "Position", "Job", "Level", "Department", "Sub-Department", "Unit", "Company", "Slot", "Exist", "Dev"]);
         headerRow.eachCell((cell) => {
             cell.font = { bold: true };
         });
 
         // Add data
         filteredData.forEach((mpp) => {
-            worksheet.addRow([mpp.posId, mpp.posName, mpp.jobName, mpp.divName, mpp.deptName, mpp.secName, mpp.compName]);
+            worksheet.addRow([mpp.posId, mpp.posName, mpp.jobName, mpp.levelCode, mpp.divName, mpp.deptName, mpp.secName, mpp.compName]);
         });
 
         // Generate Excel file and trigger download
@@ -137,8 +137,8 @@ const MPPTable = () => {
     };
 
     return (
-        <div className="container mx-auto py-8 flex">
-            <div className="w-1/6 p-4 bg-gray-100 rounded-lg shadow-md">
+        <div className="flex">
+            <div className="p-4 bg-gray-100 rounded-lg shadow-md mb-8 w-1/6 ml-4">
                 <h2 className="text-2xl font-bold mb-4 text-gray-800">Filters</h2>
                 <div className="mb-4">
                     <input
@@ -147,7 +147,7 @@ const MPPTable = () => {
                         placeholder="Filter ID"
                         value={filters.posId}
                         onChange={handleFilterChange}
-                        className="border border-gray-300 rounded-lg px-2 py-1 w-full mb-2"
+                        className="border border-gray-300 rounded-lg px-2 py-1 mb-2 w-full"
                     />
                     <input
                         type="text"
@@ -155,7 +155,7 @@ const MPPTable = () => {
                         placeholder="Filter Position"
                         value={filters.posName}
                         onChange={handleFilterChange}
-                        className="border border-gray-300 rounded-lg px-2 py-1 w-full mb-2"
+                        className="border border-gray-300 rounded-lg px-2 py-1 mb-2 w-full"
                     />
                     <input
                         type="text"
@@ -163,31 +163,31 @@ const MPPTable = () => {
                         placeholder="Filter Job"
                         value={filters.jobName}
                         onChange={handleFilterChange}
-                        className="border border-gray-300 rounded-lg px-2 py-1 w-full mb-2"
+                        className="border border-gray-300 rounded-lg px-2 py-1 mb-2 w-full"
                     />
                     <input
                         type="text"
                         name="deptName"
-                        placeholder="Filter Sub-Department"
+                        placeholder="Filter Department"
                         value={filters.deptName}
                         onChange={handleFilterChange}
-                        className="border border-gray-300 rounded-lg px-2 py-1 w-full mb-2"
+                        className="border border-gray-300 rounded-lg px-2 py-1 mb-2 w-full"
                     />
                     <input
                         type="text"
                         name="secName"
-                        placeholder="Filter Unit"
+                        placeholder="Filter Section"
                         value={filters.secName}
                         onChange={handleFilterChange}
-                        className="border border-gray-300 rounded-lg px-2 py-1 w-full mb-2"
+                        className="border border-gray-300 rounded-lg px-2 py-1 mb-2 w-full"
                     />
                     <input
                         type="text"
                         name="divName"
-                        placeholder="Filter Department"
+                        placeholder="Filter Division"
                         value={filters.divName}
                         onChange={handleFilterChange}
-                        className="border border-gray-300 rounded-lg px-2 py-1 w-full mb-2"
+                        className="border border-gray-300 rounded-lg px-2 py-1 mb-2 w-full"
                     />
                     <input
                         type="text"
@@ -195,7 +195,7 @@ const MPPTable = () => {
                         placeholder="Filter Company"
                         value={filters.compName}
                         onChange={handleFilterChange}
-                        className="border border-gray-300 rounded-lg px-2 py-1 w-full mb-2"
+                        className="border border-gray-300 rounded-lg px-2 py-1 mb-2 w-full"
                     />
                 </div>
                 <div className="mb-4">
@@ -221,7 +221,7 @@ const MPPTable = () => {
                     </button>
                 </div>
             </div>
-            <div className="w-5/6 p-4">
+            <div className="w-full p-4">
                 <h1 className="text-3xl font-bold mb-6 text-center text-gray-800">Manpower Planning Table</h1>
                 <div className="overflow-x-auto">
                     <table className="min-w-full bg-white border border-gray-300 rounded-lg shadow-md">
@@ -318,7 +318,7 @@ const MPPTable = () => {
                             <label className="block text-gray-700">Job</label>
                             <input
                                 type="text"
-                                name="posName"
+                                name="jobName"
                                 value={editData.jobName}
                                 onChange={handleEditChange}
                                 className="border border-gray-300 rounded-lg px-2 py-1 w-full"
