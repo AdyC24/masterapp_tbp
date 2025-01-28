@@ -5,7 +5,7 @@ const getAllPositions = () => {
                     p.posId,
                     p.posName,
                     l.levelId,  
-                    l.levelName,                  
+                    l.levelCode,                  
                     s.secId,
                     s.secName,
                     d.deptId,

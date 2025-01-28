@@ -230,6 +230,7 @@ const MPPTable = () => {
                                 <th className="py-3 px-4 border-b text-left text-gray-700 font-semibold">ID</th>
                                 <th className="py-3 px-4 border-b text-left text-gray-700 font-semibold">Position</th>
                                 <th className="py-3 px-4 border-b text-left text-gray-700 font-semibold">Job</th>
+                                <th className="py-3 px-4 border-b text-left text-gray-700 font-semibold">Level</th>
                                 <th className="py-3 px-4 border-b text-left text-gray-700 font-semibold">Department</th>
                                 <th className="py-3 px-4 border-b text-left text-gray-700 font-semibold">Sub-Department</th>
                                 <th className="py-3 px-4 border-b text-left text-gray-700 font-semibold">Unit</th>
@@ -246,6 +247,7 @@ const MPPTable = () => {
                                     <td className="py-3 px-4 border-b">{mpp.posId}</td>
                                     <td className="py-3 px-4 border-b">{mpp.posName}</td>
                                     <td className="py-3 px-4 border-b">{mpp.jobName}</td>
+                                    <td className="py-3 px-4 border-b">{mpp.levelCode}</td>
                                     <td className="py-3 px-4 border-b">{mpp.divName}</td>
                                     <td className="py-3 px-4 border-b">{mpp.deptName}</td> 
                                     <td className="py-3 px-4 border-b">{mpp.secName}</td>
