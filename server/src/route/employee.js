@@ -12,6 +12,9 @@ router.get('/:nik', employeeController.getEmployeeByNik)
 // CREATE New Employee
 router.post('/', employeeController.createNewEmployee)
  
+// CREATE Bunch of Employees
+router.post('/bunch', employeeController.createBunchOfEmployees)
+
 // EDIT Employee
 router.patch('/:empId', employeeController.editEmployee)
 

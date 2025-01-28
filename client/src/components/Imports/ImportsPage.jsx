@@ -22,10 +22,30 @@ const ImportsPage = () => {
             const worksheet = workbook.getWorksheet(1);
             const jsonData = [];
             worksheet.eachRow((row, rowNumber) => {
+                if (rowNumber === 1) return; // Skip the header row
                 const rowData = row.values.filter(value => value !== null);
+
+                // Concatenate data in array indices 14, 15, and 16
+                if (rowData.length > 16) {
+                    rowData[14] = `${rowData[14]}, RT/RW. ${rowData[15]}/${rowData[16]}`;
+                    rowData.splice(15, 2); // Remove the now redundant indices
+                }
+
                 jsonData.push(rowData);
             });
             console.log(`Importing ${dataType}`, jsonData);
+
+            // Send data to backend
+            try {
+                const response = await axios.post('http://localhost:4000/employee/bunch', {
+                    dataType,
+                    data: jsonData
+                });
+                console.log('Data successfully sent to backend:', response.data);
+            } catch (error) {
+                console.error('Error sending data to backend:', error);
+            }
+
         };
         reader.readAsArrayBuffer(selectedFile);
     };

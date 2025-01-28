@@ -163,9 +163,59 @@ const createNewEmployee = async (body) => {
     }
 }
 
+const createBunchOfEmployees = async (data) => {
+    const insertEmployeeQuery = `
+        INSERT INTO employee 
+            (persId, posId, locId, payId, empNik, empResidence, empJoinDate, empWorkingDate, empTerminationDate, empTerminationReason, empStatus, empWorkingStatus) 
+        VALUES 
+            (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            `;
+    const insertPersonalQuery = `
+        INSERT INTO personal 
+            (famId, payId, perNik, persName, persBirthPlace, persBirthDate, persGender, perReligion, persAddress, persKelurahan, persKecamatan, persKota, persProv, persPosNum, persPhoneNum, persEmail, persEdu, persEmergencyNum, persEmergencyContact, persEmergencyRelative)
+        VALUES
+            (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) 
+            `;
+    const insertFamilyQuery = `
+        INSERT INTO family
+            (famNum, famSpouseName, famSpouseGender, famSpouseBirthPlace, famSpouseBirthDate, famFirstKidName, famFirstKidGender, famFirstKidBirthPlace, famFirstKidBirthDate, famSecondKidName, famSecondKidGender, famSecondKidBirthPlace, famSecondKidBirthDate, famThirdKidName, famThirdKidGender, famThirdKidBirthPlace, famThirdKidBirthDate, famFatherName, famMotherName, famMaritalStatus)
+        VALUES
+            (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            `;
+
+    const connection = await dbPool.getConnection();
+    console.log('Database connection established:', connection.threadId);
+    
+    try {  
+        await connection.beginTransaction();
+
+        for (let i = 0; i < data.length; i++) {
+
+            const [familyResult] = await connection.execute(insertFamilyQuery, [null, data[i][5], null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, data[i][16]]);
+            const famId = familyResult.insertId;
+
+            const [personalResult] = await connection.execute(insertPersonalQuery, [famId, 0, data[i][4], data[i][4], data[i][8], data[i][9], data[i][7], null, data[i][14], data[i][13], data[i][12], data[i][11], data[i][10], null, data[i][17], data[i][18], "Others", null, null, null]);
+            const persId = personalResult.insertId;
+        
+            await connection.execute(insertEmployeeQuery, [[persId, data[i][12], data[i][13], null, data[i][14], null, data[i][15], data[i][15], null, null, 'Active', null]]);
+        }
+        
+        await connection.commit();
+        return {success: true, message: 'Employee created successfully'};
+    }
+    catch (error) {
+        await connection.rollback();
+        return {success: false, message: 'Failed to create employee', error};
+    }
+    finally {
+        connection.release();
+    }
+}
+
     
 module.exports = {
     getAllEmployees, 
     createNewEmployee,
+    createBunchOfEmployees,
     getEmployeeByNik
 }

@@ -58,6 +58,26 @@ const createNewEmployee = async (req, res) => {
     }
 };
 
+const createBunchOfEmployees = async (req, res) => {
+    const { dataType, data } = req.body;
+    console.log('Received data:', dataType, data);
+
+    try {
+        if (dataType === 'Employee Data') {
+            await EmployeeModel.createBunchOfEmployees(data);
+        } 
+        res.json({
+            message: 'Data successfully saved to database'
+        });
+    } catch (error) {
+        console.error('Error saving data to database:', error);
+        res.status(500).json({
+            message: 'Error saving data to database',
+            error: error.message
+        });
+    }
+}
+
 const editEmployee = (req, res) => {
 
 }
@@ -69,6 +89,7 @@ const deleteEmployee = (req, res) => {
 module.exports = {
     getAllEmployees,
     createNewEmployee,
+    createBunchOfEmployees,
     editEmployee,
     deleteEmployee, 
     getEmployeeByNik
