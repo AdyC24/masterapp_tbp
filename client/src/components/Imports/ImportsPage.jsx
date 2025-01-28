@@ -21,9 +21,32 @@ const ImportsPage = () => {
             await workbook.xlsx.load(event.target.result);
             const worksheet = workbook.getWorksheet(1);
             const jsonData = [];
-            worksheet.eachRow((row, rowNumber) => {
-                if (rowNumber === 1) return; // Skip the header row
+
+            const formatDate = (date) => {
+                if (!date) return null;
+                const d = new Date(date);
+                return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+            };
+
+            for (let rowNumber = 2; rowNumber <= worksheet.rowCount; rowNumber++) {
+                const row = worksheet.getRow(rowNumber);
                 const rowData = row.values.filter(value => value !== null);
+
+                // Fetch location data if locId exists
+                if (rowData[2]) {
+                    try {
+                        const response = await axios.get(`http://localhost:4000/location/${rowData[2]}`); // Adjust the URL to your backend endpoint
+                        const location = response.data.data; // Access the data property
+                        rowData.push(location.locId);
+                    } catch (error) {
+                        console.error('Error fetching location data:', error);
+                        continue; // Skip this row if location data fetch fails
+                    }
+                }
+
+                // Format date values in array indices [0] and [9]
+                if (rowData[0]) rowData[0] = formatDate(rowData[0]);
+                if (rowData[9]) rowData[9] = formatDate(rowData[9]);
 
                 // Concatenate data in array indices 14, 15, and 16
                 if (rowData.length > 16) {
@@ -32,7 +55,7 @@ const ImportsPage = () => {
                 }
 
                 jsonData.push(rowData);
-            });
+            }
             console.log(`Importing ${dataType}`, jsonData);
 
             // Send data to backend
@@ -45,7 +68,6 @@ const ImportsPage = () => {
             } catch (error) {
                 console.error('Error sending data to backend:', error);
             }
-
         };
         reader.readAsArrayBuffer(selectedFile);
     };

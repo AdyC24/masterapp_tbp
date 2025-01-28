@@ -20,6 +20,7 @@ const contractTypeRoute = require('./src/route/contracyType');
 const levelRoute = require('./src/route/level');
 const sectionRoute = require('./src/route/section');
 const pohRoute = require('./src/route/poh');
+const locationRoute = require('./src/route/location');
 
 const app = express();
 
@@ -54,6 +55,7 @@ app.use('/position', positionRoute);
 app.use('/pic', picRoute);
 app.use('/contractType', contractTypeRoute);
 app.use('/poh', pohRoute)
+app.use('/location', locationRoute);
 
 
 app.use('/user', userRoute);

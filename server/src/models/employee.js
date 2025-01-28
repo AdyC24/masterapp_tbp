@@ -166,9 +166,9 @@ const createNewEmployee = async (body) => {
 const createBunchOfEmployees = async (data) => {
     const insertEmployeeQuery = `
         INSERT INTO employee 
-            (persId, posId, locId, payId, empNik, empResidence, empJoinDate, empWorkingDate, empTerminationDate, empTerminationReason, empStatus, empWorkingStatus) 
+            (persId, posId, pohId, locId, payId, empNik, empResidence, empJoinDate, empWorkingDate, empTerminationDate, empTerminationReason, empStatus, empWorkingStatus) 
         VALUES 
-            (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)   
             `;
     const insertPersonalQuery = `
         INSERT INTO personal 
@@ -190,25 +190,38 @@ const createBunchOfEmployees = async (data) => {
         await connection.beginTransaction();
 
         for (let i = 0; i < data.length; i++) {
+            console.log(`Processing row ${i + 1}`);
 
-            const [familyResult] = await connection.execute(insertFamilyQuery, [null, data[i][5], null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, data[i][16]]);
+
+            // Log data for debugging
+            console.log('Family Data:', data[i][5], data[i][16]);
+            console.log('Personal Data:', data[i][4], data[i][6], data[i][8], data[i][9], data[i][7], data[i][14], data[i][13], data[i][12], data[i][11], data[i][10], data[i][17], data[i][18]);
+            console.log('Employee Data:', data[i][2], data[i][15], data[i][22], data[i][1], data[i][0]);
+
+            const [familyResult] = await connection.execute(insertFamilyQuery, [data[i][5], null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, data[i][16]]);
             const famId = familyResult.insertId;
+            console.log(`Inserted family with ID: ${famId}`);
 
-            const [personalResult] = await connection.execute(insertPersonalQuery, [famId, 0, data[i][4], data[i][4], data[i][8], data[i][9], data[i][7], null, data[i][14], data[i][13], data[i][12], data[i][11], data[i][10], null, data[i][17], data[i][18], "Others", null, null, null]);
+            const [personalResult] = await connection.execute(insertPersonalQuery, [famId, 0, data[i][4], data[i][6], data[i][8], data[i][9], data[i][7], null, data[i][14], data[i][13], data[i][12], data[i][11], data[i][10], null, data[i][17], data[i][18], "Others", null, null, null]);
             const persId = personalResult.insertId;
+            console.log(`Inserted personal with ID: ${persId}`);
         
-            await connection.execute(insertEmployeeQuery, [[persId, data[i][12], data[i][13], null, data[i][14], null, data[i][15], data[i][15], null, null, 'Active', null]]);
+            await connection.execute(insertEmployeeQuery, [persId, data[i][2], data[i][15], data[i][22], null, data[i][1], null, data[i][0], data[i][0], null, null, 'Active', null]);
+            console.log(`Inserted employee with personal ID: ${persId}`);
         }
-        
+
         await connection.commit();
+        console.log('Transaction committed');
         return {success: true, message: 'Employee created successfully'};
     }
     catch (error) {
+        console.error('Error during transaction:', error);
         await connection.rollback();
         return {success: false, message: 'Failed to create employee', error};
     }
     finally {
         connection.release();
+        console.log('Database connection released');
     }
 }
 
