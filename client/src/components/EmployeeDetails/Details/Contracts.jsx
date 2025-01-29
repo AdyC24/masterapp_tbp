@@ -59,6 +59,14 @@ const Contracts = () => {
         }
     };
 
+    const handleGenerateContract = () => { 
+        if(!signature.signature) {
+            alert("Please upload your signature first")
+        } else {
+            // Generate contract
+        }
+    };
+
     
     return(
         <div id="personalContract">
@@ -113,7 +121,8 @@ const Contracts = () => {
                 </table>
             </div>
             <div className="flex justify-center mt-8">
-                <button className="bg-gradient-to-r from-green-500 to-green-700 text-white font-semibold py-2 px-6 rounded-full shadow-lg transform transition duration-300 hover:scale-105 hover:shadow-xl">
+                <button className="bg-gradient-to-r from-green-500 to-green-700 text-white font-semibold py-2 px-6 rounded-full shadow-lg transform transition duration-300 hover:scale-105 hover:shadow-xl"
+                onClick={handleGenerateContract}>
                     Generate New Contract
                 </button>
             </div>
