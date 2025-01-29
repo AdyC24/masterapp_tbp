@@ -128,10 +128,10 @@ const createNewEmployee = async (body) => {
     `;
 
     const insertEmployeeQuery = `
-        INSERT INTO employee 
-            (persId, posId, locId, payId, empNik, empResidence, empJoinDate, empWorkingDate, empTerminationDate, empTerminationReason, empStatus, empWorkingStatus) 
+        I INSERT INTO employee 
+            (persId, posId, pohId, locId, payId, empNik, empResidence, empJoinDate, empWorkingDate, empTerminationDate, empTerminationReason, empStatus, empWorkingStatus, signature) 
         VALUES 
-            (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)   
+            (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)    
     `;
 
     const connection = await dbPool.getConnection();
@@ -150,7 +150,7 @@ const createNewEmployee = async (body) => {
         const persId = personalResult.insertId;   
 
         // Insert employee
-        await connection.execute(insertEmployeeQuery, [persId, position, locId, null, nik, null, doh, doh, null, null, 'Active', null]);
+        await connection.execute(insertEmployeeQuery, [persId, position, locId, null, nik, null, doh, doh, null, null, 'Active', null, null]);
 
         await connection.commit();
         return {success: true, 
@@ -166,9 +166,9 @@ const createNewEmployee = async (body) => {
 const createBunchOfEmployees = async (data) => {
     const insertEmployeeQuery = `
         INSERT INTO employee 
-            (persId, posId, pohId, locId, payId, empNik, empResidence, empJoinDate, empWorkingDate, empTerminationDate, empTerminationReason, empStatus, empWorkingStatus) 
+            (persId, posId, pohId, locId, payId, empNik, empResidence, empJoinDate, empWorkingDate, empTerminationDate, empTerminationReason, empStatus, empWorkingStatus, signature) 
         VALUES 
-            (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)   
+            (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)   
             `;
     const insertPersonalQuery = `
         INSERT INTO personal 
@@ -206,7 +206,7 @@ const createBunchOfEmployees = async (data) => {
             const persId = personalResult.insertId;
             console.log(`Inserted personal with ID: ${persId}`);
         
-            await connection.execute(insertEmployeeQuery, [persId, data[i][2], data[i][15], data[i][22], null, data[i][1], null, data[i][0], data[i][0], null, null, 'Active', null]);
+            await connection.execute(insertEmployeeQuery, [persId, data[i][2], data[i][15], data[i][22], null, data[i][1], null, data[i][0], data[i][0], null, null, 'Active', null, null]);
             console.log(`Inserted employee with personal ID: ${persId}`);
         }
 
@@ -225,10 +225,24 @@ const createBunchOfEmployees = async (data) => {
     }
 }
 
-    
+const updateEmployeeSignature = async (nik, signature) => {
+    const updateQuery = `
+        UPDATE employee
+        SET signature = ?
+        WHERE empNik = ?
+    `;
+
+    const [result] = await dbPool.execute(updateQuery, [signature, nik]);
+
+    if (result.affectedRows === 0) {
+        throw new Error('Employee not found');
+    }
+};
+
 module.exports = {
     getAllEmployees, 
     createNewEmployee,
     createBunchOfEmployees,
-    getEmployeeByNik
+    getEmployeeByNik,
+    updateEmployeeSignature
 }

@@ -22,10 +22,47 @@ const Contracts = () => {
         fetchContract();
     }, [fetchContract]);
 
+    const handleFileUpload = (event) => {
+        const file = event.target.files[0];
+        if (file) {
+            const validExtensions = ['jpg', 'jpeg', 'png'];
+            const fileExtension = file.name.split('.').pop().toLowerCase();
+            if (validExtensions.includes(fileExtension)) {
+                const formData = new FormData();
+                formData.append('signature', file);
+                axios.patch(`http://localhost:4000/employee/${nik}/signature`, formData)
+                    .then(response => {
+                        console.log('Signature uploaded:', response.data);
+                    })
+                    .catch(error => {
+                        console.error('Error uploading signature:', error);
+                    });
+            } else {
+                console.error('Invalid file type. Please upload an image file.');
+            }
+        }
+    };
+
     
     return(
         <div id="personalContract">
-            <h2 className="text-2xl font-semibold mb-4">Contract Information</h2>
+            <div className="flex justify-between items-center mb-8">
+                <h2 className="text-2xl font-semibold">Contract Information</h2>
+                <div>
+                    <input
+                        type="file"
+                        id="fileUpload"
+                        className="hidden"
+                        onChange={handleFileUpload}
+                    />
+                    <label
+                        htmlFor="fileUpload"
+                        className="bg-blue-500 hover:bg-blue-700 text-white text-sm font-bold py-2 px-4 rounded cursor-pointer"
+                    >
+                        Signature
+                    </label>
+                </div>
+            </div>
             <div className="overflow-x-auto shadow-lg rounded-lg mb-8">
                 <table className="min-w-full bg-white border-collapse">
                     <thead>

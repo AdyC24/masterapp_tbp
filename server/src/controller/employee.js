@@ -1,3 +1,4 @@
+const path = require('path');
 const EmployeeModel = require('../models/employee')
 const LocationModel = require('../models/location')
 const userController = require('../controller/user')
@@ -78,19 +79,37 @@ const createBunchOfEmployees = async (req, res) => {
     }
 }
 
-const editEmployee = (req, res) => {
+const updateEmployeeSignature = async (req, res) => {
+    const { nik } = req.params;
+    const { file } = req;
 
-}
+    if (!file) {
+        return res.status(400).json({
+            message: 'No file uploaded'
+        });
+    }
 
-const deleteEmployee = (req, res) => {
+    const signature = path.join('uploads/signature', file.filename);
+    console.log('Signature:', signature);
 
+    try {
+        await EmployeeModel.updateEmployeeSignature(nik, file.filename);
+        res.json({
+            message: 'Employee signature updated'
+        });
+    } catch (error) {
+        console.error('Error updating employee signature:', error);
+        res.status(500).json({
+            message: 'Error updating employee signature',
+            error: error.message
+        });
+    }
 }
 
 module.exports = {
     getAllEmployees,
+    getEmployeeByNik,
     createNewEmployee,
     createBunchOfEmployees,
-    editEmployee,
-    deleteEmployee, 
-    getEmployeeByNik
-}
+    updateEmployeeSignature
+};
