@@ -37,6 +37,9 @@ router.get('/', employeeController.getAllEmployees);
 // GET Employee by Id
 router.get('/:nik', employeeController.getEmployeeByNik);
 
+// GET Employee by Id
+router.get('/:nik/signature', employeeController.getSignatureByNik);
+
 // CREATE New Employee
 router.post('/', employeeController.createNewEmployee);
 

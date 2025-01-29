@@ -5,6 +5,7 @@ import { formatDate } from "./dateUtils";
 
 const Contracts = () => {
     const [contracts, setContracts] = useState([]);
+    const [signature, setSignature] = useState({});
 
     const { nik } = useParams()
 
@@ -22,6 +23,22 @@ const Contracts = () => {
         fetchContract();
     }, [fetchContract]);
 
+    const fetchSignatue = useCallback(async () => {
+        try {
+            const signature = await axios.get(`http://localhost:4000/employee/${nik}/signature`);
+            if (JSON.stringify(signature.data.data) !== JSON.stringify(signature)) {
+                setSignature(signature.data.data);
+                console.log(signature.data.data);
+            }
+        } catch (error) {
+            console.error("Error fetching signature", error);
+        }
+    }, [nik]);
+
+    useEffect(() => {
+        fetchSignatue();
+    }, [fetchSignatue]);
+
     const handleFileUpload = (event) => {
         const file = event.target.files[0];
         if (file) {
@@ -33,6 +50,7 @@ const Contracts = () => {
                 axios.patch(`http://localhost:4000/employee/${nik}/signature`, formData)
                     .then(response => {
                         console.log('Signature uploaded:', response.data);
+                        fetchSignatue(); // Refresh signature data after upload
                     })
                     .catch(error => {
                         console.error('Error uploading signature:', error);
@@ -48,7 +66,10 @@ const Contracts = () => {
         <div id="personalContract">
             <div className="flex justify-between items-center mb-8">
                 <h2 className="text-2xl font-semibold">Contract Information</h2>
-                <div>
+                <div className="flex items-center">
+                    <span className={`mr-4 px-2 py-1 rounded ${signature.signature ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
+                        {signature.signature ? "Signature is available" : "Signature is not available"}
+                    </span>
                     <input
                         type="file"
                         id="fileUpload"
@@ -59,7 +80,7 @@ const Contracts = () => {
                         htmlFor="fileUpload"
                         className="bg-blue-500 hover:bg-blue-700 text-white text-sm font-bold py-2 px-4 rounded cursor-pointer"
                     >
-                        Signature
+                        Upload New Signature
                     </label>
                 </div>
             </div>

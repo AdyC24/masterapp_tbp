@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import { formatDate, genderReveal } from "./dateUtils";
 
 
-const Personal = () => {
+const Personal = () => { 
     const [personal, setPersonals] = useState([])
 
     const { nik } = useParams()

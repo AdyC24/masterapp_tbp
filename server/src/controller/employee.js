@@ -1,9 +1,6 @@
 const path = require('path');
 const EmployeeModel = require('../models/employee')
 const LocationModel = require('../models/location')
-const userController = require('../controller/user')
-const securityMiddleware = require('../middleware/security')
-const generateRandomString = require('../middleware/security')
 
 const getAllEmployees = async (req, res) => {
     try {
@@ -34,6 +31,23 @@ const getEmployeeByNik = async (req, res) => {
             message: "Server is error",
             errMessage: error.message
         })
+    }
+}
+
+const getSignatureByNik = async (req, res) => {
+    const { nik } = req.params;
+
+    try {
+        const [data] = await EmployeeModel.getSignatureByNik(nik);
+        res.json({
+            message: 'Get employee signature',
+            data: data[0]
+        });
+    } catch (error) {
+        res.status(500).json({
+            message: 'Server error',
+            error: error.message
+        });
     }
 }
 
@@ -109,6 +123,7 @@ const updateEmployeeSignature = async (req, res) => {
 module.exports = {
     getAllEmployees,
     getEmployeeByNik,
+    getSignatureByNik,
     createNewEmployee,
     createBunchOfEmployees,
     updateEmployeeSignature
