@@ -28,7 +28,6 @@ const Contracts = () => {
             const signature = await axios.get(`http://localhost:4000/employee/${nik}/signature`);
             if (JSON.stringify(signature.data.data) !== JSON.stringify(signature)) {
                 setSignature(signature.data.data);
-                console.log(signature.data.data);
             }
         } catch (error) {
             console.error("Error fetching signature", error);
@@ -49,7 +48,6 @@ const Contracts = () => {
                 formData.append('signature', file);
                 axios.patch(`http://localhost:4000/employee/${nik}/signature`, formData)
                     .then(response => {
-                        console.log('Signature uploaded:', response.data);
                         fetchSignatue(); // Refresh signature data after upload
                     })
                     .catch(error => {
