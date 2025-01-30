@@ -63,7 +63,7 @@ const createNewContract = async (req, res) => {
                 message: 'Employee not found'
             });
         }
-        const { compId, empId } = employeeResult[0];
+        const { compId, empId, empJoinDate } = employeeResult[0];
 
         // Fetch last No Contract from the database
         const [lastContractResult] = await ContractModel.getLastContractNo({ compId, contractType: "PKWT 1", year: new Date().getFullYear() });
@@ -71,14 +71,13 @@ const createNewContract = async (req, res) => {
         const newContractNo = (lastContractNo + 1).toString().padStart(3, '0'); // Format with leading zeros
 
         // Add 6 months to the original date
-        const originalDate = new Date(); // Replace with the actual original date
         const addMonths = (date, months) => {
             const d = new Date(date);
             d.setMonth(d.getMonth() + months);
             return d;
         };
-        const endContractDate = addMonths(originalDate, 6);
-        endContractDate.setDate(originalDate.getDate() - 1);
+        const endContractDate = addMonths(empJoinDate, 6);
+        endContractDate.setDate(empJoinDate.getDate() - 1);
 
         const contract = {
             empId: empId, // Use the correct empId
@@ -86,7 +85,7 @@ const createNewContract = async (req, res) => {
             compId: compId,
             cgId: null, // This will be set after inserting into contract_generator
             contractNo: newContractNo,
-            contractStart: originalDate,
+            contractStart: empJoinDate,
             contractEnd: endContractDate,
             contractToken: crypto.randomBytes(16).toString('hex'),
             contractStatus: 'draft'
