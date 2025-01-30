@@ -14,7 +14,7 @@ router.get('/dept/:dept', contractController.getAllContractByDept)
 router.get('/', contractController.getAllContracts)
 
 // CREATE New Contract
-router.post('/', contractController.createNewContract)
+router.post('/:nik', contractController.createNewContract)
 
 // EDIT Contract
 router.patch('/:contId', contractController.editContract)

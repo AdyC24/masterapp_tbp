@@ -121,6 +121,26 @@ const getSignatureByNik = (nik) => {
     return dbPool.execute(SQLQuery, [nik]);
 }
 
+const getCompIdByNik = (nik) => {
+    const SQLQuery = `
+                    SELECT
+                        compId,
+                        empId,
+                        empJoinDate
+                    FROM
+                        level
+                    JOIN
+                        job ON level.levelId = job.levelId
+                    JOIN
+                        position ON job.jobId = position.jobId
+                    JOIN
+                        employee ON position.posId = employee.posId
+                    WHERE
+                        empNik = ?
+                    `;
+    return dbPool.execute(SQLQuery, [nik]);
+}
+
 const createNewEmployee = async (body) => {
 
     const { ktpNo, name, gender, birthPlace, birthDate, address, village, district, city, mariageStatus, phoneNumber, email, nik, position, doh, province, locId } = body
@@ -255,6 +275,7 @@ module.exports = {
     getAllEmployees, 
     getEmployeeByNik,
     getSignatureByNik,
+    getCompIdByNik,
     createNewEmployee,
     createBunchOfEmployees,
     updateEmployeeSignature

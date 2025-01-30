@@ -59,11 +59,18 @@ const Contracts = () => {
         }
     };
 
-    const handleGenerateContract = () => { 
+    const handleGenerateContract = async () => { 
         if(!signature.signature) {
             alert("Please upload your signature first")
         } else {
-            // Generate contract
+            try {
+                const response = await axios.post(`http://localhost:4000/contract/${nik}`);
+                if (response.status === 201) {
+                    fetchContract();
+                }
+            } catch (error) {
+                console.error("Error generating contract", error);
+            }
         }
     };
 
