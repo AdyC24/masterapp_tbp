@@ -1,6 +1,7 @@
 const { end } = require('../config/database');
 const ContractModel = require('../models/contract')
 const EmployeeModel = require('../models/employee')
+const crypto = require('crypto');
 
 const getAllContracts = async (req, res) => {
     try {
@@ -54,59 +55,56 @@ const getAllContractByDept = async (req, res) => {
 const createNewContract = async (req, res) => {
     const { nik } = req.params;
 
-    // Function to add months to a date
-    const addMonths = (date, months) => {
-        const d = new Date(date);
-        d.setMonth(d.getMonth() + months);
-        return d;
-    };
-
     try {
-        // Fetch compId from the database
-        const [compIdResult] = await EmployeeModel.getCompIdByNik(nik);
-        if (!compId) {
-            return res.status(400).json({
+        // Fetch compId and empId from the database
+        const [employeeResult] = await EmployeeModel.getCompIdByNik(nik);
+        if (employeeResult.length === 0) {
+            return res.status(404).json({
                 message: 'Employee not found'
             });
         }
-        const compId = compIdResult[0].compId;
-        const empId = compIdResult[0].empId;
-        const empJoinDate = compIdResult[0].empJoinDate;
+        const { compId, empId } = employeeResult[0];
 
         // Fetch last No Contract from the database
-        const [lastContract] = await ContractModel.getLastContractNo(compId,"PKWT 1", new Date().getFullYear());
-        const lastContractNo = lastContract[0].contractNo;
-
-        if (lastContractNo === null) {
-            lastContractNo = 1;
-        }
+        const [lastContractResult] = await ContractModel.getLastContractNo({ compId, contractType: "PKWT 1", year: new Date().getFullYear() });
+        const lastContractNo = lastContractResult.length > 0 ? lastContractResult[0].cgNo : 0;
+        const newContractNo = (lastContractNo + 1).toString().padStart(3, '0'); // Format with leading zeros
 
         // Add 6 months to the original date
+        const originalDate = new Date(); // Replace with the actual original date
+        const addMonths = (date, months) => {
+            const d = new Date(date);
+            d.setMonth(d.getMonth() + months);
+            return d;
+        };
         const endContractDate = addMonths(originalDate, 6);
-
-        // Set the day to one day before the original day
         endContractDate.setDate(originalDate.getDate() - 1);
 
         const contract = {
-            empId: empId,
-            empJoinDate: empJoinDate,
-            endContractDate: endContractDate,
+            empId: empId, // Use the correct empId
+            contractType: 'PKWT 1', // Example contract type
             compId: compId,
-            lastContractNo: lastContractNo,
-        }
-        
-        const [data] = await ContractModel.createNewContract(contract);
+            cgId: null, // This will be set after inserting into contract_generator
+            contractNo: newContractNo,
+            contractStart: originalDate,
+            contractEnd: endContractDate,
+            contractToken: crypto.randomBytes(16).toString('hex'),
+            contractStatus: 'draft'
+        };
+
+        const data = await ContractModel.createNewContract(contract);
         res.json({
             message: 'Create new contract succeed',
             data: data
-        })
+        });
     } catch (error) {
+        console.error('Error creating new contract:', error);
         res.status(500).json({
-            message: "Server is error",
+            message: "Server error",
             errMessage: error.message
-        })
+        });
     }
-}
+};
 
 const editContract = () => {
 
