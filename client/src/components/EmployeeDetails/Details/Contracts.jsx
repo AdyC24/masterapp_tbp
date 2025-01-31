@@ -6,24 +6,25 @@ import { formatDate } from "./dateUtils";
 const Contracts = () => {
     const [contracts, setContracts] = useState([]);
     const [signature, setSignature] = useState({});
+    const [showModal, setShowModal] = useState(false);
 
-    const { nik } = useParams()
+    const { nik } = useParams();
 
     const fetchContract = useCallback(
         async () => {
             try {
                 const response = await axios.get(`http://localhost:4000/contract/${nik}`);
-                setContracts(response.data.data)
+                setContracts(response.data.data);
             } catch (error) {
-                console.error("Error fetching contract:", error)
+                console.error("Error fetching contract:", error);
             }
-        }, [nik]); 
+        }, [nik]);
 
     useEffect(() => {
         fetchContract();
     }, [fetchContract]);
 
-    const fetchSignatue = useCallback(async () => {
+    const fetchSignature = useCallback(async () => {
         try {
             const signature = await axios.get(`http://localhost:4000/employee/${nik}/signature`);
             if (JSON.stringify(signature.data.data) !== JSON.stringify(signature)) {
@@ -35,47 +36,48 @@ const Contracts = () => {
     }, [nik]);
 
     useEffect(() => {
-        fetchSignatue();
-    }, [fetchSignatue]);
+        fetchSignature();
+    }, [fetchSignature]);
 
-    const handleFileUpload = (event) => {
+    const handleFileUpload = async (event) => {
         const file = event.target.files[0];
-        if (file) {
-            const validExtensions = ['jpg', 'jpeg', 'png'];
-            const fileExtension = file.name.split('.').pop().toLowerCase();
-            if (validExtensions.includes(fileExtension)) {
-                const formData = new FormData();
-                formData.append('signature', file);
-                axios.patch(`http://localhost:4000/employee/${nik}/signature`, formData)
-                    .then(response => {
-                        fetchSignatue(); // Refresh signature data after upload
-                    })
-                    .catch(error => {
-                        console.error('Error uploading signature:', error);
-                    });
-            } else {
-                console.error('Invalid file type. Please upload an image file.');
-            }
-        }
-    };
+        const formData = new FormData();
+        formData.append('signature', file);
 
-    const handleGenerateContract = async () => { 
-        if(!signature.signature) {
-            alert("Please upload your signature first")
-        } else {
-            try {
-                const response = await axios.post(`http://localhost:4000/contract/${nik}`);
-                if (response.status === 201) {
-                    fetchContract();
+        try {
+            const response = await axios.post(`http://localhost:4000/employee/${nik}/signature`, formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
                 }
-            } catch (error) {
-                console.error("Error generating contract", error);
-            }
+            });
+            setSignature(response.data.data);
+            console.log('Signature uploaded successfully');
+        } catch (error) {
+            console.error('Error uploading signature:', error);
         }
     };
 
-    
-    return(
+    const handleGenerateContract = () => {
+        setShowModal(true);
+    };
+
+    const handleConfirmGenerateContract = async () => {
+        setShowModal(false);
+        // Add your contract generation logic here
+        try {
+            const response = await axios.post(`http://localhost:4000/contract/${nik}`);
+            console.log('Contract generated successfully:', response.data);
+            fetchContract(); // Refresh the contract list
+        } catch (error) {
+            console.error('Error generating contract:', error);
+        }
+    };
+
+    const handleCancelGenerateContract = () => {
+        setShowModal(false);
+    };
+
+    return (
         <div id="personalContract">
             <div className="flex justify-between items-center mb-8">
                 <h2 className="text-2xl font-semibold">Contract Information</h2>
@@ -117,24 +119,37 @@ const Contracts = () => {
                                 <td className="py-3 px-6 text-left">{contract.contractNo}</td>
                                 <td className="py-3 px-6 text-left">{formatDate(contract.contractStart)}</td>
                                 <td className="py-3 px-6 text-left">{formatDate(contract.contractEnd)}</td>
-                                <td className="py-3 px-6 text-left">
-                                <span className={`py-1 px-3 rounded-full text-xs ${contract.contractStatus === "Open" ? "bg-green-200 text-green-600" : "bg-red-200 text-red-600"}`}>
-                                        {contract.contractStatus} 
-                                    </span>
-                                </td>
+                                <td className="py-3 px-6 text-left">{contract.contractStatus}</td>
                             </tr>
                         ))}
                     </tbody>
                 </table>
             </div>
-            <div className="flex justify-center mt-8">
-                <button className="bg-gradient-to-r from-green-500 to-green-700 text-white font-semibold py-2 px-6 rounded-full shadow-lg transform transition duration-300 hover:scale-105 hover:shadow-xl"
-                onClick={handleGenerateContract}>
-                    Generate New Contract
+            <div className="flex justify-center">
+                <button onClick={handleGenerateContract} className="bg-green-500 hover:bg-green-700 text-white text-sm font-bold py-2 px-4 rounded">
+                    Generate Contract
                 </button>
             </div>
-        </div>       
-    )
-}
 
-export default Contracts
+            {showModal && (
+                <div className="fixed inset-0 flex items-center justify-center z-50">
+                    <div className="fixed inset-0 bg-black opacity-50"></div>
+                    <div className="bg-white p-6 rounded shadow-lg z-10">
+                        <h2 className="text-xl font-bold mb-4">Confirm Contract Generation</h2>
+                        <p>Are you sure you want to generate a new contract to PKWT 1?</p>
+                        <div className="mt-4 flex justify-end">
+                            <button onClick={handleCancelGenerateContract} className="bg-gray-500 hover:bg-gray-700 text-white text-sm font-bold py-2 px-4 rounded mr-2">
+                                Cancel
+                            </button>
+                            <button onClick={handleConfirmGenerateContract} className="bg-blue-500 hover:bg-blue-700 text-white text-sm font-bold py-2 px-4 rounded">
+                                Confirm
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
+        </div>
+    );
+};
+
+export default Contracts;

@@ -104,7 +104,7 @@ const getLastContractNo = ({ compId, contractType, year }) => {
     const SQLQuery = `
         SELECT cgNo
         FROM contract_generator
-        WHERE compId = ? AND contractType = ? AND YEAR(cgYear) = ?
+        WHERE compId = ? AND contractType = ? AND cgYear = ?
         ORDER BY cgNo DESC
         LIMIT 1
     `;

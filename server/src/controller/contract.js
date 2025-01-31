@@ -70,6 +70,7 @@ const createNewContract = async (req, res) => {
         const lastContractNo = lastContractResult.length > 0 ? lastContractResult[0].cgNo : 0;
         const newContractNo = (lastContractNo + 1).toString().padStart(3, '0'); // Format with leading zeros
 
+        
         // Add 6 months to the original date
         const addMonths = (date, months) => {
             const d = new Date(date);
@@ -78,6 +79,7 @@ const createNewContract = async (req, res) => {
         };
         const endContractDate = addMonths(empJoinDate, 6);
         endContractDate.setDate(empJoinDate.getDate() - 1);
+
 
         const contract = {
             empId: empId, // Use the correct empId
