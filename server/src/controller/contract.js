@@ -1,7 +1,8 @@
-const { end } = require('../config/database');
 const ContractModel = require('../models/contract')
 const EmployeeModel = require('../models/employee')
 const crypto = require('crypto');
+const generateContractPDF = require('../utils/pdfGenerator');
+const path = require('path');
 
 const getAllContracts = async (req, res) => {
     try {
@@ -52,6 +53,7 @@ const getAllContractByDept = async (req, res) => {
     }
 }
 
+
 const createNewContract = async (req, res) => {
     const { nik } = req.params;
 
@@ -94,9 +96,15 @@ const createNewContract = async (req, res) => {
         };
 
         const data = await ContractModel.createNewContract(contract);
+
+        // Generate PDF draft of the contract
+        const pdfFilePath = path.join(__dirname, `../../pdfs/contract_${contract.contractNo}.pdf`);
+        generateContractPDF(contract, pdfFilePath);
+
         res.json({
             message: 'Create new contract succeed',
-            data: data
+            data: data,
+            pdfPath: pdfFilePath
         });
     } catch (error) {
         console.error('Error creating new contract:', error);

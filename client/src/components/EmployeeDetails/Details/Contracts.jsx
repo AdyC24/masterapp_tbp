@@ -58,7 +58,11 @@ const Contracts = () => {
     };
 
     const handleGenerateContract = () => {
-        setShowModal(true);
+        if (signature.signature) {
+            setShowModal(true);
+        } else {
+            alert('Please upload the signature first');
+        }
     };
 
     const handleConfirmGenerateContract = async () => {
