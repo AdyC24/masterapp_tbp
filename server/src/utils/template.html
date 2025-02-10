@@ -30,8 +30,54 @@
             font-family: 'Times New Roman', Times, serif;
             margin-bottom: 2px;
         }
-        
-        
+        ol {
+            counter-reset: item;
+            list-style-type: none;
+            padding-inline-start: 0;
+        }
+
+        ol li {
+            counter-increment: item;
+            margin-bottom: 2px;
+            padding-left: 25px;
+            font-size: 15px;
+            position: relative;
+        }
+
+        ol li::before {
+            content: "(" counter(item) ")";
+            margin-right: 5px;
+            position: absolute;
+            left: 0;
+        }
+
+        /* Gaya khusus untuk sublist */
+        ol ol {
+            list-style-type: lower-alpha; 
+            counter-reset: subitem;
+            padding-inline-start: 15px;
+        }
+
+        ol ol li {
+            counter-increment: subitem;
+            padding-left: 10px;
+        }
+
+        ol ol li::before {
+            content: none;
+            position: static;
+            margin-right: 5px;
+        }
+
+        /* Mengatur ulang counter untuk elemen <li> setelah sublist */
+        ol li > ol + li {
+            counter-increment: none;
+        }
+
+        ol li > ol + li::before {
+            counter-increment: item;
+            content: "(" counter(item) ")";
+        }
     </style>
 </head>
 <body>
@@ -245,7 +291,7 @@
     <ol>
         <li><strong>PIHAK KEDUA</strong> yang melakukan perbuatan melanggar hukum, Perjanjian Kerja, instruksi atasan, Peraturan Perusahaan, larangan, tata tertib, dan/atau melakukan perbuatan yang dapat merugikan Perusahaan dapat dikenai sanksi.</li>
         <li>Jenis sanksi sebagaimana yang dimaksud dalam ayat (1) pasal ini termasuk namun tidak terbatas pada:
-            <ol type="a">
+            <ol>
                 <li>Surat Teguran dan/atau Surat Peringatan;</li>
                 <li>Skorsing (pemberhentian untuk sementara waktu);</li>
                 <li>Demosi (Penurunan tingkat jabatan);</li>
@@ -262,7 +308,7 @@
     
     <ol>
         <li>Hubungan kerja berakhir apabila:
-            <ol type="a">
+            <ol>
                 <li>Karena sebab-sebab berakhirnya hubungan kerja yang diatur dalam Peraturan Perundang-Undangan tentang Ketenagakerjaan dan/atau Peraturan Perusahaan yang berlaku, termasuk sebab-sebab berakhirnya hubungan kerja yang diatur dalam Perajanjian ini.</li>
                 <li>PIHAK KEDUA melakukan pelanggaran yang berakibat pemutusan hubungan kerja karena alasan mendesak sebagaimana yang diatur dalam Peraturan Perundang-Undangan tentang Ketenagakerjaan dan Peraturan Perusahaan yang berlaku.</li>
                 <li>Terjadi hal-hal lain yang dikualifikasikan keadaan terpaksa atau force majeure, antara lain: gempa bumi, tsunami, banjir, krisis finansial/moneter atau terjadinya bencana kesehatan/wabah/ pandemi yang dinyatakan pemerintah atau karena kebijakan atau tindakan Pemerintah yang menyebabkan salah satu atau Para Pihak tidak dapat melaksanakan kewajibannya yang tertulis dalam Perjanjian ini.</li>
@@ -270,7 +316,7 @@
         </li>
         <li>Apabila salah satu pihak mengakhiri hubungan kerja sebelum berakhirnya jangka waktu yang ditetapkan dalam Perjanjian ini, pihak yang mengakhiri hubungan kerja diwajibkan membayar ganti rugi pada pihak lainnya sebesar upah PIHAK KEDUA sampai batas waktu berakhirnya Perjanjian ini.</li>
         <li>Para Pihak sepakat bahwa PIHAK PERTAMA dapat mengakhiri Perjanjian ini sebelum jangka waktu Perjanjian ini berakhir tanpa membayar ganti rugi sebesar upah PIHAK KEDUA sampai batas waktu berakhirnya Perjanjian ini apabila PIHAK KEDUA melakukan hal sebagai berikut:      
-            <ol type="a">
+            <ol>
                 <li>PIHAK KEDUA tidak melengkapi semua persyaratan dalam proses perekrutan sampai dengan waktu yang telah ditentukan sebelumnya.</li>
                 <li>PIHAK KEDUA melanggar ketentuan yang disebutkan dalam syarat-syarat kerja untuk masing-masing jabatan yang termuat dalam Pasal 7 dalam Perjanjian ini.</li>
                 <li>Pekerjaan yang diperjanjikan dalam Perjanjian  ini dinyatakan selesai oleh PIHAK PERTAMA secara tertulis.</li>
