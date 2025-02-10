@@ -1,139 +1,70 @@
-const PDFDocument = require('pdfkit');
+const puppeteer = require('puppeteer');
 const fs = require('fs');
 const path = require('path');
 
-const generateContractPDF = (contract, filePath) => {
-    const doc = new PDFDocument({ margin: 50 });
+// Function to convert image to base64
+const imageToBase64 = (filePath) => {
+    const file = fs.readFileSync(filePath);
+    return `data:image/png;base64,${file.toString('base64')}`;
+};
 
-    // Pastikan direktori tempat menyimpan file ada
-    const dir = path.dirname(filePath);
-    if (!fs.existsSync(dir)) {
-        fs.mkdirSync(dir, { recursive: true });
-    }
+const generateContractPDF = async (contract, filePath) => {
+    const browser = await puppeteer.launch();
+    const page = await browser.newPage();
 
-    doc.pipe(fs.createWriteStream(filePath));
+    // Load the HTML template
+    const htmlContent = fs.readFileSync(path.join(__dirname, 'template.html'), 'utf8');
+    await page.setContent(htmlContent, { waitUntil: 'domcontentloaded' });
 
-    // Register fonts
-    doc.registerFont('Calibri', path.join(__dirname, '../../fonts', 'Calibri.ttf'));
-    doc.registerFont('Calibri-Bold', path.join(__dirname, '../../fonts', 'Calibri-Bold.ttf'));
-    doc.registerFont('TimesNewRoman-Bold', path.join(__dirname, '../../fonts', 'TimesNewRoman-Bold.ttf'));
+    // Convert image to base64
+    const imagePath = path.join(__dirname, 'images/HeaderTBP.png');
+    const imageBase64 = imageToBase64(imagePath);
+    console.log(`Image base64: ${imageBase64.substring(0, 30)}...`); // Log the first 30 characters of the base64 string
 
-    // Judul Dokumen
-    doc.font('TimesNewRoman-Bold').fontSize(14).text('PERJANJIAN KERJA WAKTU TERTENTU', { align: 'center', underline: true });
-    doc.font('Calibri-Bold').fontSize(10).text(`No: 087/HRD/PKWT I/TBP/III/2024`, { align: 'center' });
-    doc.moveDown();
-    doc.font('Calibri').fontSize(11).text(`Perjanjian ini dibuat di Desa Kawasi, pada hari Sabtu, 02 Maret 2024 oleh dan antara:`, { align: 'justify' });
-    doc.moveDown();
+    // Define header template with base64 image
+    const headerTemplate = `
+        <div style="width: 100%; text-align: center; font-size: 10px; padding: 10px 0;">
+            <img src="${imageBase64}" style="width: 750px; height: auto;" />
+        </div>
+    `;
 
-    const tableData1 = [
-        [1, 'Nama', ':', 'Rangga Aji Pratama'],
-        ['', 'Jabatan', ':', 'HR & GA Manager'],
-        ['', {
-            text: 'Dalam hal ini bertindak untuk dan atas nama ',
-            boldText: 'Trimegah Bangun Persada',
-            normalText: '. Sebuah perusahaan yang bergerak di bidang pertambangan umum yang berkedudukan di Gedung Bank Panin Lt.2, Jl. Jenderal Sudirman Kav. 1, Kel. Gelora Kec, Tanah Abang, Kota Administrasi Jakarta Pusat dengan Kantor Perwakilannya yang beralamat di Jln. Kantor Camat RT 07/RW 04 Kel. Kalumata Puncak Kec. Kota Ternate Selatan, Propinsi Maluku Utara, untuk selanjutnya dalam Perjanjian ini disebut sebagai ',
-            boldEnd: 'PIHAK PERTAMA.'
-        }, '', '']
-    ];
-    
-    // **Lebar kolom**
-    const colWidths1 = [25, 130, 30, 320]; // Menyesuaikan proporsi tabel
-    
-    // **Posisi awal tabel**
-    const startX1 = 50;
-    let startY1 = doc.y;
-    const rowHeight1 = 17;
-    const padding1s = 5;
-    
-    // **Render tabel**
-    tableData1.forEach((row, rowIndex) => {
-        let rowHeightDynamic = rowHeight1;
-        const y = startY1 + rowIndex * rowHeightDynamic;
-    
-        if (rowIndex < 2) {
-            // **Baris Normal**
-            row.forEach((cell, colIndex) => {
-                const x = startX1 + colWidths1.slice(0, colIndex).reduce((a, b) => a + b, 0);
-                doc.font('Calibri').fontSize(12).text(cell, x + padding1s, y + padding1s, { width: colWidths1[colIndex] - padding1s * 2 });
-            });
-        } else {
-            // **Baris dengan teks panjang**
-            const x2 = startX1 + colWidths1[0];
-            const col2Width = colWidths1[1] + colWidths1[2] + colWidths1[3];
-    
-            const textHeight = doc.heightOfString(row[1].text + row[1].normalText, { width: col2Width - padding1s * 2 });
-            rowHeightDynamic = Math.max(rowHeight1, textHeight + padding1s * 2);
-    
-            // **Tulis teks dengan format bold pada bagian tertentu**
-            doc.font('Calibri').fontSize(12).text(row[1].text, x2 + padding1s, y + padding1s, { continued: true });
-            doc.font('Calibri-Bold').text(row[1].boldText, { continued: true });
-            doc.font('Calibri').text(row[1].normalText, { continued: true });
-            doc.font('Calibri-Bold').text(row[1].boldEnd);
+    // Define footer template with a line above and two small columns in the right corner
+    const footerTemplate = `
+        <div style="width: 100%; text-align: center; font-size: 10px; padding: 10px 0; position: relative;">
+            <hr style="border: none; border-style: double; border-top: 1px solid #000; width: 80%; margin-bottom: 5px;">
+            <span style="position: relative; z-index: 2;">Halaman <span class="pageNumber"></span> dari <span class="totalPages"></span></span>
+            <div style="position: absolute; right: 80px; top: 20px; display: flex; z-index: 1;">
+                <table style="border-collapse: collapse; width: 100%; font-size: 6px;">
+                    <tr>
+                        <td style="border: 1px solid #000; height: 20px; width: 30px;"></td>
+                        <td style="border: 1px solid #000; height: 20px; width: 30px;"></td>
+                    </tr>
+                    <tr>
+                        <td style="border: 1px solid #000; font-size: 6px;">Pekerja</td>
+                        <td style="border: 1px solid #000; font-size: 6px;">Perusahaan</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    `;
+
+    // Generate PDF with header and footer
+    await page.pdf({
+        path: filePath,
+        format: 'A4',
+        printBackground: true,
+        displayHeaderFooter: true,
+        headerTemplate: headerTemplate,
+        footerTemplate: footerTemplate,
+        margin: {
+            top: '135px', // Adjust top margin to accommodate header
+            right: '50px',
+            bottom: '50px',
+            left: '50px'
         }
-    
-        startY1 += rowHeightDynamic - rowHeight1;
-    });
-    
-    doc.moveDown();
-
-    // **Data tabel**
-    const tableData2 = [
-        [2, 'Nama', ':', 'Sikran Ulhaq'],
-        ['', 'Jenis Kelamin', ':', 'Laki - Laki'],
-        ['', 'Tempat, Tanggal Lahir', ':', 'Pekkabata, 18-Jul-95'],
-        ['', 'Usia', ':', '29 Tahun'],
-        ['', 'Alamat', ':', 'Jl. Lasinrang No 80. Rt 001/001, Kel. Pekkabata, Kec. Duampanua, Kab. Pinrang, Prov. Sulawesi Selatan'],
-        ['', 'Status Pernikahan', ':', 'TK/0'],
-        ['', 'No KTP', ':', '7315061807950004'],
-        ['', {
-            text: 'dalam hal ini bertindak untuk dan atas nama pribadi, untuk selanjutnya dalam Perjanjian ini disebut sebagai ',
-            boldText: 'PIHAK KEDUA.',
-        }, '', '']
-    ];
-
-    // **Lebar kolom**
-    const colWidths = [25, 130, 30, 320]; 
-
-    // **Posisi awal tabel**
-    const startX = 50;
-    let startY = doc.y;
-    const padding = 5;
-
-    // **Render tabel**
-    tableData2.forEach((row, rowIndex) => {
-        let rowHeightDynamic = 17; // Default tinggi row minimal
-
-        // **Hitung tinggi teks tertinggi dalam satu baris**
-        row.forEach((cell, colIndex) => {
-            if (typeof cell === 'string' || typeof cell === 'number') {
-                const textHeight = doc.heightOfString(cell, { width: colWidths[colIndex] - padding * 2 });
-                rowHeightDynamic = Math.max(rowHeightDynamic, textHeight);
-            }
-        });
-
-        // **Gambar teks dalam tabel**
-        row.forEach((cell, colIndex) => {
-            const x = startX + colWidths.slice(0, colIndex).reduce((a, b) => a + b, 0);
-
-            // **Jika cell berisi objek (teks + bold)**
-            if (typeof cell === 'object' && cell !== null) {
-                const combinedTextHeight = doc.heightOfString(cell.text + cell.boldText, { width: colWidths[colIndex] - padding * 2 });
-                rowHeightDynamic = Math.max(rowHeightDynamic, combinedTextHeight);
-
-                doc.font('Calibri').fontSize(12).text(cell.text, x + padding, startY + padding, { continued: true });
-                doc.font('Calibri-Bold').text(cell.boldText);
-            } else {
-                doc.font('Calibri').fontSize(12).text(cell, x + padding, startY + padding, { width: colWidths[colIndex] - padding * 2 });
-            }
-        });
-
-        // **Update posisi Y untuk baris berikutnya**
-        startY += rowHeightDynamic;
     });
 
-
-    // **Simpan PDF**
-    doc.end();
+    await browser.close();
 };
 
 module.exports = generateContractPDF;
