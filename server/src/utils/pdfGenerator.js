@@ -8,12 +8,22 @@ const imageToBase64 = (filePath) => {
     return `data:image/png;base64,${file.toString('base64')}`;
 };
 
+// Function to replace placeholders in template
+const replacePlaceholders = (template, data) => {
+    return template.replace(/{{name}}/g, data.title)
+                   .replace(/{{content}}/g, data.content);
+};
+
 const generateContractPDF = async (contract, filePath) => {
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
 
     // Load the HTML template
-    const htmlContent = fs.readFileSync(path.join(__dirname, 'template.html'), 'utf8');
+    let htmlContent = fs.readFileSync(path.join(__dirname, 'template.html'), 'utf8');
+
+    // Replace placeholders with actual data
+    htmlContent = replacePlaceholders(htmlContent, contract);
+
     await page.setContent(htmlContent, { waitUntil: 'domcontentloaded' });
 
     // Convert image to base64
@@ -30,7 +40,7 @@ const generateContractPDF = async (contract, filePath) => {
 
     // Define footer template with a line above and two small columns in the right corner
     const footerTemplate = `
-        <div style="width: 100%; text-align: center; font-size: 10px; padding: 10px 0; position: relative;">
+        <div style="width: 100%; text-align: center; font-size: 10px; padding: 10px 0 30px; position: relative;">
             <hr style="border: none; border-style: double; border-top: 1px solid #000; width: 80%; margin-bottom: 5px;">
             <span style="position: relative; z-index: 2;">Halaman <span class="pageNumber"></span> dari <span class="totalPages"></span></span>
             <div style="position: absolute; right: 80px; top: 20px; display: flex; z-index: 1;">
@@ -58,9 +68,9 @@ const generateContractPDF = async (contract, filePath) => {
         footerTemplate: footerTemplate,
         margin: {
             top: '135px', // Adjust top margin to accommodate header
-            right: '50px',
-            bottom: '50px',
-            left: '50px'
+            right: '60px',
+            bottom: '78px',
+            left: '60px'
         }
     });
 
