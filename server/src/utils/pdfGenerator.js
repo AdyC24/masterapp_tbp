@@ -10,8 +10,28 @@ const imageToBase64 = (filePath) => {
 
 // Function to replace placeholders in template
 const replacePlaceholders = (template, data) => {
-    return template.replace(/{{name}}/g, data.title)
-                   .replace(/{{content}}/g, data.content);
+    return template.replace(/{{contractNumber}}/g, data.title)
+                   .replace(/{{currentDate}}/g, data.content)
+                   .replace(/{{manager}}/g, data.manager)
+                   .replace(/{{managerPosition}}/g, data.managerPosition)
+                   .replace(/{{name}}/g, data.name)
+                   .replace(/{{gender}}/g, data.gender)
+                   .replace(/{{birthPlace}}/g, data.birthPlace)
+                   .replace(/{{birthDate}}/g, data.birthDate)
+                   .replace(/{{age}}/g, data.age)
+                   .replace(/{{address}}/g, data.address)
+                   .replace(/{{marriageStatus}}/g, data.marriageStatus)
+                   .replace(/{{ktpNo}}/g, data.ktpNo)
+                   .replace(/{{nik}}/g, data.nik)
+                   .replace(/{{site}}/g, data.site)
+                   .replace(/{{poh}}/g, data.poh)
+                   .replace(/{{position}}/g, data.position)
+                   .replace(/{{grade}}/g, data.grade)
+                   .replace(/{{department}}/g, data.department)
+                   .replace(/{{startContract}}/g, data.startContract)
+                   .replace(/{{endContract}}/g, data.endContract)
+                   .replace(/{{salary}}/g, data.salary)
+                   .replace(/{{salaryInWord}}/g, data.salaryInWord);
 };
 
 const generateContractPDF = async (contract, filePath) => {

@@ -83,20 +83,20 @@
 </head>
 <body>
     <h3>PERJANJIAN KERJA WAKTU TERTENTU</h3>
-    <p style="text-align: center; margin-top: -4px;"><strong>No: 087/HRD/PKWT I/TBP/III/2024</strong></p>
-    <p>Perjanjian ini dibuat di Desa Kawasi, pada hari Sabtu, 02 Maret 2024 oleh dan antara:</p>
+    <p style="text-align: center; margin-top: -4px;"><strong>No: {{contractNumber}}</strong></p>
+    <p>Perjanjian ini dibuat di Desa Kawasi, pada hari Sabtu, {{currentDate}} oleh dan antara:</p>
     <table style="margin-bottom: 1rem;">
         <tr>
             <td style="padding-right: 1rem;">1</td>
             <td>Nama</td>
             <td>:</td>
-            <td>Rangga Aji Pratama</td>
+            <td>{{manager}}</td>
         </tr>
         <tr>
             <td style="padding-right: 1rem;"></td>
             <td>Jabatan</td>
             <td>:</td>
-            <td>HR & GA Manager</td>
+            <td>{{managerPosition}}</td>
         </tr>
         <tr>
             <td style="padding-right: 1rem;"></td>
@@ -116,37 +116,37 @@
             <td style="padding-right: 1rem;"></td>
             <td style="width: 190px;">Jenis Kelamin</td>
             <td style="width: 25px;">:</td>
-            <td>Laki-Laki</td>
+            <td>{{gender}}</td>
         </tr>
         <tr>
             <td style="padding-right: 1rem;"></td>
             <td style="width: 190px;">Tempat, Tanggal Lahir</td>
             <td style="width: 25px;">:</td>
-            <td>Pekkabata, 18-Jul-95</td>
+            <td>{{birthPlace}}, {{birthDate}}</td>
         </tr>
         <tr>
             <td style="padding-right: 1rem;"></td>
             <td style="width: 190px;">Usia</td>
             <td style="width: 25px;">:</td>
-            <td>29 Tahun</td>
+            <td>{{age}} Tahun</td>
         </tr>
         <tr>
             <td style="padding-right: 1rem;"></td>
             <td style="width: 190px;">Alamat</td>
             <td style="width: 25px;">:</td>
-            <td>Jl. Lasinrang No 80. Rt 001/001, Kel. Pekkabata, Kec. Duampanua, Kab. Pinrang, Prov. Sulawesi Selatan</td>
+            <td>{{address}}</td>
         </tr>
         <tr>
             <td style="padding-right: 1rem;"></td>
             <td style="width: 190px;">Status Pernikahan</td>
             <td style="width: 25px;">:</td>
-            <td>TK/0</td>
+            <td>{{marriageStatus}}</td>
         </tr>
         <tr>
             <td style="padding-right: 1rem;"></td>
             <td style="width: 190px;">No KTP</td>
             <td style="width: 25px;">:</td>
-            <td>7315061807950004</td>
+            <td>{{ktpNo}}</td>
         </tr>
         <tr>
             <td style="padding-right: 1rem;"></td>
@@ -167,27 +167,27 @@
             <tr>
                 <td style="width: 300px;">NIK</td>
                 <td>:</td>
-                <td>M0403240131</td>
+                <td>{{nik}}</td>
             </tr>
             <tr>
                 <td style="width: 300px">Lokasi pekerjaan</td>
                 <td>:</td>
-                <td>Site Kawasi</td>
+                <td>Site {{site}}</td>
             </tr>
             <tr>
                 <td style="width: 300px">Tempat penerimaan  / <i>Point of Hire</i> (POH)</td>
                 <td>:</td>
-                <td>Makassar</td>
+                <td>{{poh}}</td>
             </tr>
             <tr>
                 <td style="width: 300px">Jabatan / Grade</td>
                 <td>:</td>
-                <td>Dump Truck Driver Production/ I</td>
+                <td>{{position}}/ {{grade}}</td>
             </tr>
             <tr>
                 <td style="width: 300px">Divisi / Departemen</td>
                 <td>:</td>
-                <td>Production</td>
+                <td>{{department}}</td>
             </tr>
         </table>
         <li>PIHAK KEDUA sepakat dipindahkan oleh PIHAK PERTAMA pada jabatan dan/atau departemen yang berbeda dan/atau antar perusahaan di bawah naungan Pihak Pertama (beserta afiliasinya) untuk memenuhi kebutuhan operasional Perusahaan</li>
@@ -198,7 +198,7 @@
     <p style="text-align: center; margin-top: 0;"><strong>JANGKA WAKTU PERJANJIAN</strong></p>
 
     <ol>
-        <li>Jangka Waktu perjanjian ini adalah selama <strong>3 (Tiga Bulan)</strong> terhitung sejak tanggal <strong>04 Maret 2024</strong> sampai dengan tanggal <strong>03 Juni 2024</strong>.</li>
+        <li>Jangka Waktu perjanjian ini adalah selama <strong>3 (Tiga Bulan)</strong> terhitung sejak tanggal <strong>{{startContract}}</strong> sampai dengan tanggal <strong>{{endContract}}</strong>.</li>
         <li>Apabila Perjanjian ini akan segera berakhir dan <strong>PIHAK PERTAMA</strong> memandang perlu, maka Perjanjian ini dapat diperpanjang melalui <i>addendum</i> Perjanjian ini.</li>
     </ol>
     
@@ -221,7 +221,7 @@
     <p style="text-align: center; margin-top: 0;"><strong>KEWAJIBAN PIHAK PERTAMA UNTUK MEMENUHI HAK PIHAK KEDUA</strong></p>
     
     <ol>
-        <li>Sebagai imbal jasa atas pekerjaan yang telah dilakukan selama dalam periode Perjanjian ini, <strong>PARA PIHAK</strong> sepakat bahwa <strong>PIHAK PERTAMA</strong> memberikan secara sebanding, setiap bulannya kepada <strong>PIHAK KEDUA</strong> upah sebesar <stong>Rp. 3,669,550,- (<i>Tiga Juta Enam Ratus Enam Puluh Sembilan Ribu Lima Ratus Lima Puluh Rupiah</i>)</stong> dan mengikut sertakan <strong>PIHAK KEDUA</strong>  sebagai peserta BPJS Ketenagakerjaan yang terdiri dari Jaminan Kecelakaan Kerja, Jaminan Kematian, Jaminan Hari Tua, Jaminan pensiun dan BPJS Kesehatan.</li>
+        <li>Sebagai imbal jasa atas pekerjaan yang telah dilakukan selama dalam periode Perjanjian ini, <strong>PARA PIHAK</strong> sepakat bahwa <strong>PIHAK PERTAMA</strong> memberikan secara sebanding, setiap bulannya kepada <strong>PIHAK KEDUA</strong> upah sebesar <stong>Rp. {{salary}},- (<i>{{salaryInWord}} Rupiah</i>)</stong> dan mengikut sertakan <strong>PIHAK KEDUA</strong>  sebagai peserta BPJS Ketenagakerjaan yang terdiri dari Jaminan Kecelakaan Kerja, Jaminan Kematian, Jaminan Hari Tua, Jaminan pensiun dan BPJS Kesehatan.</li>
         <li>Pembayaran upah dilaksanakan oleh <strong>PIHAK PERTAMA</strong> kepada <strong>PIHAK KEDUA</strong> melalui transfer ke rekening bank milik <strong>PIHAK KEDUA</strong> setelah dipotong iuran kepesertaan BPJS kontribusi pekerja maupun pemotongan upah lain (jika ada) sesuai ketentuan perundang-undangan yang berlaku.</li>
         <li><strong>PIHAK PERTAMA</strong> menyediakan fasilitas tempat tinggal /<i>Mess</i> dan memberikan makanan / konsumsi bagi <strong>PIHAK KEDUA</strong> sesuai dengan prosedur yang ditetapkan oleh <strong>PIHAK PERTAMA</strong> jika <strong>PIHAK KEDUA</strong> bekerja di <i>site</i> / daerah terpencil dengan tempat penerimaan / <i>Point of Hire</i> (POH) non lokal, atau <strong>PIHAK KEDUA</strong> melakukan perjalanan dinas atas perintah dari <strong>PIHAK PERTAMA</strong>.</li>            
         <li>Pengaturan konsumsi dan pemanfaatan <i>Mess</i> bagi <strong>PIHAK KEDUA</strong> akan diatur tersendiri berdasarkan Peraturan dan Tata Tertib yang telah ditetapkan <strong>PIHAK PERTAMA</strong>.</li>
@@ -393,14 +393,14 @@
             <td></td>
         </tr>
         <tr style="font-weight: bold;">
-            <td style="border-bottom: 1px solid #000;">RANGGA AJI PRATAMA</td>
+            <td style="border-bottom: 1px solid #000;">{{manager}}</td>
             <td style="width: 4rem;"></td>
-            <td style="border-bottom: 1px solid #000;">Sikran Ulhaq</td>
+            <td style="border-bottom: 1px solid #000;">{{name}}</td>
         </tr>
         <tr>
-            <td>HR & GA Manager</td>
+            <td>{{managerPosition}}</td>
             <td style="width: 4rem;"></td>
-            <td>Dump Truck Driver Production</td>
+            <td>{{position}}</td>
         </tr>
     </table>
 </body>
