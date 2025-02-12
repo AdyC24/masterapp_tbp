@@ -13,7 +13,7 @@
         p {
             text-align: justify;
             font-size: 15px;
-            line-height: 1.25;
+            line-height: 1.15;
         }
         table {
             width: 100%;
@@ -84,18 +84,18 @@
 <body>
     <h3>PERJANJIAN KERJA WAKTU TERTENTU</h3>
     <p style="text-align: center; margin-top: -4px;"><strong>No: {{contractNumber}}</strong></p>
-    <p>Perjanjian ini dibuat di Desa Kawasi, pada hari Sabtu, {{currentDate}} oleh dan antara:</p>
+    <p>Perjanjian ini dibuat di Desa Kawasi, pada hari {{currentDay}}, {{currentDate}} oleh dan antara:</p>
     <table style="margin-bottom: 1rem;">
         <tr>
             <td style="padding-right: 1rem;">1</td>
-            <td>Nama</td>
-            <td>:</td>
+            <td style="width: 190px;">Nama</td>
+            <td style="width: 25px;">:</td>
             <td>{{manager}}</td>
         </tr>
         <tr>
             <td style="padding-right: 1rem;"></td>
-            <td>Jabatan</td>
-            <td>:</td>
+            <td style="width: 190px;">Jabatan</td>
+            <td style="width: 25px;">:</td>
             <td>{{managerPosition}}</td>
         </tr>
         <tr>

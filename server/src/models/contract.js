@@ -100,9 +100,21 @@ const getAllContractByDept = (dept) => {
     return dbPool.execute(SQLQuery, [dept])                
 }
 
+const getContractByCgId = (cgId) => {
+    const SQLQuery = `
+        SELECT
+            contractNo
+        FROM contract
+        WHERE cgId = ?
+    `;
+    return dbPool.execute(SQLQuery, [cgId]);
+}
+
 const getLastContractNo = ({ compId, contractType, year }) => {
     const SQLQuery = `
-        SELECT cgNo
+        SELECT 
+            cgNo,
+            cgConcat
         FROM contract_generator
         WHERE compId = ? AND contractType = ? AND cgYear = ?
         ORDER BY cgNo DESC
@@ -152,7 +164,7 @@ const createNewContract = async (contract) => {
         ]);
 
         await connection.commit();
-        return { success: true, message: 'Contract created successfully' };
+        return { cgId, success: true, message: 'Contract created successfully' };
     } catch (error) {
         await connection.rollback();
         throw error;
@@ -166,5 +178,6 @@ module.exports = {
     getAllContractsByNik,
     getAllContractByDept,
     getLastContractNo,
-    createNewContract
+    createNewContract,
+    getContractByCgId
 }

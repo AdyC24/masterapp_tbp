@@ -109,6 +109,23 @@ const getEmployeeByNik = (nik) => {
     return dbPool.execute(SQLQuery, [nik]);
 }
 
+const getEmployeeByRole = (role) => {
+    const SQLQuery = `
+                    SELECT
+                        persName,
+                        posName
+                    FROM
+                        employee
+                    JOIN
+                        position ON employee.posId = position.posId
+                    JOIN
+                        personal ON employee.persId = personal.persId
+                    WHERE
+                        empRole = ?
+    `;
+    return dbPool.execute(SQLQuery, [role]);
+}
+
 const getSignatureByNik = (nik) => {
     const SQLQuery = `
                     SELECT
@@ -278,5 +295,6 @@ module.exports = {
     getCompIdByNik,
     createNewEmployee,
     createBunchOfEmployees,
-    updateEmployeeSignature
+    updateEmployeeSignature,
+    getEmployeeByRole
 }

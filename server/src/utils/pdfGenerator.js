@@ -10,10 +10,11 @@ const imageToBase64 = (filePath) => {
 
 // Function to replace placeholders in template
 const replacePlaceholders = (template, data) => {
-    return template.replace(/{{contractNumber}}/g, data.title)
-                   .replace(/{{currentDate}}/g, data.content)
-                   .replace(/{{manager}}/g, data.manager)
-                   .replace(/{{managerPosition}}/g, data.managerPosition)
+    return template.replace(/{{contractNumber}}/g, data.fullContractNo)
+                   .replace(/{{currentDay}}/g, data.currentDay)
+                   .replace(/{{currentDate}}/g, data.currentDate)
+                   .replace(/{{manager}}/g, data.hrName)
+                   .replace(/{{managerPosition}}/g, data.hrPosition)
                    .replace(/{{name}}/g, data.name)
                    .replace(/{{gender}}/g, data.gender)
                    .replace(/{{birthPlace}}/g, data.birthPlace)
@@ -28,8 +29,8 @@ const replacePlaceholders = (template, data) => {
                    .replace(/{{position}}/g, data.position)
                    .replace(/{{grade}}/g, data.grade)
                    .replace(/{{department}}/g, data.department)
-                   .replace(/{{startContract}}/g, data.startContract)
-                   .replace(/{{endContract}}/g, data.endContract)
+                   .replace(/{{startContract}}/g, data.contractStart)
+                   .replace(/{{endContract}}/g, data.contractEnd)
                    .replace(/{{salary}}/g, data.salary)
                    .replace(/{{salaryInWord}}/g, data.salaryInWord);
 };
@@ -49,7 +50,6 @@ const generateContractPDF = async (contract, filePath) => {
     // Convert image to base64
     const imagePath = path.join(__dirname, 'images/HeaderTBP.png');
     const imageBase64 = imageToBase64(imagePath);
-    console.log(`Image base64: ${imageBase64.substring(0, 30)}...`); // Log the first 30 characters of the base64 string
 
     // Define header template with base64 image
     const headerTemplate = `
@@ -87,7 +87,7 @@ const generateContractPDF = async (contract, filePath) => {
         headerTemplate: headerTemplate,
         footerTemplate: footerTemplate,
         margin: {
-            top: '135px', // Adjust top margin to accommodate header
+            top: '125px', // Adjust top margin to accommodate header
             right: '60px',
             bottom: '78px',
             left: '60px'
